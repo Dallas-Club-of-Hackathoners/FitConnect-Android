@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -61,6 +62,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("com.google.firebase:firebase-database-ktx:20.2.2")
 
 
     val hilt_version = "2.44"
@@ -69,6 +71,11 @@ dependencies {
 
     val nav_version = "2.7.4"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    val firebase_version = "32.3.1"
+    implementation(platform("com.google.firebase:firebase-bom:$firebase_version"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
