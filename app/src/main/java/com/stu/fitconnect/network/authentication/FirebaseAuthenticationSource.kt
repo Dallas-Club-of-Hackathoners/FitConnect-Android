@@ -17,8 +17,12 @@ import com.stu.fitconnect.InvalidUserException
 import com.stu.fitconnect.TooManyRequestsException
 import com.stu.fitconnect.UnknownException
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AuthenticationSourceImpl(
+
+@Singleton
+class FirebaseAuthenticationSource @Inject constructor(
     private val auth: FirebaseAuth
 ): AuthenticationSource {
 

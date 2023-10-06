@@ -6,8 +6,11 @@ import com.stu.fitconnect.features.authentication.domain.AuthField
 import com.stu.fitconnect.features.authentication.domain.User
 import com.stu.fitconnect.network.authentication.AuthenticationSource
 import com.stu.fitconnect.network.usersource.UsersSource
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AuthenticationRepositoryImpl(
+@Singleton
+class AuthenticationRepositoryImpl @Inject constructor(
     private val authenticationSource: AuthenticationSource,
     private val usersSource: UsersSource,
 ): AuthenticationRepository {
