@@ -5,6 +5,6 @@ import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFilters
 
 interface SportsClubsRepository {
 
-    fun getSportsClubList(sportsClubsFilters: SportsClubsFilters): List<ClubSummary>
+    fun getSportsClubList(searchBy: String, sportsClubsFilters: SportsClubsFilters): List<ClubSummary>
 
 }

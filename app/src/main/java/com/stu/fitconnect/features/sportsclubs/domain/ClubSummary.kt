@@ -10,3 +10,5 @@ data class ClubSummary(
     val cost: Int,
     val isFavorite:Boolean
 )
+
+

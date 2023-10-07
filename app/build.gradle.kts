@@ -63,14 +63,14 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("com.google.firebase:firebase-database-ktx:20.2.2")
 
-    val hilt_version = "2.46"
+    val hilt_version = "2.48"
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
+
+//    val nav_version = "2.7.4"
+//    implementation("androidx.navigation:navigation-compose:$nav_version")
 
 
-    val nav_version = "2.7.4"
-    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     val firebase_version = "32.3.1"
     implementation(platform("com.google.firebase:firebase-bom:$firebase_version"))
@@ -79,7 +79,6 @@ dependencies {
 
     val room_version = "2.5.2"
     implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     implementation("androidx.room:room-paging:$room_version")

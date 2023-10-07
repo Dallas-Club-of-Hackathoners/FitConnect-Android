@@ -1,13 +1,12 @@
 package com.stu.fitconnect.features.sportsclubs.domain
 
-import com.google.gson.annotations.SerializedName
 
 data class SportsClubsFilters(
-    @SerializedName("isFavourite") val isFavourite: Boolean = false,
+    val isFavourite: Boolean = false,
     val facilities: List<Facility> = emptyList(),
     val cost: List<Int> = emptyList(),
     val clubsCategory: List<ClubsCategory> = emptyList(),
-    @SerializedName("sortType") val sortType: SortType
+    val sortTypes: List<SortType> = emptyList()
 )
 
 data class Facility(
@@ -29,10 +28,3 @@ data class SortType(
     val name: String,
 )
 
-
-data class SportsClubsFilterTransaction(
-    val isFavourite: Boolean = false,
-    val facilities: List<String> = emptyList(),
-    val cost: List<Int> = emptyList(),
-    val clubsCategory: List<String> = emptyList()
-)
