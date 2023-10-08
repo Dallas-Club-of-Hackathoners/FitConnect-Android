@@ -20,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.*
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.stu.fitconnect.R
@@ -125,15 +124,15 @@ fun SportsClubListCard(
                 .padding(16.dp)
         ) {
             // Изображения спортзала (первое изображение)
-            Image(
-                painter = painterResource(id = sportClub.imagesRes.first()),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-                    .clip(shape = RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop
-            )
+//            Image(
+//                painter = painterResource(id = sportClub.imagesRes.first()),
+//                contentDescription = null,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(120.dp)
+//                    .clip(shape = RoundedCornerShape(8.dp)),
+//                contentScale = ContentScale.Crop
+//            )
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -206,7 +205,7 @@ fun SportsClubListCard(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-private fun MarketListScreenPreview(
+fun SportsClubsListScreenPreview(
     @PreviewParameter(SportsClubListStatePreviewProvider::class)
     sportsClubsListState: SportsClubListContract.State,
 ) {

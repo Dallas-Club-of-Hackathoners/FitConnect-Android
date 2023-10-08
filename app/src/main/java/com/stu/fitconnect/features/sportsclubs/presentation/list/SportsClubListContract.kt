@@ -23,6 +23,6 @@ interface SportsClubListContract:
         data class OnSearchSportsClub(val searchBy: String) : Event()
         data class OnSortSelected(val sortType: SortType) : Event()
         data class OnApplySelectedFilters(val sportsClubsFilters: SportsClubsFilters) : Event()
-        data object OnRefresh : Event()
+        object OnRefresh : Event()
     }
 }
