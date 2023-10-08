@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportsclubs.presentation
+package com.stu.fitconnect.features.sportsclubs.presentation.filters
 
 import com.stu.fitconnect.features.sportsclubs.domain.ClubsCategory
 import com.stu.fitconnect.features.sportsclubs.domain.Cost

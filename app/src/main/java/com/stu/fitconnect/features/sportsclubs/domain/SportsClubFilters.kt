@@ -12,7 +12,7 @@ data class SportsClubsFilters(
         this.isFavouriteFilter.isFavourite = !this.isFavouriteFilter.isFavourite
         return this
     }
-    fun selectSortType(sortType: SortType) : SportsClubsFilters {
+    fun selectSortType(sortType: SortType?) : SportsClubsFilters {
         this.sortType = sortType
         return this
     }

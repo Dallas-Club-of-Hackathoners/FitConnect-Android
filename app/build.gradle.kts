@@ -33,11 +33,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -62,16 +62,20 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("com.google.firebase:firebase-database-ktx:20.2.2")
+    implementation("androidx.compose.ui:ui-tooling-preview-android:1.5.3")
 
     val hilt_version = "2.48"
     implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    kapt("com.google.dagger:hilt-compiler:$hilt_version")
+
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
 //    val nav_version = "2.7.4"
 //    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     val paging_version = "3.2.1"
     implementation("androidx.paging:paging-runtime:$paging_version")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha16")
 
 
     val firebase_version = "32.3.1"

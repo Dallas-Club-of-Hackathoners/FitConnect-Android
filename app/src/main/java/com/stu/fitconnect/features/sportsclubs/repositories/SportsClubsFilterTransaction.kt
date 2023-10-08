@@ -8,5 +8,4 @@ data class SportsClubsFilterTransaction(
     val cost: List<Int> = emptyList(),
     val clubsCategory: List<String> = emptyList(),
     val sortTypes: SortType
-
 )

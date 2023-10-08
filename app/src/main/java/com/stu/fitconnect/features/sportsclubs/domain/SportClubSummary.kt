@@ -11,4 +11,3 @@ data class SportClubSummary(
     val isFavorite:Boolean
 )
 
-
