@@ -70,6 +70,8 @@ dependencies {
 //    val nav_version = "2.7.4"
 //    implementation("androidx.navigation:navigation-compose:$nav_version")
 
+    val paging_version = "3.2.1"
+    implementation("androidx.paging:paging-runtime:$paging_version")
 
 
     val firebase_version = "32.3.1"

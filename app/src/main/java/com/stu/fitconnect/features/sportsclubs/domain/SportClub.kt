@@ -2,7 +2,7 @@ package com.stu.fitconnect.features.sportsclubs.domain
 
 import com.stu.fitconnect.features.authentication.domain.User
 
-data class Club(
+data class SportClub(
     val id: Int,
     val name: String,
     val imagesRes: List<Int>,

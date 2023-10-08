@@ -1,5 +1,6 @@
 package com.stu.fitconnect
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.gson.Gson
+import com.stu.fitconnect.features.sportsclubs.domain.FilterCategoryData
+import com.stu.fitconnect.features.sportsclubs.presentation.AllSportsClubFiltersData
 import com.stu.fitconnect.ui.theme.FitConnectTheme
 
 class MainActivity : ComponentActivity() {

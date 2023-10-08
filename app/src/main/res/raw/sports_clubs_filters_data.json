@@ -1,0 +1,196 @@
+[
+  {
+    "id": "isFavourite",
+    "filterType": "IS_FAVOURITE",
+    "filtersList": [
+      {
+        "id": "true",
+        "name": "",
+        "iconRes": null
+      }
+    ]
+  },
+  {
+    "id": "facilities",
+    "filterType": "FACILITIES",
+    "filtersList": [
+      {
+        "id": "parking",
+        "name": "Парковка",
+        "iconRes": 123
+      },
+      {
+        "id": "shower",
+        "name": "Душ",
+        "iconRes": 456
+      },
+      {
+        "id": "drinking_water",
+        "name": "Питьевая вода",
+        "iconRes": 789
+      },
+      {
+        "id": "pet_friendly",
+        "name": "Можно с животными",
+        "iconRes": 1011
+      },
+      {
+        "id": "18_plus",
+        "name": "18+",
+        "iconRes": 1213
+      },
+      {
+        "id": "16_plus",
+        "name": "16+",
+        "iconRes": 1415
+      },
+      {
+        "id": "14_plus",
+        "name": "14+",
+        "iconRes": 1617
+      },
+      {
+        "id": "fitness_bar",
+        "name": "Фитнес-бар",
+        "iconRes": 1819
+      },
+      {
+        "id": "sauna",
+        "name": "Сауна",
+        "iconRes": 2021
+      },
+      {
+        "id": "open_24_hours",
+        "name": "Круглосуточно",
+        "iconRes": 2223
+      }
+    ]
+  },
+  {
+    "id": "cost",
+    "filterType": "COST",
+    "filtersList": [
+      {
+        "id": "one_cost",
+        "name": "",
+        "iconRes": null
+      },
+      {
+        "id": "two_cost",
+        "name": "",
+        "iconRes": null
+      },
+      {
+        "id": "two_cost",
+        "name": "",
+        "iconRes": null
+      }
+    ]
+  },
+  {
+    "id": "clubsCategory",
+    "filterType": "CLUB_CATEGORY",
+    "filtersList": [
+      {
+        "id": "running",
+        "name": "Бег",
+        "iconRes": null
+      },
+      {
+        "id": "water_sports",
+        "name": "Водные виды",
+        "iconRes": null
+      },
+      {
+        "id": "martial_arts",
+        "name": "Единоборства",
+        "iconRes": null
+      },
+      {
+        "id": "fitness",
+        "name": "Фитнес",
+        "iconRes": null
+      },
+      {
+        "id": "winter_sports",
+        "name": "Зимние виды",
+        "iconRes": null
+      },
+      {
+        "id": "extreme_sports",
+        "name": "Экстремальные виды",
+        "iconRes": null
+      },
+      {
+        "id": "leisure_and_tourism",
+        "name": "Отдых и туризм",
+        "iconRes": null
+      },
+      {
+        "id": "summer_sports",
+        "name": "Летние виды",
+        "iconRes": null
+      },
+      {
+        "id": "air_sports",
+        "name": "Воздушные виды",
+        "iconRes": null
+      },
+      {
+        "id": "strength_sports",
+        "name": "Силовые виды",
+        "iconRes": null
+      },
+      {
+        "id": "shooting_sports",
+        "name": "Стрелковые виды",
+        "iconRes": null
+      },
+      {
+        "id": "acrobatics",
+        "name": "Акробатика",
+        "iconRes": null
+      },
+      {
+        "id": "equestrian_sports",
+        "name": "Эквитация (конный спорт)",
+        "iconRes": null
+      },
+      {
+        "id": "skiing",
+        "name": "Лыжи",
+        "iconRes": null
+      },
+      {
+        "id": "mountain_sports",
+        "name": "Горные виды",
+        "iconRes": null
+      },
+      {
+        "id": "team_sports",
+        "name": "Командные виды",
+        "iconRes": null
+      },
+      {
+        "id": "individual_sports",
+        "name": "Индивидуальные виды",
+        "iconRes": null
+      },
+      {
+        "id": "sports_dance",
+        "name": "Спортивные танцы",
+        "iconRes": null
+      },
+      {
+        "id": "sports_games",
+        "name": "Спортивные игры",
+        "iconRes": null
+      },
+      {
+        "id": "marathons_and_distances",
+        "name": "Марафоны и дистанции",
+        "iconRes": null
+      }
+    ]
+  }
+]
