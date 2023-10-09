@@ -8,6 +8,7 @@ import com.stu.fitconnect.features.sportclubs.presentation.list.SportClubListCon
 import kotlinx.coroutines.flow.flowOf
 
 class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubListContract.State> {
+
     override val values: Sequence<SportClubListContract.State> = sequenceOf(
         SportClubListContract.State(
             pagingSportClubList = flowOf(
