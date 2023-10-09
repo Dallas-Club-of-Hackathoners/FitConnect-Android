@@ -63,13 +63,15 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09")
 
     val hilt_version = "2.44"
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
     //kapt("androidx.hilt:hilt-compiler:1.0.0")
 
-    //implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    //last added
 
 //    val nav_version = "2.7.4"
 //    implementation("androidx.navigation:navigation-compose:$nav_version")

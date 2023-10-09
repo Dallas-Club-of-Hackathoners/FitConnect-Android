@@ -3,11 +3,11 @@ package com.stu.fitconnect.features.sportsclubs.repositories
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportsclubs.domain.SportClub
 import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFilters
+import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
 
 interface SportsClubsRepository {
 
-    fun getSportsClubsPagingList(searchBy: String, sportsClubsFilters: SportsClubsFilters): kotlinx.coroutines.flow.Flow<PagingData<SportClubSummary>>
+    fun getSportsClubsPagingList(searchBy: String, sportsClubsFilters: SportsClubsFiltersData): kotlinx.coroutines.flow.Flow<PagingData<SportClubSummary>>
 
     fun getSportClubById(id: Int): SportClub
 

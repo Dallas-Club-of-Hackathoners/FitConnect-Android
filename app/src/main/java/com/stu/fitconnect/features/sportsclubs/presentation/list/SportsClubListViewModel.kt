@@ -1,14 +1,14 @@
 package com.stu.fitconnect.features.sportsclubs.presentation.list
 
+import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.stu.fitconnect.features.sportsclubs.domain.ClubsCategory
-import com.stu.fitconnect.features.sportsclubs.domain.Cost
-import com.stu.fitconnect.features.sportsclubs.domain.Facility
+import com.google.gson.Gson
+import com.stu.fitconnect.R
 import com.stu.fitconnect.features.sportsclubs.domain.Filter
-import com.stu.fitconnect.features.sportsclubs.domain.IsFavouriteFilter
+import com.stu.fitconnect.features.sportsclubs.domain.FilterCategoryData
 import com.stu.fitconnect.features.sportsclubs.domain.SortType
-import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFilters
+import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
 import com.stu.fitconnect.features.sportsclubs.domain.usecases.GetSportsClubsListUseCase
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,14 +28,20 @@ class SportsClubListViewModel @Inject constructor(
     override val state: StateFlow<SportsClubListContract.State> = mutableScreenState.asStateFlow()
 
     override fun event(event: SportsClubListContract.Event) = when (event) {
-        is SportsClubListContract.Event.OnSearchSportsClub -> onSearchBy(event.searchBy)
-        is SportsClubListContract.Event.OnSortSelected -> onSortSelected(event.sortType)
-        is SportsClubListContract.Event.OnApplySelectedFilters -> applySelectedFilters(event.sportsClubsFilters)
         SportsClubListContract.Event.OnRefresh -> onRefresh()
+        SportsClubListContract.Event.OnGetSportsClubFilters -> getAllSportsClubFiltersData()
+        SportsClubListContract.Event.OnGetSportsClub -> getSportsClubsPagingList()
+        is SportsClubListContract.Event.OnSearchSportsClub -> updateStateAndFetchData { it.copy(searchText = event.searchBy) }
+        is SportsClubListContract.Event.OnApplySingleFilter -> updateStateAndFetchData { it.copy(selectedFilters = it.selectedFilters.getUpdatedFiltersList(event.filter)) }
+        is SportsClubListContract.Event.OnApplySelectedFilters -> updateStateAndFetchData { it.copy(selectedFilters = event.sportsClubsFilters) }
     }
 
-    init {
-        getSportsClubsPagingList()
+    fun getAllSportsClubFiltersData() {
+        val inputStream = Resources.getSystem().openRawResource(R.raw.sports_clubs_filters_data)
+        val jsonString = inputStream.bufferedReader().use { it.readText() }
+        mutableScreenState.update{
+            it.copy(selectedFilters = Gson().fromJson(jsonString, SportsClubsFiltersData::class.java))
+        }
     }
 
     private fun getSportsClubsPagingList() {
@@ -55,8 +61,8 @@ class SportsClubListViewModel @Inject constructor(
         }
     }
 
-    private fun onSortSelected(sortType: SortType) {
-        mutableScreenState.update { it.copy(selectedFilters = getSportsClubFiltersBySelectFilter(sortType, it.selectedFilters)) }
+    private fun updateStateAndFetchData(updateAction: (SportsClubListContract.State) -> SportsClubListContract.State) {
+        mutableScreenState.update { updateAction(it) }
         getSportsClubsPagingList()
     }
 
@@ -64,26 +70,5 @@ class SportsClubListViewModel @Inject constructor(
         mutableScreenState.update { it.copy(refreshing = true) }
         getSportsClubsPagingList()
         mutableScreenState.update { it.copy(refreshing = false) }
-    }
-
-    private fun onSearchBy(searchBy: String) {
-        mutableScreenState.update { it.copy(searchText = searchBy) }
-        getSportsClubsPagingList()
-    }
-
-    private fun applySelectedFilters(sportsClubsFilters: SportsClubsFilters) {
-        mutableScreenState.update { it.copy(selectedFilters = sportsClubsFilters) }
-        getSportsClubsPagingList()
-    }
-
-    private fun getSportsClubFiltersBySelectFilter(filter: Filter, sportsClubsFilters: SportsClubsFilters) : SportsClubsFilters {
-        when(filter) {
-            is IsFavouriteFilter -> sportsClubsFilters?.selectIsFavouriteFilter()
-            is Facility -> sportsClubsFilters?.selectFacility(filter)
-            is Cost -> sportsClubsFilters?.selectCost(filter)
-            is ClubsCategory -> sportsClubsFilters?.selectClubsCategory(filter)
-            is SortType -> sportsClubsFilters?.selectSortType(filter)
-        }
-        throw IllegalStateException("Unexpected filter type")
     }
 }
