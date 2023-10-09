@@ -32,7 +32,7 @@ fun SportsClubsListRoute(
     val (state, event) = use(viewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
-        event.invoke(SportClubListContract.Event.OnGetSportsClub)
+        event.invoke(SportClubListContract.Event.OnGetSportClub)
     }
 
     SportsClubsListScreen(
@@ -40,7 +40,7 @@ fun SportsClubsListRoute(
         onNavigateToDetailSportsClubsScreen = onNavigateToDetailSportsClubsScreen,
         onNavigateToFiltersSportsClubsScreen = onNavigateToFiltersSportsClubsScreen,
         onSearch = { searchBy ->
-            event.invoke(SportClubListContract.Event.OnSearchSportsClub(searchBy = searchBy))
+            event.invoke(SportClubListContract.Event.OnSearchSportClub(searchBy = searchBy))
         },
         onApplySingleFilter = { filter ->
             event.invoke(SportClubListContract.Event.OnApplySingleFilter(filter = filter))
@@ -115,7 +115,7 @@ fun SportsClubsListScreen(
 
         // Список спортзалов
         val sportsClubsPagingItems: LazyPagingItems<SportClubSummary> =
-            sportsClubsListState.pagingSportsClubList.collectAsLazyPagingItems()
+            sportsClubsListState.pagingSportClubList.collectAsLazyPagingItems()
 
 
         LazyColumn(

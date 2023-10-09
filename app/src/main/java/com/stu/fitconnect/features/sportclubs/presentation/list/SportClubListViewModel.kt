@@ -25,9 +25,9 @@ class SportClubListViewModel @Inject constructor(
 
     override fun event(event: SportClubListContract.Event) = when (event) {
         SportClubListContract.Event.OnRefresh -> onRefresh()
-        SportClubListContract.Event.OnGetSportsClubFilters -> getAllSportClubFiltersData()
-        SportClubListContract.Event.OnGetSportsClub -> getSportsClubsPagingList()
-        is SportClubListContract.Event.OnSearchSportsClub -> updateStateAndFetchData { it.copy(searchText = event.searchBy) }
+        SportClubListContract.Event.OnGetSportClubFilters -> getAllSportClubFiltersData()
+        SportClubListContract.Event.OnGetSportClub -> getSportsClubsPagingList()
+        is SportClubListContract.Event.OnSearchSportClub -> updateStateAndFetchData { it.copy(searchText = event.searchBy) }
         is SportClubListContract.Event.OnApplySingleFilter -> updateStateAndFetchData { it.copy(selectedFilters = it.selectedFilters.getUpdatedFiltersList(event.filter)) }
         is SportClubListContract.Event.OnApplySelectedFilters -> updateStateAndFetchData { it.copy(selectedFilters = event.sportsClubsFilters) }
     }
@@ -47,7 +47,7 @@ class SportClubListViewModel @Inject constructor(
                 val pagingList = getSportClubsListUseCase.getSportsClubsPagingList(
                     mutableScreenState.value.searchText,
                     mutableScreenState.value.selectedFilters)
-                mutableScreenState.update { it.copy(pagingSportsClubList = pagingList) }
+                mutableScreenState.update { it.copy(pagingSportClubList = pagingList) }
             }
         } catch (e: Exception) {
             //handle exception

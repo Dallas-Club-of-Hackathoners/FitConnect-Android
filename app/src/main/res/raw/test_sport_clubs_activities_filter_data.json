@@ -1,0 +1,70 @@
+{
+  "filterList": [
+    {
+      "id": 1,
+      "name": "Тренера",
+      "filterList": [
+        {
+          "id": 101,
+          "name": "Тренер 1",
+          "categoryId": 1,
+          "imageRes": null,
+          "time": null,
+          "isSelected": false
+        },
+        {
+          "id": 102,
+          "name": "Тренер 2",
+          "categoryId": 1,
+          "imageRes": null,
+          "time": null,
+          "isSelected": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Сортировки",
+      "filterList": [
+        {
+          "id": 201,
+          "name": "Сортировка 1",
+          "categoryId": 2,
+          "imageRes": null,
+          "time": null,
+          "isSelected": false
+        },
+        {
+          "id": 202,
+          "name": "Сортировка 2",
+          "categoryId": 2,
+          "imageRes": null,
+          "time": null,
+          "isSelected": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Направления занятий",
+      "filterList": [
+        {
+          "id": 301,
+          "name": "Направление 1",
+          "categoryId": 3,
+          "imageRes": null,
+          "time": null,
+          "isSelected": false
+        },
+        {
+          "id": 302,
+          "name": "Направление 2",
+          "categoryId": 3,
+          "imageRes": null,
+          "time": null,
+          "isSelected": false
+        }
+      ]
+    }
+  ]
+}

@@ -16,4 +16,4 @@ data class SportClubActivity(
     val time: String,
     val isPossible: Boolean,
     val isFavorite: Boolean
-)
+) //todo время че за парметр мб DATE() или что то подобное?

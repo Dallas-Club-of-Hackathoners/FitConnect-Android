@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOf
 class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubListContract.State> {
     override val values: Sequence<SportClubListContract.State> = sequenceOf(
         SportClubListContract.State(
-            pagingSportsClubList = flowOf(
+            pagingSportClubList = flowOf(
                 PagingData.from(
                     listOf(
                         SportClubSummary(

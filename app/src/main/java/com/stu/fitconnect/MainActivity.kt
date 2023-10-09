@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     SportsClubsListScreenPreview(
                         SportClubListContract.State(
-                            pagingSportsClubList = flowOf(
+                            pagingSportClubList = flowOf(
                                 PagingData.from(
                                     listOf(
                                         SportClubSummary(

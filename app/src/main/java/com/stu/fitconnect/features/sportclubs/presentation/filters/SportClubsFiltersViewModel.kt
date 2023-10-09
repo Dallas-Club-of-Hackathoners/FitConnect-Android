@@ -10,7 +10,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @ViewModelScoped
 class SportClubsFiltersViewModel : ViewModel() {
 
-    fun getAllSportsClubFiltersData() : List<FilterCategoryData> {
+    fun getAllSportClubFiltersData() : List<FilterCategoryData> {
         val inputStream = Resources.getSystem().openRawResource(R.raw.sport_clubs_filters_data)
         val jsonString = inputStream.bufferedReader().use { it.readText() }
         return Gson().fromJson(jsonString, Array<FilterCategoryData>::class.java).asList()

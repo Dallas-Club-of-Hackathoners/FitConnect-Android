@@ -4,7 +4,7 @@ import java.util.Date
 
 data class SportClubActivitySummary(
     val id: Int,
-    val date: Date,
+    val date: String, //было Date
     val name: String,
     val imagesRes: List<Int>,
     val score: Double,

@@ -12,7 +12,7 @@ interface SportClubListContract:
     UnidirectionalViewModel<SportClubListContract.State, SportClubListContract.Event> {
 
     data class State(
-        val pagingSportsClubList : Flow<PagingData<SportClubSummary>> = emptyFlow(),
+        val pagingSportClubList : Flow<PagingData<SportClubSummary>> = emptyFlow(),
         val searchText: String = "",
         val selectedFilters: SportClubsFiltersData = SportClubsFiltersData(),
         val refreshing: Boolean = false,
@@ -21,9 +21,9 @@ interface SportClubListContract:
 
     sealed class Event {
         object OnRefresh : Event()
-        object OnGetSportsClubFilters : Event()
-        object OnGetSportsClub : Event()
-        data class OnSearchSportsClub(val searchBy: String) : Event()
+        object OnGetSportClubFilters : Event()
+        object OnGetSportClub : Event()
+        data class OnSearchSportClub(val searchBy: String) : Event()
         data class OnApplySingleFilter(val filter: Filter) : Event()
         data class OnApplySelectedFilters(val sportsClubsFilters: SportClubsFiltersData) : Event()
     }
