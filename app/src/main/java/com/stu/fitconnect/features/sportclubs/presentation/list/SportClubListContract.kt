@@ -2,7 +2,7 @@ package com.stu.fitconnect.features.sportclubs.presentation.list
 
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
-import com.stu.fitconnect.UnidirectionalViewModel
+import com.stu.fitconnect.base.UnidirectionalViewModel
 import com.stu.fitconnect.features.sportclubs.domain.Filter
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
 import kotlinx.coroutines.flow.Flow

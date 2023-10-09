@@ -10,7 +10,7 @@ interface AuthenticationSource {
 
     fun isSignedId(): Boolean
 
-    fun getCurrentUId(): String?
+    fun getCurrentUId(): String
 
     suspend fun deleteCurrentUser()
 }

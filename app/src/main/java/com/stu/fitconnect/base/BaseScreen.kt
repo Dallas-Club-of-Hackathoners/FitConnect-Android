@@ -1,4 +1,4 @@
-package com.stu.fitconnect
+package com.stu.fitconnect.base
 
 import android.app.Activity
 import androidx.compose.runtime.Composable

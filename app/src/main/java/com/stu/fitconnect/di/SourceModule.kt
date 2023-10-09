@@ -2,6 +2,8 @@ package com.example.smartmessenger.di
 
 import com.stu.fitconnect.network.authentication.AuthenticationSource
 import com.stu.fitconnect.network.authentication.FirebaseAuthenticationSource
+import com.stu.fitconnect.network.spotclubs.source.SportClubsSource
+import com.stu.fitconnect.network.spotclubs.source.SportClubsSourceImpl
 import com.stu.fitconnect.network.usersource.UserSourceImpl
 import com.stu.fitconnect.network.usersource.UsersSource
 import dagger.Binds
@@ -20,9 +22,12 @@ abstract class NetworkModule {
 
     @Binds
     abstract fun bindUsersSource(
-        firestoreChatsSource: UserSourceImpl
+        chatsSource: UserSourceImpl
     ): UsersSource
 
-
+    @Binds
+    abstract fun bindSportClubsSource(
+        sportClubsSource: SportClubsSourceImpl
+    ): SportClubsSource
 
 }

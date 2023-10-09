@@ -1,8 +1,8 @@
-package com.stu.fitconnect
+package com.stu.fitconnect.base
 
 import androidx.lifecycle.ViewModel
-import com.stu.fitconnect.dispatcher.DispatcherProvider
-import com.stu.fitconnect.dispatcher.PlatformDispatcherProvider
+import com.stu.fitconnect.base.dispatcher.DispatcherProvider
+import com.stu.fitconnect.base.dispatcher.PlatformDispatcherProvider
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,9 @@ open class BaseViewModel(
     protected val dispatcherProvider: DispatcherProvider = PlatformDispatcherProvider(),
 ) : ViewModel(), BaseContract {
 
-    protected val mutableBaseState: MutableStateFlow<BaseContract.BaseState> = MutableStateFlow(BaseContract.BaseState.OnSuccess)
+    protected val mutableBaseState: MutableStateFlow<BaseContract.BaseState> = MutableStateFlow(
+        BaseContract.BaseState.OnSuccess
+    )
     override val baseState: StateFlow<BaseContract.BaseState> = mutableBaseState.asStateFlow()
 
     protected val baseEffectChannel = Channel<BaseContract.BaseEffect>(Channel.UNLIMITED)

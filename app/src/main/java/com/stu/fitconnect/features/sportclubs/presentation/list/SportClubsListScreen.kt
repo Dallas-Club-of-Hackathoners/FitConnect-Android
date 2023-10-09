@@ -19,8 +19,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.stu.fitconnect.features.sportclubs.domain.Filter
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
-import com.stu.fitconnect.features.sportclubs.presentation.SportClubListStatePreviewProvider
-import com.stu.fitconnect.use
+import com.stu.fitconnect.base.use
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

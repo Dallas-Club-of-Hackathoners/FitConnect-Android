@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportactivities.presentation
+package com.stu.fitconnect.features.sportactivities.presentation.list
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.paging.PagingData

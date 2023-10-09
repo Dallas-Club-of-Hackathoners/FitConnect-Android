@@ -9,3 +9,5 @@ data class SportClubsActivityFilterTransaction(
     val activityCategory: List<String> = emptyList(),
     val sortTypes: SortType
 )
+
+

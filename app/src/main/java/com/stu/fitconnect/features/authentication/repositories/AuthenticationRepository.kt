@@ -1,6 +1,5 @@
 package com.stu.fitconnect.features.authentication.repositories
 
-import com.stu.fitconnect.AuthWeakPasswordException
 import com.stu.fitconnect.features.authentication.domain.User
 
 interface AuthenticationRepository {

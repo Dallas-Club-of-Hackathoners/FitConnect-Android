@@ -1,4 +1,4 @@
-package com.stu.fitconnect
+package com.stu.fitconnect.utils
 
 import com.stu.fitconnect.features.authentication.domain.AuthField
 

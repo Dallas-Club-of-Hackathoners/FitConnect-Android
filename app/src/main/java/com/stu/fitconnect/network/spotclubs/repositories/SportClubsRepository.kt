@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportclubs.repositories
+package com.stu.fitconnect.network.spotclubs.repositories
 
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportclubs.domain.SportClub

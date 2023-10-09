@@ -50,7 +50,7 @@ class SportClubListViewModel @Inject constructor(
                 mutableScreenState.update { it.copy(pagingSportClubList = pagingList) }
             }
         } catch (e: Exception) {
-            //handle exception
+            // todo handle exception
             // add side effect?
         } finally {
             mutableScreenState.update { it.copy(isLoading = false) }

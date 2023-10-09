@@ -2,8 +2,8 @@ package com.example.smartmessenger.di
 
 import com.stu.fitconnect.features.authentication.repositories.AuthenticationRepository
 import com.stu.fitconnect.features.authentication.repositories.AuthenticationRepositoryImpl
-import com.stu.fitconnect.features.sportclubs.repositories.SportClubsRepository
-import com.stu.fitconnect.features.sportclubs.repositories.SportClubsRepositoryImpl
+import com.stu.fitconnect.network.spotclubs.repositories.SportClubsRepository
+import com.stu.fitconnect.network.spotclubs.repositories.SportClubsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

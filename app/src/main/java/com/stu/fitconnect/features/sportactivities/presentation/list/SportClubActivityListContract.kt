@@ -1,7 +1,7 @@
 package com.stu.fitconnect.features.sportactivities.presentation.list
 
 import androidx.paging.PagingData
-import com.stu.fitconnect.UnidirectionalViewModel
+import com.stu.fitconnect.base.UnidirectionalViewModel
 import com.stu.fitconnect.features.sportactivities.domain.FilterActivities
 import com.stu.fitconnect.features.sportactivities.domain.SportClubActivityFilters
 import com.stu.fitconnect.features.sportactivities.domain.SportClubActivitySummary

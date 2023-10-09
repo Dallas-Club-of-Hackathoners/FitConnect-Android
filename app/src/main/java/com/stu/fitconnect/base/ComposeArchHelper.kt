@@ -1,4 +1,4 @@
-package com.stu.fitconnect
+package com.stu.fitconnect.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

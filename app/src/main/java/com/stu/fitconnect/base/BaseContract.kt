@@ -1,6 +1,7 @@
-package com.stu.fitconnect
+package com.stu.fitconnect.base
 
-interface BaseContract : BaseUnidirectionalViewModel<BaseContract.BaseState, BaseContract.BaseEvent, BaseContract.BaseEffect> {
+interface BaseContract :
+    BaseUnidirectionalViewModel<BaseContract.BaseState, BaseContract.BaseEvent, BaseContract.BaseEffect> {
 
     sealed class BaseState {
         object OnLoading : BaseState()

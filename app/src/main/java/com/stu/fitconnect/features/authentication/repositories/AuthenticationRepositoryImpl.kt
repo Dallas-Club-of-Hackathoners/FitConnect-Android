@@ -1,8 +1,6 @@
 package com.stu.fitconnect.features.authentication.repositories
 
-import com.stu.fitconnect.AuthException
-import com.stu.fitconnect.EmptyFieldException
-import com.stu.fitconnect.features.authentication.domain.AuthField
+import com.stu.fitconnect.utils.AuthException
 import com.stu.fitconnect.features.authentication.domain.User
 import com.stu.fitconnect.network.authentication.AuthenticationSource
 import com.stu.fitconnect.network.usersource.UsersSource
@@ -24,9 +22,9 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
     override suspend fun signUp(user: User, password: String, repeatPassword: String, rememberUser: Boolean) {
         authenticationSource.signUp(user.email, password) // create account in firebase authentication
-        val uId: String = authenticationSource.getCurrentUId() ?: throw AuthException(UID_EXCEPTION_MES)
 
         try {
+            val uId: String = authenticationSource.getCurrentUId()
             usersSource.createUser(user.copy(uId = uId))
         } catch (e: Exception) {
             authenticationSource.deleteCurrentUser()
@@ -35,10 +33,11 @@ class AuthenticationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteCurrentUser() {
-        val uId: String = authenticationSource.getCurrentUId() ?: throw AuthException(UID_EXCEPTION_MES)
+        val uId: String = authenticationSource.getCurrentUId()
         authenticationSource.deleteCurrentUser()
         usersSource.deleteUser(uId)
-    }
+     }
+
 
     override fun logOut() = authenticationSource.logOut()
 
@@ -50,7 +49,5 @@ class AuthenticationRepositoryImpl @Inject constructor(
 //        if(repeatPassword != null && repeatPassword.isBlank()) throw (EmptyFieldException(AuthField.RepeatPassword))
 //    }
 
-    companion object {
-        const val UID_EXCEPTION_MES = "Auth error. Cant get current User Id"
-    }
+
 }

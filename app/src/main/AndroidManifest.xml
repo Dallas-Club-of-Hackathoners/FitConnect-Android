@@ -16,7 +16,7 @@
         android:theme="@style/Theme.FitConnect"
         tools:targetApi="33">
         <activity
-            android:name=".MainActivity"
+            android:name=".base.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.FitConnect">

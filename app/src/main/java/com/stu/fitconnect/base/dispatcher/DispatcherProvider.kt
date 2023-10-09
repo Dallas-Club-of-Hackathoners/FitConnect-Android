@@ -1,4 +1,4 @@
-package com.stu.fitconnect.dispatcher
+package com.stu.fitconnect.base.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
 
