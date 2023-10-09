@@ -263,12 +263,14 @@
       ]
     },
     {
-      "id": "sortType",
+      "id": "4",
       "name": "Сортировка",
-      "sortType": {
+      "filtersList": [
+        {
         "id": 0,
         "name": "A-Z"
       }
+     ]
     }
   ]
 }
