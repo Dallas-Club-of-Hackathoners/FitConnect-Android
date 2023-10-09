@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportsclubs.presentation.list
+package com.stu.fitconnect.features.sportclubs.presentation.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.stu.fitconnect.features.sportsclubs.domain.Filter
-import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
-import com.stu.fitconnect.features.sportsclubs.presentation.SportClubListStatePreviewProvider
+import com.stu.fitconnect.features.sportclubs.domain.Filter
+import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
+import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
+import com.stu.fitconnect.features.sportclubs.presentation.SportClubListStatePreviewProvider
 import com.stu.fitconnect.use
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,7 +63,7 @@ fun SportsClubsListScreen(
     onNavigateToFiltersSportsClubsScreen: () -> Unit,
     onSearch: (searchBy: String) -> Unit,
     onApplySingleFilter: (filter: Filter) -> Unit,
-    onApplySelectedFilters: (filters: SportsClubsFiltersData) -> Unit,
+    onApplySelectedFilters: (filters: SportClubsFiltersData) -> Unit,
     onRefresh: () -> Unit,
 ) {
     Column(

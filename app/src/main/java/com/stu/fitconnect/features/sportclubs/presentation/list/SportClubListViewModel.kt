@@ -1,12 +1,12 @@
-package com.stu.fitconnect.features.sportsclubs.presentation.list
+package com.stu.fitconnect.features.sportclubs.presentation.list
 
 import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.stu.fitconnect.R
-import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
-import com.stu.fitconnect.features.sportsclubs.domain.usecases.GetSportClubsListUseCase
+import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
+import com.stu.fitconnect.features.sportclubs.domain.usecases.GetSportClubsListUseCase
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +36,7 @@ class SportClubListViewModel @Inject constructor(
         val inputStream = Resources.getSystem().openRawResource(R.raw.sport_clubs_filters_data)
         val jsonString = inputStream.bufferedReader().use { it.readText() }
         mutableScreenState.update{
-            it.copy(selectedFilters = Gson().fromJson(jsonString, SportsClubsFiltersData::class.java))
+            it.copy(selectedFilters = Gson().fromJson(jsonString, SportClubsFiltersData::class.java))
         }
     }
 

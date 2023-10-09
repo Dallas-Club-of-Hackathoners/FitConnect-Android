@@ -1,7 +1,7 @@
 package com.stu.fitconnect.features.sportactivities.domain
 
-import com.stu.fitconnect.features.sportsclubs.domain.AppLocation
-import com.stu.fitconnect.features.sportsclubs.domain.Trainer
+import com.stu.fitconnect.features.sportclubs.domain.AppLocation
+import com.stu.fitconnect.features.sportclubs.domain.Trainer
 
 data class SportClubActivity(
     val id: Int,
@@ -14,5 +14,6 @@ data class SportClubActivity(
     val countVisitors: Int,
     val score: Double,
     val time: String,
-    val isPossible: Boolean
+    val isPossible: Boolean,
+    val isFavorite: Boolean
 )

@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportsclubs.domain
+package com.stu.fitconnect.features.sportclubs.domain
 
 data class AppLocation(
     val latitude: Double,

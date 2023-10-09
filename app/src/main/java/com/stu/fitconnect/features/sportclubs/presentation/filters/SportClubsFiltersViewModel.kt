@@ -1,10 +1,10 @@
-package com.stu.fitconnect.features.sportsclubs.presentation.filters
+package com.stu.fitconnect.features.sportclubs.presentation.filters
 
 import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.stu.fitconnect.R
-import com.stu.fitconnect.features.sportsclubs.domain.FilterCategoryData
+import com.stu.fitconnect.features.sportclubs.domain.FilterCategoryData
 import dagger.hilt.android.scopes.ViewModelScoped
 
 @ViewModelScoped

@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportsclubs.domain
+package com.stu.fitconnect.features.sportclubs.domain
 
 data class SportClubSummary(
     val id: Int,

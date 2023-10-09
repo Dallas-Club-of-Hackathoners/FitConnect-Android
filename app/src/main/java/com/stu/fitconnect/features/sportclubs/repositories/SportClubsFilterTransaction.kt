@@ -1,6 +1,6 @@
-package com.stu.fitconnect.features.sportsclubs.repositories
+package com.stu.fitconnect.features.sportclubs.repositories
 
-import com.stu.fitconnect.features.sportsclubs.domain.SortType
+import com.stu.fitconnect.features.sportclubs.domain.SortType
 
 data class SportClubsFilterTransaction(
     val isFavourite: Boolean = false,
