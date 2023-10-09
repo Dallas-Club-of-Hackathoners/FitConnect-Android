@@ -2,7 +2,6 @@
   "filtersList": [
     {
       "id": "0",
-      "filterType": "IS_FAVOURITE",
       "name": "Избранные",
       "filtersList": [
         {
@@ -16,7 +15,6 @@
     },
     {
       "id": "1",
-      "filterType": "FACILITIES",
       "name": "Удобства",
       "filtersList": [
         {
@@ -93,7 +91,6 @@
     },
     {
       "id": "2",
-      "filterType": "COST",
       "name": "Стоимость",
       "filtersList": [
         {
@@ -121,7 +118,6 @@
     },
     {
       "id": "3",
-      "filterType": "CLUB_CATEGORY",
       "name": "Категории клубов",
       "filtersList": [
         {
@@ -265,10 +261,14 @@
           "isSelect": false
         }
       ]
+    },
+    {
+      "id": "sortType",
+      "name": "Сортировка",
+      "sortType": {
+        "id": 0,
+        "name": "A-Z"
+      }
     }
-  ],
-  "sortType": {
-    "id": 0,
-    "name": "A-Z"
-  }
+  ]
 }
