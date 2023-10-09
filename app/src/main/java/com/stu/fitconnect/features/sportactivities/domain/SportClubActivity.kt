@@ -3,7 +3,7 @@ package com.stu.fitconnect.features.sportactivities.domain
 import com.stu.fitconnect.features.sportsclubs.domain.AppLocation
 import com.stu.fitconnect.features.sportsclubs.domain.Trainer
 
-data class SportsClubActivity(
+data class SportClubActivity(
     val id: Int,
     val name: String,
     val imageRes: Int,

@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportsclubs.domain.AppLocation
 import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportsclubs.presentation.list.SportsClubListContract
+import com.stu.fitconnect.features.sportsclubs.presentation.list.SportClubListContract
 import com.stu.fitconnect.features.sportsclubs.presentation.list.SportsClubsListScreenPreview
 import com.stu.fitconnect.ui.theme.FitConnectTheme
 import kotlinx.coroutines.flow.flowOf
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     SportsClubsListScreenPreview(
-                        SportsClubListContract.State(
+                        SportClubListContract.State(
                             pagingSportsClubList = flowOf(
                                 PagingData.from(
                                     listOf(

@@ -8,10 +8,10 @@ import com.stu.fitconnect.features.sportsclubs.domain.FilterCategoryData
 import dagger.hilt.android.scopes.ViewModelScoped
 
 @ViewModelScoped
-class SportsClubsFiltersViewModel : ViewModel() {
+class SportClubsFiltersViewModel : ViewModel() {
 
     fun getAllSportsClubFiltersData() : List<FilterCategoryData> {
-        val inputStream = Resources.getSystem().openRawResource(R.raw.sports_clubs_filters_data)
+        val inputStream = Resources.getSystem().openRawResource(R.raw.sport_clubs_filters_data)
         val jsonString = inputStream.bufferedReader().use { it.readText() }
         return Gson().fromJson(jsonString, Array<FilterCategoryData>::class.java).asList()
     }

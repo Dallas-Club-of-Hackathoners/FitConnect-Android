@@ -1,16 +1,15 @@
 package com.stu.fitconnect.features.sportsclubs.presentation
 
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportsclubs.domain.AppLocation
 import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportsclubs.presentation.list.SportsClubListContract
+import com.stu.fitconnect.features.sportsclubs.presentation.list.SportClubListContract
 import kotlinx.coroutines.flow.flowOf
 
-class SportsClubListStatePreviewProvider : PreviewParameterProvider<SportsClubListContract.State> {
-    override val values: Sequence<SportsClubListContract.State> = sequenceOf(
-        SportsClubListContract.State(
+class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubListContract.State> {
+    override val values: Sequence<SportClubListContract.State> = sequenceOf(
+        SportClubListContract.State(
             pagingSportsClubList = flowOf(
                 PagingData.from(
                     listOf(

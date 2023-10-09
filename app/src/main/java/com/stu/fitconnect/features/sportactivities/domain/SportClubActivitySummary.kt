@@ -2,7 +2,7 @@ package com.stu.fitconnect.features.sportactivities.domain
 
 import java.util.Date
 
-data class SportsClubActivitySummary(
+data class SportClubActivitySummary(
     val id: Int,
     val date: Date,
     val name: String,

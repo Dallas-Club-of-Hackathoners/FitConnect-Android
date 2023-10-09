@@ -6,7 +6,7 @@ import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
 import kotlinx.coroutines.flow.Flow
 
-class SportsClubsRepositoryImpl: SportsClubsRepository {
+class SportClubsRepositoryImpl: SportClubsRepository {
 
     override fun getSportsClubsPagingList(searchBy: String, sportsClubsFilters: SportsClubsFiltersData): Flow<PagingData<SportClubSummary>> {
         TODO("Not yet implemented")

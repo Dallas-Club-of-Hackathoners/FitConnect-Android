@@ -19,20 +19,20 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.stu.fitconnect.features.sportsclubs.domain.Filter
 import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
-import com.stu.fitconnect.features.sportsclubs.presentation.SportsClubListStatePreviewProvider
+import com.stu.fitconnect.features.sportsclubs.presentation.SportClubListStatePreviewProvider
 import com.stu.fitconnect.use
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SportsClubsListRoute(
-    viewModel: SportsClubListViewModel = hiltViewModel(),
+    viewModel: SportClubListViewModel = hiltViewModel(),
     onNavigateToDetailSportsClubsScreen: (sportClubId: Int) -> Unit,
     onNavigateToFiltersSportsClubsScreen: () -> Unit,
 ) {
     val (state, event) = use(viewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
-        event.invoke(SportsClubListContract.Event.OnGetSportsClub)
+        event.invoke(SportClubListContract.Event.OnGetSportsClub)
     }
 
     SportsClubsListScreen(
@@ -40,16 +40,16 @@ fun SportsClubsListRoute(
         onNavigateToDetailSportsClubsScreen = onNavigateToDetailSportsClubsScreen,
         onNavigateToFiltersSportsClubsScreen = onNavigateToFiltersSportsClubsScreen,
         onSearch = { searchBy ->
-            event.invoke(SportsClubListContract.Event.OnSearchSportsClub(searchBy = searchBy))
+            event.invoke(SportClubListContract.Event.OnSearchSportsClub(searchBy = searchBy))
         },
         onApplySingleFilter = { filter ->
-            event.invoke(SportsClubListContract.Event.OnApplySingleFilter(filter = filter))
+            event.invoke(SportClubListContract.Event.OnApplySingleFilter(filter = filter))
         },
         onApplySelectedFilters = { filters ->
-            event.invoke(SportsClubListContract.Event.OnApplySelectedFilters(sportsClubsFilters = filters))
+            event.invoke(SportClubListContract.Event.OnApplySelectedFilters(sportsClubsFilters = filters))
         },
         onRefresh = {
-            event.invoke(SportsClubListContract.Event.OnRefresh)
+            event.invoke(SportClubListContract.Event.OnRefresh)
         }
     )
 }
@@ -58,7 +58,7 @@ fun SportsClubsListRoute(
 @ExperimentalMaterial3Api
 @Composable
 fun SportsClubsListScreen(
-    sportsClubsListState: SportsClubListContract.State,
+    sportsClubsListState: SportClubListContract.State,
     onNavigateToDetailSportsClubsScreen: (sportClubId: Int) -> Unit,
     onNavigateToFiltersSportsClubsScreen: () -> Unit,
     onSearch: (searchBy: String) -> Unit,
@@ -232,8 +232,8 @@ fun SportsClubListCard(
 @Preview
 @Composable
 fun SportsClubsListScreenPreview(
-    @PreviewParameter(SportsClubListStatePreviewProvider::class)
-    sportsClubsListState: SportsClubListContract.State,
+    @PreviewParameter(SportClubListStatePreviewProvider::class)
+    sportsClubsListState: SportClubListContract.State,
 ) {
     Surface {
         SportsClubsListScreen(

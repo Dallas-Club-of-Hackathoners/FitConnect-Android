@@ -2,7 +2,7 @@ package com.stu.fitconnect.features.sportsclubs.repositories
 
 import com.stu.fitconnect.features.sportsclubs.domain.SortType
 
-data class SportsClubsFilterTransaction(
+data class SportClubsFilterTransaction(
     val isFavourite: Boolean = false,
     val facilities: List<String> = emptyList(),
     val cost: List<Int> = emptyList(),

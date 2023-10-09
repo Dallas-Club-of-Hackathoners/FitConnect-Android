@@ -5,7 +5,7 @@ import com.stu.fitconnect.features.sportsclubs.domain.SportClub
 import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
 
-interface SportsClubsRepository {
+interface SportClubsRepository {
 
     fun getSportsClubsPagingList(searchBy: String, sportsClubsFilters: SportsClubsFiltersData): kotlinx.coroutines.flow.Flow<PagingData<SportClubSummary>>
 

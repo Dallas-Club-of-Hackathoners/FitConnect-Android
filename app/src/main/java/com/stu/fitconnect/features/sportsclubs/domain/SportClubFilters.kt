@@ -3,7 +3,7 @@ package com.stu.fitconnect.features.sportsclubs.domain
 
 data class SportsClubsFiltersData(
     var filtersList: List<FilterCategoryData> = emptyList(),
-    var sortType: SortType = SortType()
+//    var sortType: SortType = SortType()
 ) {
 
     fun getUpdatedFiltersList(filter: Filter) : SportsClubsFiltersData {
@@ -21,7 +21,7 @@ data class SportsClubsFiltersData(
     }
 
     fun updateSortType(sortType: SortType) : SportsClubsFiltersData  {
-        this.sortType = sortType
+//        this.sortType = sortType
         return this
     }
 }

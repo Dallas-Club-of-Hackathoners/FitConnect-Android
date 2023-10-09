@@ -1,7 +1,6 @@
 package com.stu.fitconnect.features.sportsclubs.presentation.list
 
 import androidx.paging.PagingData
-import com.stu.fitconnect.features.sportsclubs.domain.SortType
 import com.stu.fitconnect.features.sportsclubs.domain.SportClubSummary
 import com.stu.fitconnect.UnidirectionalViewModel
 import com.stu.fitconnect.features.sportsclubs.domain.Filter
@@ -9,8 +8,8 @@ import com.stu.fitconnect.features.sportsclubs.domain.SportsClubsFiltersData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
-interface SportsClubListContract:
-    UnidirectionalViewModel<SportsClubListContract.State, SportsClubListContract.Event> {
+interface SportClubListContract:
+    UnidirectionalViewModel<SportClubListContract.State, SportClubListContract.Event> {
 
     data class State(
         val pagingSportsClubList : Flow<PagingData<SportClubSummary>> = emptyFlow(),
