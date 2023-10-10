@@ -28,10 +28,12 @@ fun SportsClubsListRoute(
     onNavigateToDetailSportsClubsScreen: (sportClubId: Int) -> Unit,
     onNavigateToFiltersSportsClubsScreen: () -> Unit,
 ) {
+
     val (state, event) = use(viewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
         event.invoke(SportClubListContract.Event.OnGetSportClub)
+        event.invoke(SportClubListContract.Event.OnGetSportClubFilters)
     }
 
     SportsClubsListScreen(

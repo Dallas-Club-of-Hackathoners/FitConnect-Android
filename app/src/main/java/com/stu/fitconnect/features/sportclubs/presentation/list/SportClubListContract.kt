@@ -8,8 +8,7 @@ import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
-interface SportClubListContract:
-    UnidirectionalViewModel<SportClubListContract.State, SportClubListContract.Event> {
+interface SportClubListContract: UnidirectionalViewModel<SportClubListContract.State, SportClubListContract.Event> {
 
     data class State(
         val pagingSportClubList : Flow<PagingData<SportClubSummary>> = emptyFlow(),

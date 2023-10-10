@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 
-
 data class StateDispatch<STATE, EVENT> (
     val state: STATE,
     val dispatch: (EVENT) -> Unit,
