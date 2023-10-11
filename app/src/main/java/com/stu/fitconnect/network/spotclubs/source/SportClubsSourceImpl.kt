@@ -22,5 +22,4 @@ class SportClubsSourceImpl @Inject constructor(
             throw e
         }
     }
-
 }
