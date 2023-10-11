@@ -19,7 +19,7 @@ data class SportsClubSummaryListResponse(
 data class SportClubSummaryResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
-    @SerializedName("images_res") val imagesRes: List<Int>,
+    @SerializedName("images_res") val imagesRes: List<String>,
     @SerializedName("location") val location: AppLocationResponse,
     @SerializedName("score") val score: Double,
     @SerializedName("reviews_count") val reviewsCount: Int,
