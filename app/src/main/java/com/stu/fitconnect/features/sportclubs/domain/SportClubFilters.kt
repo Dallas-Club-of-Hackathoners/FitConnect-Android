@@ -2,13 +2,14 @@ package com.stu.fitconnect.features.sportclubs.domain
 
 
 data class SportClubsFiltersData(
-    var filtersList: List<FilterCategoryData> = emptyList(),
+    var filtersCategoryList: List<FilterCategory> = emptyList(),
+//    val filtersList:
 //    var sortType: SortType = SortType()
 ) {
 
     fun getUpdatedFiltersList(filter: Filter) : SportClubsFiltersData {
         val filtersData = this
-        filtersData.filtersList.forEach { filterCategory ->
+        filtersData.filtersCategoryList.forEach { filterCategory ->
             if (filterCategory.id == filter.id) {
                 filterCategory.filtersList.forEach { filterItem ->
                     if (filterItem.id == filter.id) {
@@ -27,7 +28,7 @@ data class SportClubsFiltersData(
 }
 
 
-data class FilterCategoryData(
+data class FilterCategory(
     val id: Int,
     val name: String,
     val filtersList: MutableList<Filter> = mutableListOf()

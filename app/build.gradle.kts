@@ -73,7 +73,7 @@ dependencies {
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    val nav_version = "2.7.4"
+    val nav_version = "2.5.3"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     val paging_version = "3.2.1"
