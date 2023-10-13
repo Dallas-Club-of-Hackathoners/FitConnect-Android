@@ -4,8 +4,11 @@ import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
 import com.stu.fitconnect.network.spotclubs.api.SportClubsApiService
 import com.stu.fitconnect.network.spotclubs.api.toSportClubsFilterRequest
+import com.stu.fitconnect.network.spotclubs.api.toSportsClubSummaryList
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SportClubsSourceImpl @Inject constructor(
     private val sportsClubsApiService: SportClubsApiService
 ): SportClubsSource {
@@ -17,7 +20,7 @@ class SportClubsSourceImpl @Inject constructor(
                 searchBy = searchBy,
                 pageIndex = pageIndex,
                 userId = userId
-            ).toSportsClubSummaryList() 
+            ).toSportsClubSummaryList()
         } catch (e: Exception) {
             throw e
         }

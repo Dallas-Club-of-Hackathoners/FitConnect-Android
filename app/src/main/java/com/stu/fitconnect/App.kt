@@ -11,5 +11,4 @@ class App: Application() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
     }
-
 }

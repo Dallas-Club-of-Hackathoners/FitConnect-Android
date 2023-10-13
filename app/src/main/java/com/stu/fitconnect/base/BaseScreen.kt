@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 class BaseScreen {
-
     @Composable
     fun BaseRoute(
         baseViewModel: BaseViewModel,

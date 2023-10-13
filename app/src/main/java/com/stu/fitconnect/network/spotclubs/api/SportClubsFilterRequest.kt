@@ -14,7 +14,7 @@ data class SportClubsFilterRequest(
 
 fun SportClubsFiltersData.toSportClubsFilterRequest() : SportClubsFilterRequest {
     val sportClubsFilterRequest = SportClubsFilterRequest()
-    this.filtersList.forEach { filterCategory ->
+    this.filtersCategoryList.forEach { filterCategory ->
         filterCategory.filtersList.forEach { filter ->
             if(filter.isSelect) {
                 when(filterCategory.id) {

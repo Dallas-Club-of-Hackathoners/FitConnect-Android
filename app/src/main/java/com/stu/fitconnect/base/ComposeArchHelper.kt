@@ -20,9 +20,7 @@ data class StateEffectDispatch<STATE, EVENT, EFFECT>(
 )
 
 @Composable
-inline fun <reified STATE, EVENT> use(
-    viewModel: UnidirectionalViewModel<STATE, EVENT>,
-): StateDispatch<STATE, EVENT> {
+inline fun <reified STATE, EVENT> use(viewModel: UnidirectionalViewModel<STATE, EVENT>): StateDispatch<STATE, EVENT> {
     val state by viewModel.state.collectAsState()
 
     val dispatch: (EVENT) -> Unit = { event ->

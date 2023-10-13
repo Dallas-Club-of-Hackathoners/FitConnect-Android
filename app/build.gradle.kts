@@ -72,10 +72,9 @@ dependencies {
     //kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    //last added
 
-//    val nav_version = "2.7.4"
-//    implementation("androidx.navigation:navigation-compose:$nav_version")
+    val nav_version = "2.5.3"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     val paging_version = "3.2.1"
     implementation("androidx.paging:paging-runtime-ktx:$paging_version")
