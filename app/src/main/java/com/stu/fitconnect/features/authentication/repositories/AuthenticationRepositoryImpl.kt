@@ -16,7 +16,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     override suspend fun signIn(email: String, password: String, rememberUser: Boolean) {
         authenticationSource.signIn(email, password)
         val uId = authenticationSource.getCurrentUId()
-        val userData = usersSource.getUserData(uId ?: throw AuthException("Auth error. Cant get current User Id"))
+            //val userData = usersSource.getUserData(uId ?: throw AuthException("Auth error. Cant get current User Id"))
         //TODO добавить user в локальную бд
     }
 

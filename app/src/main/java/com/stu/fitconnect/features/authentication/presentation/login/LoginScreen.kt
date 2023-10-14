@@ -1,26 +1,18 @@
 package com.stu.fitconnect.features.authentication.presentation.login
 
-
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,8 +20,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.stu.fitconnect.features.authentication.domain.AuthField
+import com.stu.fitconnect.ui.AuthTextField
+import com.stu.fitconnect.ui.theme.ButtonColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +30,7 @@ fun LoginScreenRoute(
     viewModel: LoginViewModel = hiltViewModel(),
     onNavigateToMainScreen: () -> Unit,
     onNavigateToSportClubsListScreen: () -> Unit,
-    onNavigateToSignUpScreen: (email:String) -> Unit,
+    onNavigateToSignUpScreen: () -> Unit,
 ) {
     val (state, event) = use(viewModel = viewModel)
 
@@ -47,47 +40,44 @@ fun LoginScreenRoute(
 
     LoginScreen(
         loginState = state,
-        onNavigateToMainScreen = onNavigateToMainScreen,
         onNavigateToSportClubsListScreen = onNavigateToSportClubsListScreen,
         onNavigateToSignUpScreen = onNavigateToSignUpScreen,
-        OnEmailChanged = { email ->
-            event.invoke(LoginContract.Event.OnEmailChanged(email = email))
+        onSignInDataChanged = { value, type ->
+            event.invoke(LoginContract.Event.OnSignInDataChanged(value, type))
         },
-        OnPasswordChanged = { password ->
-            event.invoke(LoginContract.Event.OnPasswordChanged(password = password))
-        },
-        OnChangeRememberUser = { rememberUser ->
+        onChangeRememberUser = { rememberUser ->
             event.invoke(LoginContract.Event.OnChangeRememberUser(rememberUser = rememberUser))
         },
-        OnLogin = {
-            event.invoke(LoginContract.Event.OnLogin)
+        onLogin = {
+            event.invoke(LoginContract.Event.OnLogin(navigateToMainScreen = {
+                onNavigateToSportClubsListScreen()
+            }))
         }
     )
 }
-
 
 
 @ExperimentalMaterial3Api
 @Composable
 fun LoginScreen(
     loginState: LoginContract.State,
-    onNavigateToMainScreen: () -> Unit,
     onNavigateToSportClubsListScreen: () -> Unit,
-    onNavigateToSignUpScreen: (email:String) -> Unit,
-    OnEmailChanged: (email: String) -> Unit,
-    OnPasswordChanged: (password: String) -> Unit,
-    OnChangeRememberUser: (rememberUser: Boolean) -> Unit,
-    OnLogin: () -> Unit,
+    onNavigateToSignUpScreen: () -> Unit,
+    onSignInDataChanged: (value: String, type: AuthField) -> Unit,
+    onChangeRememberUser: (rememberUser: Boolean) -> Unit,
+    onLogin: () -> Unit,
 
 
     ) {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
+//    val snackbarHostState = remember { SnackbarHostState() }
+//    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1D1D1D)), // BackgroundColor
+            .background(Color(0xFF1D1D1D))
+            .padding(horizontal = 17.dp), // BackgroundColor
+
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -102,138 +92,90 @@ fun LoginScreen(
                 textAlign = TextAlign.Center,
             )
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-        var email by remember { mutableStateOf("") }
-        var isValidEmail by remember { mutableStateOf(true) }
-
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            value = email,
+        AuthTextField(
+            value = loginState.signInData.email,
+            label = "Почта",
             onValueChange = {
-                email = it
-                isValidEmail = isValidEmail(it)
-                OnEmailChanged (it)
+                onSignInDataChanged(it, AuthField.Email)
             },
-            label = { Text("Почта") },
-            textStyle = TextStyle(color = if (isValidEmail) Color.Green else Color.Red),
-            colors = TextFieldDefaults.textFieldColors(
-                focusedIndicatorColor = if (isValidEmail) Color.Black else Color.Red,
-                unfocusedIndicatorColor = if (isValidEmail) Color.Black else Color.Red,
-                textColor = if (isValidEmail) Color.Green else Color.Red,
-            ),
-            shape = RoundedCornerShape(20.dp),
-            trailingIcon = {
-                Icon(imageVector = Icons.Default.Email, contentDescription = email)
-            },
-
+            fieldType = AuthField.Email
         )
-
-
-
-        var password by rememberSaveable { mutableStateOf("") }
-        var isPasswordVisible by remember { mutableStateOf(false) }
-
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            value = password,
+        Spacer(modifier = Modifier.height(15.dp))
+        AuthTextField(
+            value = loginState.signInData.password,
+            label = "Пароль",
             onValueChange = {
-                password = it
-                OnPasswordChanged (it)
-                            },
-            label = { Text("Пароль") },
-            trailingIcon = {
-                IconButton(
-                    onClick = { isPasswordVisible = !isPasswordVisible }
-                ) {
-                    Icon(
-                        imageVector = if (isPasswordVisible) Icons.Default.Warning else Icons.Default.Lock,
-                        contentDescription = if (isPasswordVisible) "Скрыть пароль" else "Показать пароль"
-                    )
-                }
+                onSignInDataChanged(it, AuthField.Password)
             },
-            colors = TextFieldDefaults.textFieldColors(
-                focusedIndicatorColor = Color.Black,
-                unfocusedIndicatorColor = Color.Black,
-                textColor = Color.White,
-            ),
-            visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Password
-            ),
-            singleLine = true,
-            shape = RoundedCornerShape(20.dp),
-
-            )
-
-
+            fieldType = AuthField.Password
+        )
+        Spacer(modifier = Modifier.height(15.dp))
 
         Button(
-            onClick = {
-                if (isValidEmail(email) && isValidPassword(password)) {
-                    // Выполнить действие, если почта и пароль валидны
-                    // todo крч надо сделать проверку на существование юзера, надеюсь она включена в юз кейс
-                    OnLogin
-                    onNavigateToSportClubsListScreen
-                } else {
-                      coroutineScope.launch {
-                        snackbarHostState.showSnackbar(
-                            message = "Проверьте валидность данных",
-                            actionLabel = "Закрыть"
-                        )
-                        delay(3000) // Time in milliseconds
-                        snackbarHostState.currentSnackbarData?.dismiss() //пока не работает
-                    }
-                }
-
-                      },
+            onClick = onLogin,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
-                .padding(20.dp),
-            border = BorderStroke(1.dp, Color.Black),
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.Green, // Здесь задайте цвет текста
-                containerColor = Color(0xFF383838), // Здесь задайте цвет кнопки
-            )
-
+                .height(47.dp),
+            shape = RoundedCornerShape(17.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = ButtonColor)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
-                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
-                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
-                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
-                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
-                Spacer(modifier = Modifier.width(22.dp)) // Расстояние между иконкой и текстом
-                Text(
-                    text = "Сonnect",
-                    fontFamily = FontFamily(Font(R.font.montserrat_italic)),
-                    )
-                Spacer(modifier = Modifier.width(22.dp)) // Расстояние между иконкой и текстом
-                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
-                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
-                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
-                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между текстом и второй иконкой
-                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
-            }
-
+            Text(
+                text = "Войти",
+                color = Color.White,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)))
         }
 
-    }
-    SnackbarHost(
-        hostState = snackbarHostState,
-        modifier = Modifier
-            .navigationBarsPadding()
-            .statusBarsPadding()
-    )
+        Spacer(modifier = Modifier.height(15.dp))
 
+        Button(
+            onClick = onNavigateToSignUpScreen,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(47.dp),
+            shape = RoundedCornerShape(17.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = ButtonColor)
+        ) {
+            Text(
+                text = "Нет аккаунта? Зарегестрироваться",
+                color = Color.White,
+                fontFamily = FontFamily(Font(R.font.montserrat_medium)))
+        }
+//    {
+//            Row(
+//                verticalAlignment = Alignment.CenterVertically,
+//                horizontalArrangement = Arrangement.SpaceBetween
+//            ) {
+//                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
+//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
+//                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
+//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
+//                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
+//                Spacer(modifier = Modifier.width(22.dp)) // Расстояние между иконкой и текстом
+//                Text(
+//                    text = "Сonnect",
+//                    fontFamily = FontFamily(Font(R.font.montserrat_italic)),
+//                    )
+//                Spacer(modifier = Modifier.width(22.dp)) // Расстояние между иконкой и текстом
+//                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
+//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
+//                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
+//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между текстом и второй иконкой
+//                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
+//            }
+//
+//        }
+//
+//    }
+//    SnackbarHost(
+//        hostState = snackbarHostState,
+//        modifier = Modifier
+//            .navigationBarsPadding()
+//            .statusBarsPadding()
+//    )
+
+    }
 }
 //@Composable
 //fun NextScreenButton(onClick: () -> Unit) {
@@ -246,8 +188,6 @@ fun LoginScreen(
 //        Text(text = "Далее")
 //    }
 //}
-
-
 
 
 fun isValidEmail(email: String): Boolean {
@@ -265,12 +205,10 @@ fun isValidPassword(password: String): Boolean {
 fun LoginScreenPreview() {
     LoginScreen(
         loginState = LoginContract.State(),
-        onNavigateToMainScreen = {},
         onNavigateToSportClubsListScreen = {},
         onNavigateToSignUpScreen = {},
-        OnEmailChanged = {},
-        OnPasswordChanged = {},
-        OnChangeRememberUser = {},
-        OnLogin = {},
+        onSignInDataChanged = { _, _ -> },
+        onChangeRememberUser = {},
+        onLogin = {},
     )
 }

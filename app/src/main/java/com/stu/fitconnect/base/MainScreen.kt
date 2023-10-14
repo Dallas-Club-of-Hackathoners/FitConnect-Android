@@ -9,6 +9,7 @@ fun MainScreen() {
     val navigationState = rememberNavigationState()
 
     AppNavGraph(
-        navHostController = navigationState.navHostController
+        navHostController = navigationState.navHostController,
+        isLogIn = false
     )
 }

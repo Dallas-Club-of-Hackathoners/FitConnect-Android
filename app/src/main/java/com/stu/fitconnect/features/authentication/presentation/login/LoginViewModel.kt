@@ -2,6 +2,7 @@ package com.stu.fitconnect.features.authentication.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.stu.fitconnect.features.authentication.domain.AuthField
 import com.stu.fitconnect.features.authentication.domain.usecases.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,29 +23,37 @@ class LoginViewModel @Inject constructor(
 
 
     override fun event(event: LoginContract.Event) = when (event) {
-        LoginContract.Event.OnLogin -> onLogin()
+        is LoginContract.Event.OnLogin -> onLogin(event.navigateToMainScreen)
 //        LoginContract.Event.OnForgotPassword -> onForgotPassword()
-        is LoginContract.Event.OnEmailChanged -> updateStateAndFetchData{it.copy(email = event.email)}
-        is LoginContract.Event.OnPasswordChanged -> updateStateAndFetchData{it.copy(password = event.password)}
-        is LoginContract.Event.OnChangeRememberUser -> updateStateAndFetchData { it.copy(rememberUser = event.rememberUser) }
+        is LoginContract.Event.OnSignInDataChanged -> updateState {
+            when(event.type) {
+                AuthField.Email -> it.copy(signInData = it.signInData.copy(email = event.value))
+                AuthField.Password -> it.copy(signInData = it.signInData.copy(password = event.value))
+                else -> throw Exception()
+            }
+        }
+        is LoginContract.Event.OnChangeRememberUser -> updateState { it.copy(rememberUser = event.rememberUser) }
     }
 
-    private fun onLogin() {
+    private fun onLogin(navigateToMainScreen: () -> Unit) {
         mutableScreenState.update { it.copy(isLoading = true) }
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch() {
+            try {
                 loginUseCase.invoke(
-                    mutableScreenState.value.email,
-                    mutableScreenState.value.password,
+                    mutableScreenState.value.signInData.email,
+                    mutableScreenState.value.signInData.password,
                     mutableScreenState.value.rememberUser
                 )
+                navigateToMainScreen()
+            } catch (e: Exception) {
+                // todo handle exception
+                // add side effect?
+            } finally {
+                mutableScreenState.update { it.copy(isLoading = false) }
             }
-        } catch (e: Exception) {
-            // todo handle exception
-            // add side effect?
-        } finally {
-            mutableScreenState.update { it.copy(isLoading = false) }
         }
+
+
     }
 
 
@@ -52,7 +61,7 @@ class LoginViewModel @Inject constructor(
 //        TODO("Not yet implemented")
 //    }
 
-    private fun updateStateAndFetchData(updateAction: (LoginContract.State) -> LoginContract.State) {
+    private fun updateState(updateAction: (LoginContract.State) -> LoginContract.State) {
         mutableScreenState.update { updateAction(it) }
     }
 

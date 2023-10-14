@@ -13,11 +13,12 @@ import com.stu.fitconnect.features.sportclubs.presentation.selectedclub.SportClu
 
 @Composable
 fun AppNavGraph(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    isLogIn: Boolean
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = Screen.SportClubSList.route
+        startDestination = if(isLogIn) Screen.SportClubSList.route else Screen.SignIn.route
     ) {
 
         composable(Screen.SignUp.route) {
@@ -36,7 +37,19 @@ fun AppNavGraph(
             )
         }
         composable(Screen.SignIn.route) {
-          //  SigUp
+            LoginScreenRoute(
+                onNavigateToMainScreen = { /*TODO*/ },
+                onNavigateToSportClubsListScreen = {
+                    navHostController.navigate(
+                        route = Screen.SportClubSList.route
+                    )
+                },
+                onNavigateToSignUpScreen = {
+                    navHostController.navigate(
+                        route = Screen.SignUp.route
+                    )
+                } ,
+            )
         }
         composable(Screen.SportClubSList.route) {
             SportsClubsListRoute(
