@@ -8,9 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import com.stu.fitconnect.R
 import com.stu.fitconnect.features.sportclubs.domain.Filter
 import com.stu.fitconnect.features.sportclubs.domain.FilterCategory
 import com.stu.fitconnect.ui.theme.BackgroundColor
@@ -53,6 +56,7 @@ fun FiltersCard(
                     Text(
                         text = filter.name,
                         color = if(filter.isSelect) Gray else Color.White,
+                        fontFamily = FontFamily(Font(R.font.montserrat_medium)),
                         fontSize = 16.sp,
                         modifier = Modifier
                             .padding(end = 10.dp, start = 10.dp, bottom = 2.dp),
