@@ -1,4 +1,4 @@
-package com.stu.fitconnect.network.spotclubs.api
+package com.stu.fitconnect.network
 
 object ApiConstants {
     const val BASE_URL = "http://5.35.101.92:8080"

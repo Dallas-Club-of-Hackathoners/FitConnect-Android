@@ -1,4 +1,4 @@
-package com.stu.fitconnect.network.usersource
+package com.stu.fitconnect.network.usersource.api
 
 data class UserTransaction(
     val uId: String,

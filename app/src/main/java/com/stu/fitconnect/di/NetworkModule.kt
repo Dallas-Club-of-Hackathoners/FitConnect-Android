@@ -1,7 +1,8 @@
 package com.stu.fitconnect.di
 
-import com.stu.fitconnect.network.spotclubs.api.ApiConstants
+import com.stu.fitconnect.network.ApiConstants
 import com.stu.fitconnect.network.spotclubs.api.SportClubsApiService
+import com.stu.fitconnect.network.usersource.api.UsersApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,14 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideWeatherApiService(retrofit: Retrofit): SportClubsApiService {
+    fun provideSportClubsApiService(retrofit: Retrofit): SportClubsApiService {
         return retrofit.create(SportClubsApiService::class.java)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideUsersApiService(retrofit: Retrofit): UsersApiService {
+        return retrofit.create(UsersApiService::class.java)
     }
 }

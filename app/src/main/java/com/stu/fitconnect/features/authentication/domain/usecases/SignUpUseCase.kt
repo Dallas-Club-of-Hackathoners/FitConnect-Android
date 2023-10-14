@@ -9,4 +9,5 @@ class SignUpUseCase(
     operator suspend fun invoke(user: User, password: String, repeatPassword: String, rememberUser: Boolean) {
         return authenticationRepository.signUp(user, password, repeatPassword, rememberUser)
     }
+
 }

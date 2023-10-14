@@ -1,4 +1,4 @@
-package com.stu.fitconnect.network.usersource
+package com.stu.fitconnect.network.usersource.source
 
 import com.stu.fitconnect.features.authentication.domain.User
 
