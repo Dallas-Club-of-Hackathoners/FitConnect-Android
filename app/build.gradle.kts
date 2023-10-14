@@ -68,6 +68,7 @@ dependencies {
     implementation ("androidx.compose.material:material-icons-core:1.5.3")
 
 
+
     val hilt_version = "2.44"
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")

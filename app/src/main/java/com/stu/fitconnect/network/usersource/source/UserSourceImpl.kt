@@ -12,7 +12,7 @@ class UserSourceImpl @Inject constructor(
     override suspend fun createUser(user: User) {
         try {
             if(user.uId == null || user.uniqueUsername == null) throw Exception()
-            usersApiService.createUser(userId = user.uId, name = user.uniqueUsername)
+            usersApiService.createUser(userId = user.uId, name = user.email) //TODO change name to uniqueUsername
         } catch (e: Exception) {
 
         }

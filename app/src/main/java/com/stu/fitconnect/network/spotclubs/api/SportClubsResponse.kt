@@ -30,7 +30,7 @@ data class SportClubSummaryResponse(
     @SerializedName("isFavorite") val isFavorite: Boolean
 ) {
     fun toSportClubSummary() : SportClubSummary{
-        return SportClubSummary(id, name, listOf(imagesRes), location.toAppLocation(), score, reviewsCount, cost, isFavorite)
+        return SportClubSummary(id, name, listOf(imagesRes), location.toAppLocation(), score, reviewsCount, cost, category ,isFavorite)
     }
 }
 

@@ -187,7 +187,7 @@ fun LoginScreen(
                             actionLabel = "Закрыть"
                         )
                         delay(3000) // Time in milliseconds
-                        snackbarHostState.currentSnackbarData?.dismiss() //пока не работает
+                        snackbarHostState.currentSnackbarData?.dismiss() // toпока не работает
                     }
                 }
 
