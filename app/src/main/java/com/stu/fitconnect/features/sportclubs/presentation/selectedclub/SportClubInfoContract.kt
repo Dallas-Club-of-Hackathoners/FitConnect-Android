@@ -1,10 +1,7 @@
 package com.stu.fitconnect.features.sportclubs.presentation.selectedclub
 
-import androidx.paging.PagingData
 import com.stu.fitconnect.base.UnidirectionalViewModel
 import com.stu.fitconnect.features.sportclubs.domain.SportClub
-import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 interface SportClubInfoContract:
@@ -12,10 +9,12 @@ interface SportClubInfoContract:
 
     data class State(
         val isLoading: Boolean = false,
+        val id: Int = 0,
+        val sportClub: SportClub = SportClub(),
     )
 
     sealed class Event {
-        object OnRefresh : Event()
+//        object OnRefresh : Event()
         object OnGetSportClub : Event()
     }
 }

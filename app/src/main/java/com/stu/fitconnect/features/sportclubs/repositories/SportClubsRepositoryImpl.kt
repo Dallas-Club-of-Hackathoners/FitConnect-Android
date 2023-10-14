@@ -8,8 +8,8 @@ import com.stu.fitconnect.features.sportclubs.domain.SportClub
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
 import com.stu.fitconnect.network.authentication.AuthenticationSource
-import com.stu.fitconnect.network.spotclubs.source.SportClubsPagingSource
-import com.stu.fitconnect.network.spotclubs.source.SportClubsSource
+import com.stu.fitconnect.network.sportclubs.source.SportClubsPagingSource
+import com.stu.fitconnect.network.sportclubs.source.SportClubsSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -45,9 +45,6 @@ class SportClubsRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override fun getSportClubById(id: Int): SportClub {
-        TODO()
-    }
 
     private companion object {
         const val PAGE_SIZE = 6

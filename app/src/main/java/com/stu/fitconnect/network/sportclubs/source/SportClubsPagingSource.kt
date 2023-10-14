@@ -1,4 +1,4 @@
-package com.stu.fitconnect.network.spotclubs.source
+package com.stu.fitconnect.network.sportclubs.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

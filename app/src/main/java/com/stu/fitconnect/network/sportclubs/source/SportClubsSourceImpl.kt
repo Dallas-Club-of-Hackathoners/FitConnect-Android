@@ -1,11 +1,11 @@
-package com.stu.fitconnect.network.spotclubs.source
+package com.stu.fitconnect.network.sportclubs.source
 
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
-import com.stu.fitconnect.network.spotclubs.api.SportClubsApiService
-import com.stu.fitconnect.network.spotclubs.api.SportClubsSummaryRequest
-import com.stu.fitconnect.network.spotclubs.api.toSportClubsFilterRequest
-import com.stu.fitconnect.network.spotclubs.api.toSportsClubSummaryList
+import com.stu.fitconnect.network.sportclubs.api.SportClubsApiService
+import com.stu.fitconnect.network.sportclubs.api.SportClubsSummaryRequest
+import com.stu.fitconnect.network.sportclubs.api.toSportClubsFilterRequest
+import com.stu.fitconnect.network.sportclubs.api.toSportsClubSummaryList
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -1,4 +1,4 @@
-package com.stu.fitconnect.network.spotclubs.api
+package com.stu.fitconnect.network.sportclubs.api
 
 import retrofit2.http.Body
 import retrofit2.http.POST

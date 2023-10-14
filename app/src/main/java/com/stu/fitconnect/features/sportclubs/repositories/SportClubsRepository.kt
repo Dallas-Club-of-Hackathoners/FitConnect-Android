@@ -9,6 +9,5 @@ interface SportClubsRepository {
 
     fun getSportClubsPagingList(searchBy: String, sportClubsFilters: SportClubsFiltersData): kotlinx.coroutines.flow.Flow<PagingData<SportClubSummary>>
 
-    fun getSportClubById(id: Int): SportClub
 
 }

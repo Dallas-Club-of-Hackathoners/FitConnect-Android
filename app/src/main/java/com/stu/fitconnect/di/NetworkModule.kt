@@ -1,7 +1,7 @@
 package com.stu.fitconnect.di
 
 import com.stu.fitconnect.network.ApiConstants
-import com.stu.fitconnect.network.spotclubs.api.SportClubsApiService
+import com.stu.fitconnect.network.sportclubs.api.SportClubsApiService
 import com.stu.fitconnect.network.usersource.api.UsersApiService
 import dagger.Module
 import dagger.Provides

@@ -1,9 +1,8 @@
-package com.stu.fitconnect.network.spotclubs.api
+package com.stu.fitconnect.network.sportclubs.api
 
 import com.google.gson.annotations.SerializedName
 import com.stu.fitconnect.features.sportclubs.domain.FilterType
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
-import retrofit2.http.Query
 
 
 data class SportClubsSummaryRequest(
