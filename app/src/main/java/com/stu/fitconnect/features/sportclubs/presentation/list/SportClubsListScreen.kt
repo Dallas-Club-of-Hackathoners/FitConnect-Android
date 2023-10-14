@@ -1,13 +1,25 @@
 package com.stu.fitconnect.features.sportclubs.presentation.list
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -70,6 +82,7 @@ fun SportsClubsListScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFF1D1D1D)) // BackgroundColor
             .padding(16.dp)
     ) {
         // Строка для ввода поиска
@@ -78,39 +91,65 @@ fun SportsClubsListScreen(
             onValueChange = { newText ->
                 onSearch(newText)
             },
-            label = { Text("Поиск спортзала") },
-            modifier = Modifier.fillMaxWidth()
+            label = {
+                Text(text = "Поиск спортзала")
+                TextStyle(color = Color.White)
+            },
+            textStyle = TextStyle(color = Color.White), // Задаем цвет текста
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(25.dp),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search, // Иконка поиска
+                    contentDescription = null, // Описание контента (можно оставить пустым)
+                    modifier = Modifier.padding(8.dp) // Отступ от текста
+                )
+            }
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Кнопка для сортировки
-        Button(
-            onClick = {
-                // Открываем экран сортировки
-                onNavigateToFiltersSportsClubsScreen()
-            },
+        Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Сортировать")
+            // Кнопка для сортировки
+            Button(
+                onClick = {
+                    // Открываем экран фильтров
+                    onNavigateToFiltersSportsClubsScreen()
+                },
+                modifier = Modifier
+                    .weight(1f) // Занимает доступное пространство равномерно с другой кнопкой
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = Color.White, // Здесь задайте цвет текста
+                    containerColor = Color.Green, // Здесь задайте цвет кнопки
+                )
+            ) {
+                Text("Фильтры")
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // Кнопка для сортировки
+            Button(
+                onClick = {
+                    // Открываем экран сортировки
+                    onNavigateToFiltersSportsClubsScreen()
+                },
+                modifier = Modifier
+                    .weight(1f) // Занимает доступное пространство равномерно с другой кнопкой
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = Color.White, // Здесь задайте цвет текста
+                    containerColor = Color.Green, // Здесь задайте цвет кнопки
+                )
+            ) {
+                Text("Сортировать")
+            }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
 
-        // Кнопка для фильтров
-        Button(
-            onClick = {
-                // Открываем экран фильтров
-                onNavigateToFiltersSportsClubsScreen()
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
-        ) {
-            Text("Фильтры")
-        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -150,15 +189,13 @@ fun SportsClubListCard(
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            // Изображения спортзала (первое изображение)
-//            Image(
-//                painter = painterResource(id = sportClub.imagesRes.first()),
-//                contentDescription = null,
+            // Изображения спортзала
+//            ImagePager(
+//                images = sportClub.imagesRes,
 //                modifier = Modifier
 //                    .fillMaxWidth()
 //                    .height(120.dp)
-//                    .clip(shape = RoundedCornerShape(8.dp)),
-//                contentScale = ContentScale.Crop
+//                    .clip(shape = RoundedCornerShape(8.dp))
 //            )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -216,17 +253,18 @@ fun SportsClubListCard(
                 Spacer(modifier = Modifier.weight(1f))
 
                 if (sportClub.isFavorite) {
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.ic_favorite),
-//                        contentDescription = null,
-//                        tint = Color.Red,
-//                        modifier = Modifier.size(16.dp)
-//                    )
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = null,
+                        tint = Color.Red,
+                        modifier = Modifier.size(16.dp)
+                    )
                 }
             }
         }
     }
 }
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -248,3 +286,5 @@ fun SportsClubsListScreenPreview(
         )
     }
 }
+
+

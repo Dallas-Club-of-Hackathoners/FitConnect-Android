@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.stu.fitconnect"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.stu.fitconnect"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -64,6 +64,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation ("androidx.compose.material:material-icons-core:1.5.3")
+
 
     val hilt_version = "2.44"
     implementation("com.google.dagger:hilt-android:$hilt_version")
