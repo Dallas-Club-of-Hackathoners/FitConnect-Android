@@ -3,7 +3,7 @@ package com.stu.fitconnect.features.authentication.repositories
 import com.stu.fitconnect.utils.AuthException
 import com.stu.fitconnect.features.authentication.domain.User
 import com.stu.fitconnect.network.authentication.AuthenticationSource
-import com.stu.fitconnect.network.usersource.UsersSource
+import com.stu.fitconnect.network.usersource.source.UsersSource
 import javax.inject.Inject
 import javax.inject.Singleton
 

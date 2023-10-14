@@ -4,8 +4,8 @@ import com.stu.fitconnect.network.authentication.AuthenticationSource
 import com.stu.fitconnect.network.authentication.FirebaseAuthenticationSource
 import com.stu.fitconnect.network.spotclubs.source.SportClubsSource
 import com.stu.fitconnect.network.spotclubs.source.SportClubsSourceImpl
-import com.stu.fitconnect.network.usersource.UserSourceImpl
-import com.stu.fitconnect.network.usersource.UsersSource
+import com.stu.fitconnect.network.usersource.source.UserSourceImpl
+import com.stu.fitconnect.network.usersource.source.UsersSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -3,7 +3,7 @@ package com.stu.fitconnect.network.spotclubs.source
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
-import com.stu.fitconnect.network.spotclubs.repositories.SportClubsPageLoader
+import com.stu.fitconnect.features.sportclubs.SportClubsPageLoader
 
 class SportClubsPagingSource(
     private val loader: SportClubsPageLoader

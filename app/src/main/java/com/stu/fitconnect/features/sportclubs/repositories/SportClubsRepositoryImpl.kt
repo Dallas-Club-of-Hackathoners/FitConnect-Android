@@ -1,9 +1,9 @@
-package com.stu.fitconnect.network.spotclubs.repositories
+package com.stu.fitconnect.features.sportclubs.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.stu.fitconnect.features.authentication.repositories.AuthenticationRepository
+import com.stu.fitconnect.features.sportclubs.SportClubsPageLoader
 import com.stu.fitconnect.features.sportclubs.domain.SportClub
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
@@ -13,9 +13,6 @@ import com.stu.fitconnect.network.spotclubs.source.SportClubsSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
-
-
-typealias SportClubsPageLoader = suspend (pageIndex: Int) -> List<SportClubSummary>
 
 @Singleton
 class SportClubsRepositoryImpl @Inject constructor(
