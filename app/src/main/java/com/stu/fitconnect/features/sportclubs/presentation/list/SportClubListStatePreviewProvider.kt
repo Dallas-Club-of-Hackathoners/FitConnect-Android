@@ -28,6 +28,7 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                             score = 4.5,
                             reviewsCount = 100,
                             cost = "2000",
+                            category = "",
                             isFavorite = false
                         ),
                         SportClubSummary(
@@ -44,6 +45,7 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                             score = 4.0,
                             reviewsCount = 75,
                             cost = "1500",
+                            category = "",
                             isFavorite = true
                         )
                     )

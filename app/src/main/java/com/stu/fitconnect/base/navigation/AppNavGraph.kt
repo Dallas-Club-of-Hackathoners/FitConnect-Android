@@ -6,6 +6,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.stu.fitconnect.features.authentication.presentation.login.LoginScreen
+import com.stu.fitconnect.features.authentication.presentation.login.LoginScreenRoute
 import com.stu.fitconnect.features.sportclubs.presentation.list.SportsClubsListRoute
 import com.stu.fitconnect.features.sportclubs.presentation.selectedclub.SportClubInfoRoute
 
@@ -18,11 +20,29 @@ fun AppNavGraph(
         startDestination = Screen.SportClubSList.route
     ) {
 
+        composable(Screen.SignUp.route) {
+            LoginScreenRoute(
+                onNavigateToMainScreen = { /*TODO*/ },
+                onNavigateToSportClubsListScreen = {
+                    navHostController.navigate(
+                        route = Screen.SportClubSList.route
+                    )
+                },
+                onNavigateToSignUpScreen = {
+                    navHostController.navigate(
+                        route = Screen.SignUp.route
+                    )
+                } ,
+            )
+        }
+        composable(Screen.SignIn.route) {
+          //  SigUp
+        }
         composable(Screen.SportClubSList.route) {
             SportsClubsListRoute(
                 onNavigateToDetailSportsClubsScreen = { sportClubId ->
                     navHostController.navigate(
-                        Screen.SelectedSportClub(sportClubId).getRouteWithArgs()
+                        route = Screen.SelectedSportClub(sportClubId).getRouteWithArgs()
                     )
                 },
                 onNavigateToFiltersSportsClubsScreen = {
@@ -43,17 +63,17 @@ fun AppNavGraph(
             )
 
         }
-        composable(
-            route = Screen.ROUTE_SELECTED_SPORT_CLUB,
-            arguments = listOf(navArgument(Screen.KEY_SPORT_CLUB) { type = NavType.IntType })
-        ) {
-            SportClubInfoRoute(
-                sportClubId = it.arguments?.getInt(Screen.KEY_SPORT_CLUB) ?: throw (Exception()),//todo
-                onNavigateToActivitiesTableScreen = {
-                    //todo
-                }
-            )
-        }
+//        composable(
+//            route = Screen.ROUTE_SELECTED_SPORT_CLUB,
+//            arguments = listOf(navArgument(Screen.KEY_SPORT_CLUB) { type = NavType.IntType })
+//        ) {
+//            SportClubInfoRoute(
+//                sportClubId = it.arguments?.getInt(Screen.KEY_SPORT_CLUB) ?: throw (Exception()),//todo
+//                onNavigateToActivitiesTableScreen = {
+//                    //todo
+//                }
+//            )
+//        }
 
     }
 

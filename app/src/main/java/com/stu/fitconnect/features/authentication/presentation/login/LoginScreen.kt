@@ -1,7 +1,6 @@
 package com.stu.fitconnect.features.authentication.presentation.login
 
-import com.stu.fitconnect.features.authentication.presentation.login.LoginContract
-import com.stu.fitconnect.features.authentication.presentation.login.LoginViewModel
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -247,6 +246,9 @@ fun LoginScreen(
 //        Text(text = "Далее")
 //    }
 //}
+
+
+
 
 fun isValidEmail(email: String): Boolean {
 

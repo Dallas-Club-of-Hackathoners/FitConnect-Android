@@ -110,11 +110,11 @@ enum class FilterType {
 //    var isFavourite: Boolean = false
 //): Filter
 //
-data class Facility(
-    var id: String,
-    var name: String,
-    var iconRes: Int,
-)
+//data class Facility(
+//    var id: String,
+//    var name: String,
+//    var iconRes: Int,
+//)
 //
 //data class Cost(
 //    var id: String,
