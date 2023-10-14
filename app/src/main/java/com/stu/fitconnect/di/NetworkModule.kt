@@ -1,6 +1,6 @@
 package com.stu.fitconnect.di
 
-import com.stu.fitconnect.network.spotclubs.api.ApiFactory
+import com.stu.fitconnect.network.spotclubs.api.ApiConstants
 import com.stu.fitconnect.network.spotclubs.api.SportClubsApiService
 import dagger.Module
 import dagger.Provides
@@ -18,7 +18,7 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(ApiFactory.BASE_URL)
+            .baseUrl(ApiConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

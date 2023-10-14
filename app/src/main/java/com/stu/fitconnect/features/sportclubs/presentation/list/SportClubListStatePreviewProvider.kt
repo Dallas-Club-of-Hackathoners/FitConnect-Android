@@ -17,7 +17,7 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                         SportClubSummary(
                             id = 1,
                             name = "Спортзал 1",
-                            imagesRes = listOf(0),
+                            imagesRes = listOf(""),
                             location = AppLocation(
                                 latitude = 52.520008,
                                 longitude = 13.404954,
@@ -33,7 +33,7 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                         SportClubSummary(
                             id = 2,
                             name = "Спортзал 2",
-                            imagesRes = listOf(0),
+                            imagesRes = listOf(""),
                             location = AppLocation(
                                 latitude = 52.520008,
                                 longitude = 13.404954,
