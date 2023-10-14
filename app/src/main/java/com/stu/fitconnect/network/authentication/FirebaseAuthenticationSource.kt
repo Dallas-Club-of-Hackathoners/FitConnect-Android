@@ -42,6 +42,7 @@ class FirebaseAuthenticationSource @Inject constructor(
         saveFirebaseExecute {
             try {
                 auth.createUserWithEmailAndPassword(email, password).await()
+                signIn(email, password)
             } catch (exception: FirebaseAuthWeakPasswordException) {
                 throw AuthWeakPasswordException(exception.message ?: "")
             } catch (exception: FirebaseAuthEmailException) {
