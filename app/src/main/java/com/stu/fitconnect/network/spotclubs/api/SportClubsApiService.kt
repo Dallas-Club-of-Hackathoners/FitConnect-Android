@@ -5,7 +5,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface SportClubsApiService {
-    @POST("clubs/get_list")
+    @POST("clubs/get_list?")
     suspend fun getSummarySportClubList(
         @Body request: SportClubsSummaryRequest,
     ): List<SportClubSummaryResponse>
