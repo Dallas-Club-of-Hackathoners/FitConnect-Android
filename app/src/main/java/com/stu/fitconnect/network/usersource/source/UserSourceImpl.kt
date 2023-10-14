@@ -11,10 +11,11 @@ class UserSourceImpl @Inject constructor(
 ): UsersSource {
     override suspend fun createUser(user: User) {
         try {
-            if(user.uId == null || user.uniqueUsername == null) throw Exception()
-            usersApiService.createUser(userId = user.uId, name = user.uniqueUsername)
+            if(user.uId == null /*|| user.uniqueUsername == null*/) throw Exception()
+            val result = usersApiService.createUser(userId = user.uId, name = user.email)
+            val i = result
         } catch (e: Exception) {
-
+            throw e
         }
     }
 
