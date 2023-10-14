@@ -5,11 +5,11 @@ import com.stu.fitconnect.features.sportclubs.domain.FilterType
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
 
 data class SportClubsFilterRequest(
-    @SerializedName("is_favourite") var isFavourite: Boolean = false,
+    @SerializedName("favourites") var isFavourite: Boolean = false,
     @SerializedName("facilities") val facilitiesIds: MutableList<Int> = mutableListOf(),
     @SerializedName("cost") val costIds: MutableList<Int> = mutableListOf(),
-    @SerializedName("clubs_category") val clubsCategoryIds: MutableList<Int> = mutableListOf(),
-    @SerializedName("sort_types") var sortTypesId: Int = 0
+    @SerializedName("clubsCategory") val clubsCategoryIds: MutableList<Int> = mutableListOf(),
+    @SerializedName("sortsType") var sortTypesId: Int = 0
 )
 
 fun SportClubsFiltersData.toSportClubsFilterRequest() : SportClubsFilterRequest {

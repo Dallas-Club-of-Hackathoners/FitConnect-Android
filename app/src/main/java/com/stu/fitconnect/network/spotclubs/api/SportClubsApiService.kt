@@ -6,8 +6,8 @@ import retrofit2.http.Query
 interface SportClubsApiService {
     @POST("clubs/get_list")
     suspend fun getSummarySportClubList(
-        @Query("userId") userId: String,
-        @Query("filters") filters: SportClubsFilterRequest,
+        @Query("token") userId: String,
+        @Query("clubs_filters") filters: SportClubsFilterRequest,
         @Query("search_by") searchBy: String,
         @Query("page_index") pageIndex: Int
     ): List<SportClubSummaryResponse>
