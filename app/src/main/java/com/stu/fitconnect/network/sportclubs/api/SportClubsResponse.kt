@@ -1,4 +1,4 @@
-package com.stu.fitconnect.network.sportclubs.api
+package com.stu.fitconnect.network.spotclubs.api
 
 import com.google.gson.annotations.SerializedName
 import com.stu.fitconnect.features.sportclubs.domain.AppLocation
@@ -30,7 +30,7 @@ data class SportClubSummaryResponse(
     @SerializedName("isFavorite") val isFavorite: Boolean
 ) {
     fun toSportClubSummary() : SportClubSummary{
-        return SportClubSummary(id, name, listOf(imagesRes), location.toAppLocation(), score, reviewsCount, cost, category, isFavorite)
+        return SportClubSummary(id, name, listOf(imagesRes), location.toAppLocation(), score, reviewsCount, cost, isFavorite)
     }
 }
 
