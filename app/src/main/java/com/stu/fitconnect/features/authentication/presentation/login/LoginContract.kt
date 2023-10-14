@@ -13,6 +13,7 @@ interface LoginContract: UnidirectionalViewModel<LoginContract.State, LoginContr
     )
 
     sealed class Event {
+
         data class OnLogin(val navigateToMainScreen: () -> Unit) : Event()
 ///        object OnNavigateToMain : Event()
 ////        object OnForgotPassword : Event()
