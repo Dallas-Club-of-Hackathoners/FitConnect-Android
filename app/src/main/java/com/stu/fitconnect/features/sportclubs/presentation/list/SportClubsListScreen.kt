@@ -1,26 +1,52 @@
 package com.stu.fitconnect.features.sportclubs.presentation.list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.stu.fitconnect.R
+import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.Filter
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
-import com.stu.fitconnect.features.sportclubs.presentation.SportClubListStatePreviewProvider
-import com.stu.fitconnect.use
+import com.stu.fitconnect.ui.theme.BackgroundColor
+import com.stu.fitconnect.ui.theme.Green1
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,10 +55,12 @@ fun SportsClubsListRoute(
     onNavigateToDetailSportsClubsScreen: (sportClubId: Int) -> Unit,
     onNavigateToFiltersSportsClubsScreen: () -> Unit,
 ) {
+
     val (state, event) = use(viewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
         event.invoke(SportClubListContract.Event.OnGetSportClub)
+        event.invoke(SportClubListContract.Event.OnGetSportClubFilters)
     }
 
     SportsClubsListScreen(
@@ -69,6 +97,7 @@ fun SportsClubsListScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(BackgroundColor) // BackgroundColor
             .padding(16.dp)
     ) {
         // Строка для ввода поиска
@@ -77,39 +106,65 @@ fun SportsClubsListScreen(
             onValueChange = { newText ->
                 onSearch(newText)
             },
-            label = { Text("Поиск спортзала") },
-            modifier = Modifier.fillMaxWidth()
+            label = {
+                Text(text = "Поиск спортзала")
+                TextStyle(color = Color.White)
+            },
+            textStyle = TextStyle(color = Color.White), // Задаем цвет текста
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(25.dp),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search, // Иконка поиска
+                    contentDescription = null, // Описание контента (можно оставить пустым)
+                    modifier = Modifier.padding(8.dp) // Отступ от текста
+                )
+            }
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Кнопка для сортировки
-        Button(
-            onClick = {
-                // Открываем экран сортировки
-                onNavigateToFiltersSportsClubsScreen()
-            },
+        Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Сортировать")
+            // Кнопка для сортировки
+            Button(
+                onClick = {
+                    // Открываем экран фильтров
+                    onNavigateToFiltersSportsClubsScreen()
+                },
+                modifier = Modifier
+                    .weight(1f) // Занимает доступное пространство равномерно с другой кнопкой
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = BackgroundColor, // Здесь задайте цвет текста
+                    containerColor = Green1, // Здесь задайте цвет кнопки
+                )
+            ) {
+                Text("Фильтры")
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // Кнопка для сортировки
+            Button(
+                onClick = {
+                    // Открываем экран сортировки
+                    onNavigateToFiltersSportsClubsScreen()
+                },
+                modifier = Modifier
+                    .weight(1f) // Занимает доступное пространство равномерно с другой кнопкой
+                    .padding(4.dp),
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = BackgroundColor, // Здесь задайте цвет текста
+                    containerColor = Green1, // Здесь задайте цвет кнопки
+                )
+            ) {
+                Text("Сортировать")
+            }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
 
-        // Кнопка для фильтров
-        Button(
-            onClick = {
-                // Открываем экран фильтров
-                onNavigateToFiltersSportsClubsScreen()
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
-        ) {
-            Text("Фильтры")
-        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -149,32 +204,61 @@ fun SportsClubListCard(
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            // Изображения спортзала (первое изображение)
-//            Image(
-//                painter = painterResource(id = sportClub.imagesRes.first()),
-//                contentDescription = null,
+//            ImagePager(
+//                images = sportClub.imagesRes,
 //                modifier = Modifier
 //                    .fillMaxWidth()
 //                    .height(120.dp)
-//                    .clip(shape = RoundedCornerShape(8.dp)),
-//                contentScale = ContentScale.Crop
+//                    .clip(shape = RoundedCornerShape(8.dp))
 //            )
+            //todo fix
+
 
             Spacer(modifier = Modifier.height(8.dp))
 
             // Название спортзала
-            Text(
-                text = sportClub.name,
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+//                    .padding(top = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = sportClub.name,
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_bolditalic)),
+                        color = Color.White
+                    )
                 )
-            )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                if (sportClub.isFavorite) {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = null,
+                        tint = Color.Red,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
+            }
 
             // Местоположение
+            sportClub.location.metro?.let {
+                Text(text = it,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        color = Green1))
+            }
             Text(
                 text = sportClub.location.address,
-                style = TextStyle(fontSize = 14.sp)
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                    color = Color.White,
+                )
             )
 
             // Рейтинг и количество отзывов
@@ -184,16 +268,30 @@ fun SportsClubListCard(
                     .padding(top = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 Text(
-                    text = sportClub.score.toString(),
+                    text = "Оценка: ",
                     style = TextStyle(
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                )
+
+                Text(
+                    text = "${sportClub.score} ",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Green1
                     )
                 )
                 Text(
                     text = " (${sportClub.reviewsCount} отзывов)",
-                    style = TextStyle(fontSize = 12.sp, color = Color.Gray)
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        color = Color.Gray
+                    )
                 )
             }
 
@@ -205,27 +303,19 @@ fun SportsClubListCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Цена: ${sportClub.cost} руб.",
+                    text = "Цена: ${sportClub.cost} баллов",
                     style = TextStyle(
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
                 )
 
-                Spacer(modifier = Modifier.weight(1f))
-
-                if (sportClub.isFavorite) {
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.ic_favorite),
-//                        contentDescription = null,
-//                        tint = Color.Red,
-//                        modifier = Modifier.size(16.dp)
-//                    )
-                }
             }
         }
     }
 }
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -247,3 +337,5 @@ fun SportsClubsListScreenPreview(
         )
     }
 }
+
+

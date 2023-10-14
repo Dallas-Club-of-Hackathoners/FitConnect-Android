@@ -8,14 +8,14 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseAuthWebException
-import com.stu.fitconnect.AccountAlreadyExistsException
-import com.stu.fitconnect.AuthException
-import com.stu.fitconnect.AuthWeakPasswordException
-import com.stu.fitconnect.BackendException
-import com.stu.fitconnect.ConnectionException
-import com.stu.fitconnect.InvalidUserException
-import com.stu.fitconnect.TooManyRequestsException
-import com.stu.fitconnect.UnknownException
+import com.stu.fitconnect.utils.AccountAlreadyExistsException
+import com.stu.fitconnect.utils.AuthException
+import com.stu.fitconnect.utils.AuthWeakPasswordException
+import com.stu.fitconnect.utils.BackendException
+import com.stu.fitconnect.utils.ConnectionException
+import com.stu.fitconnect.utils.InvalidUserException
+import com.stu.fitconnect.utils.TooManyRequestsException
+import com.stu.fitconnect.utils.UnknownException
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -41,7 +41,8 @@ class FirebaseAuthenticationSource @Inject constructor(
     override suspend fun signUp(email: String, password: String) {
         saveFirebaseExecute {
             try {
-                auth.signInWithEmailAndPassword(email, password).await()
+                auth.createUserWithEmailAndPassword(email, password).await()
+                signIn(email, password)
             } catch (exception: FirebaseAuthWeakPasswordException) {
                 throw AuthWeakPasswordException(exception.message ?: "")
             } catch (exception: FirebaseAuthEmailException) {
@@ -58,8 +59,8 @@ class FirebaseAuthenticationSource @Inject constructor(
         return auth.currentUser != null
     }
 
-    override fun getCurrentUId(): String? {
-        return auth.currentUser?.uid
+    override fun getCurrentUId(): String {
+        return auth.currentUser?.uid ?: throw AuthException(UID_EXCEPTION_MES)
     }
 
     override suspend fun deleteCurrentUser() {
@@ -78,5 +79,9 @@ class FirebaseAuthenticationSource @Inject constructor(
         } catch (exception: Exception) {
             throw UnknownException(exception.message ?: "")
         }
+    }
+
+    companion object {
+        const val UID_EXCEPTION_MES = "Auth error. Cant get current User Id"
     }
 }

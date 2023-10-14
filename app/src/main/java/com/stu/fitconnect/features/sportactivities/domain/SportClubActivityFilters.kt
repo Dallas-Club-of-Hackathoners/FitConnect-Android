@@ -46,7 +46,7 @@ data class FilterActivities (
 )
 
 data class SortType(
-    val id: Int = 0,
+    val id: Int,
     val name: String,
 )
 

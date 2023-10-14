@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.stu.fitconnect"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.stu.fitconnect"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -64,6 +64,13 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation ("androidx.compose.material:material-icons-core:1.5.3")
+
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+
+
+
 
     val hilt_version = "2.44"
     implementation("com.google.dagger:hilt-android:$hilt_version")
@@ -72,10 +79,9 @@ dependencies {
     //kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    //last added
 
-//    val nav_version = "2.7.4"
-//    implementation("androidx.navigation:navigation-compose:$nav_version")
+    val nav_version = "2.5.3"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     val paging_version = "3.2.1"
     implementation("androidx.paging:paging-runtime-ktx:$paging_version")
@@ -86,6 +92,10 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:$firebase_version"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
+
+    val retrofit_version = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
 
 //    val room_version = "2.5.2"
 //    implementation("androidx.room:room-runtime:$room_version")
