@@ -47,7 +47,7 @@ class SportClubsRepositoryImpl @Inject constructor(
     }
 
     override fun getSportClubById(id: Int): SportClub {
-        TODO("Not yet implemented")
+        TODO()
     }
 
     private companion object {
