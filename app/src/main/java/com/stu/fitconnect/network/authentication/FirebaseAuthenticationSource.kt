@@ -41,7 +41,8 @@ class FirebaseAuthenticationSource @Inject constructor(
     override suspend fun signUp(email: String, password: String) {
         saveFirebaseExecute {
             try {
-                auth.signInWithEmailAndPassword(email, password).await()
+                auth.createUserWithEmailAndPassword(email, password).await()
+                signIn(email, password)
             } catch (exception: FirebaseAuthWeakPasswordException) {
                 throw AuthWeakPasswordException(exception.message ?: "")
             } catch (exception: FirebaseAuthEmailException) {

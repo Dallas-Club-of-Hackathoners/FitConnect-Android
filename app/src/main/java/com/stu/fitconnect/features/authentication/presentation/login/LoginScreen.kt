@@ -65,10 +65,8 @@ fun LoginScreen(
     onNavigateToSignUpScreen: () -> Unit,
     onSignInDataChanged: (value: String, type: AuthField) -> Unit,
     onChangeRememberUser: (rememberUser: Boolean) -> Unit,
-    onLogin: () -> Unit,
-
-
-    ) {
+    onLogin: () -> Unit
+) {
 //    val snackbarHostState = remember { SnackbarHostState() }
 //    val coroutineScope = rememberCoroutineScope()
 
@@ -138,7 +136,7 @@ fun LoginScreen(
             colors = ButtonDefaults.buttonColors(containerColor = ButtonColor)
         ) {
             Text(
-                text = "Нет аккаунта? Зарегестрироваться",
+                text = "Нет аккаунта? Зарегистрироваться",
                 color = Color.White,
                 fontFamily = FontFamily(Font(R.font.montserrat_medium)))
         }

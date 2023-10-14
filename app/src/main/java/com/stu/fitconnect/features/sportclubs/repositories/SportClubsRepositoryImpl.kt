@@ -21,8 +21,7 @@ class SportClubsRepositoryImpl @Inject constructor(
 ) : SportClubsRepository {
 
     override fun getSportClubsPagingList(searchBy: String, sportClubsFilters: SportClubsFiltersData): Flow<PagingData<SportClubSummary>> {
-        val userId = "token1"
-            //authenticationSource.getCurrentUId()
+        val userId = authenticationSource.getCurrentUId()
 
         val loader: SportClubsPageLoader = { pageIndex ->
             sportClubsSource.getSummarySportClubsPagingList(
