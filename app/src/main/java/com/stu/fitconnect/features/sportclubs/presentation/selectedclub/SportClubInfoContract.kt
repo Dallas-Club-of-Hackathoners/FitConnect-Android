@@ -2,7 +2,6 @@ package com.stu.fitconnect.features.sportclubs.presentation.selectedclub
 
 import com.stu.fitconnect.base.UnidirectionalViewModel
 import com.stu.fitconnect.features.sportclubs.domain.SportClub
-import kotlinx.coroutines.flow.emptyFlow
 
 interface SportClubInfoContract:
     UnidirectionalViewModel<SportClubInfoContract.State, SportClubInfoContract.Event> {

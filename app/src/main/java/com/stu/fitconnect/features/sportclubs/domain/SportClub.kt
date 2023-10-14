@@ -10,9 +10,9 @@ data class SportClub(
     val score: Double,
     val contacts: SportClubAdmin, //ссылка на акк админа клуба ??
     val description: String,
-    val facilities: List<Facility>,
+    val facilities: List<String>,
     val reviewsCount: Int,
-    val cost: Int,
+    val cost: String,
     val isFavorite: Boolean
 )
 
