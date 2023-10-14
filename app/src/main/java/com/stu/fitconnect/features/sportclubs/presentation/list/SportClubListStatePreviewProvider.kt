@@ -27,13 +27,13 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                             ),
                             score = 4.5,
                             reviewsCount = 100,
-                            cost = 2000,
+                            cost = "2000",
                             isFavorite = false
                         ),
                         SportClubSummary(
                             id = 2,
                             name = "Спортзал 2",
-                            imagesRes = listOf(""),
+                            imagesRes = listOf("0"),
                             location = AppLocation(
                                 latitude = 52.520008,
                                 longitude = 13.404954,
@@ -43,7 +43,7 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                             ),
                             score = 4.0,
                             reviewsCount = 75,
-                            cost = 1500,
+                            cost = "1500",
                             isFavorite = true
                         )
                     )
