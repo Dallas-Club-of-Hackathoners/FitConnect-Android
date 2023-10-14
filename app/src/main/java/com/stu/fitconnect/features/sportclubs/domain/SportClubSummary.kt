@@ -7,6 +7,7 @@ data class SportClubSummary(
     val location: AppLocation,
     val score: Double,
     val reviewsCount: Int,
+    val category: String,
     val cost: String,
     val isFavorite:Boolean
 )

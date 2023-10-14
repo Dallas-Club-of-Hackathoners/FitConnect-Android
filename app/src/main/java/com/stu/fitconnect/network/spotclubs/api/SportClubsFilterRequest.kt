@@ -13,9 +13,6 @@ data class SportClubsSummaryRequest(
     @SerializedName("token") val token: String
 )
 
-
-
-
 data class SportClubsFilterRequest(
     @SerializedName("favourites") var isFavourite: Boolean = false,
     @SerializedName("facilities") val facilitiesIds: MutableList<Int> = mutableListOf(),
