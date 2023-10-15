@@ -271,7 +271,7 @@ fun SportClubInfoScreen(sportClub: SportClub) {
                     // Остальные параметры стиля
                 ))
             Spacer(modifier = Modifier.width((LocalConfiguration.current.screenWidthDp * 0.70).dp))
-            Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка после текста
+            Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null, tint = Green1) // Иконка после текста
         }
 
 
@@ -365,7 +365,7 @@ fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
         contentDescription = null,
         tint = tint,
         modifier = Modifier
-            .padding(start = ((LocalConfiguration.current.screenWidthDp * 0.85).dp), top = 20.dp)
+            .padding(start = ((LocalConfiguration.current.screenWidthDp * 0.85).dp), top = 40.dp)
             .clickable {
                 isClicked = !isClicked
                 onClick()
