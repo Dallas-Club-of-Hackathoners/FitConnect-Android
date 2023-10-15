@@ -29,6 +29,10 @@
    - Нажмите на файл, чтобы начать процесс установки.
    - По завершении установки, вы найдете приложение в списке установленных на вашем устройстве.
 
+## Ограничения ##
+На данный момент регистрация доступна только для почт gmail-типа. 
+Пример: test@gmail.com 
+
 ## Скриншоты ##
 ![image](https://github.com/Dallas-Club-of-Hackathoners/FitConnect-Android/assets/90094274/1c1d4ed1-3510-4e43-926f-6641c7a42a55)
 ![image](https://github.com/Dallas-Club-of-Hackathoners/FitConnect-Android/assets/90094274/498a847c-09b4-429a-9394-9b156ba1f6f2)
