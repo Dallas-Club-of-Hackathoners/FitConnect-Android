@@ -1,8 +1,6 @@
 package com.stu.fitconnect.base
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.core.view.ViewCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.stu.fitconnect.base.navigation.AppNavGraph
 import com.stu.fitconnect.base.navigation.rememberNavigationState

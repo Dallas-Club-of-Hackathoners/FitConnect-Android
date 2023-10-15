@@ -4,7 +4,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportclubs.domain.AppLocation
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportclubs.presentation.list.SportClubListContract
 import kotlinx.coroutines.flow.flowOf
 
 class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubListContract.State> {

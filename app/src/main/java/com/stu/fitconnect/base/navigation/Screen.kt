@@ -8,9 +8,8 @@ sealed class Screen(
     object SignUp : Screen(ROUTE_SIGN_UP)
     object SportClubSList : Screen(ROUTE_SPORT_CLUBS_LIST)
     data class SelectedSportClub(val sportClubId: Int) : Screen(ROUTE_SELECTED_SPORT_CLUB) {
-        fun getRouteWithArgs() : String {
-            val route = "$ROUTE_SELECTED_SPORT_CLUB_FOR_ARG/${sportClubId}"
-            return route
+        fun getRouteWithArgs(): String {
+            return "$ROUTE_SELECTED_SPORT_CLUB_FOR_ARG/$sportClubId"
         }
     }
     object Home : Screen(ROUTE_HOME)

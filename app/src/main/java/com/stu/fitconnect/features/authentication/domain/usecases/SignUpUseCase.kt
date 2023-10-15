@@ -9,7 +9,7 @@ import javax.inject.Singleton
 class SignUpUseCase @Inject constructor(
     private val authenticationRepository: AuthenticationRepository
 ) {
-    operator suspend fun invoke(user: User, password: String, repeatPassword: String, rememberUser: Boolean) {
+    suspend operator fun invoke(user: User, password: String, repeatPassword: String, rememberUser: Boolean) {
         return authenticationRepository.signUp(user, password, repeatPassword, rememberUser)
     }
 

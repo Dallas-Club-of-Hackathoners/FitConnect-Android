@@ -1,4 +1,4 @@
-package com.example.smartmessenger.di
+package com.stu.fitconnect.di
 
 import dagger.Module
 import dagger.hilt.InstallIn

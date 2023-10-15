@@ -2,9 +2,7 @@ package com.stu.fitconnect.features.authentication.presentation.signup
 
 import com.stu.fitconnect.base.UnidirectionalViewModel
 import com.stu.fitconnect.features.authentication.domain.AuthField
-import com.stu.fitconnect.features.authentication.domain.SignInData
 import com.stu.fitconnect.features.authentication.domain.SignUpData
-import com.stu.fitconnect.features.authentication.presentation.login.LoginContract
 
 interface SignUpContract : UnidirectionalViewModel<SignUpContract.State, SignUpContract.Event> {
 

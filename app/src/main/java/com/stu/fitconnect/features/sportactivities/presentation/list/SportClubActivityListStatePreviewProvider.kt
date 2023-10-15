@@ -3,9 +3,7 @@ package com.stu.fitconnect.features.sportactivities.presentation.list
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportactivities.domain.SportClubActivitySummary
-import com.stu.fitconnect.features.sportactivities.presentation.list.SportClubActivityListContract
 import kotlinx.coroutines.flow.flowOf
-import java.util.Date
 
 class SportClubActivityListStatePreviewProvider: PreviewParameterProvider<SportClubActivityListContract.State> {
     override val values: Sequence<SportClubActivityListContract.State> = sequenceOf(

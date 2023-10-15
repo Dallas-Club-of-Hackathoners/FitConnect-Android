@@ -21,10 +21,10 @@ class SportClubInfoViewModel @Inject constructor(
 
 
     override fun event(event: SportClubInfoContract.Event) = when(event) {
-        SportClubInfoContract.Event.OnGetSportClub -> getSportClubInfo()
+        is SportClubInfoContract.Event.OnGetSportClub -> getSportClubInfo(event.id)
     }
 
-    private fun getSportClubInfo() {
+    private fun getSportClubInfo(id:Int) {
         mutableScreenState.update { it.copy(isLoading = true) }
         try {
             viewModelScope.launch {

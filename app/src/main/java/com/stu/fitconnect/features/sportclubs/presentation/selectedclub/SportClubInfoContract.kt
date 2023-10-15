@@ -9,11 +9,11 @@ interface SportClubInfoContract:
     data class State(
         val isLoading: Boolean = false,
         val id: Int = 0,
-        val sportClub: SportClub = SportClub(),
+        val sportClub: SportClub? = null,
     )
 
     sealed class Event {
 //        object OnRefresh : Event()
-        object OnGetSportClub : Event()
+        data class OnGetSportClub(val id: Int) : Event()
     }
 }
