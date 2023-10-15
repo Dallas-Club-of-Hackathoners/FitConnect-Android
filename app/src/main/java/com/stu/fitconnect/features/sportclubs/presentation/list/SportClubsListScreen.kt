@@ -2,6 +2,8 @@ package com.stu.fitconnect.features.sportclubs.presentation.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -35,6 +38,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -126,7 +130,7 @@ fun SportsClubsListScreen(
                     )                    ) {
                     Text(text = "3000 баллов",
                         style = TextStyle(
-                            color = Color.White,
+                            color = BackgroundColor,
                         )
                         )
                 }
@@ -140,19 +144,25 @@ fun SportsClubsListScreen(
                 },
                 label = {
                     Text(text = "Поиск спортзала")
-                    TextStyle(color = Color.White)
                 },
                 textStyle = TextStyle(color = Color.White), // Задаем цвет текста
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(25.dp),
                 leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search, // Иконка поиска
-                        contentDescription = null, // Описание контента (можно оставить пустым)
-                        modifier = Modifier.padding(8.dp) // Отступ от текста
-                    )
+                    Box(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .size(24.dp), // Размер иконки
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search, // Иконка поиска
+                            contentDescription = null, // Описание контента (можно оставить пустым)
+                        )
+                    }
                 }
             )
+
 
             Row(
                 modifier = Modifier
@@ -191,11 +201,15 @@ fun SportsClubsListScreen(
                 Spacer(modifier = Modifier.width(16.dp))
 
                 OutlinedButton(onClick = { /*TODO*/ }) {
-                    Text(text = "Рекомендуем",
+                    Text(
+                        text = "Рекомендуем",
                         style = TextStyle(
-                            color = Color.White, // Устанавливаем цвет текста
-                            // Остальные параметры стиля
-                        ))
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                            fontWeight = FontWeight(500),
+                            color = Color(0xFFFFFFFF),
+                        )
+                    )
 
                 }
             }
@@ -210,7 +224,8 @@ fun SportsClubsListScreen(
 
 
             LazyColumn(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxWidth()
             ) {
                 items(sportsClubsPagingItems.itemCount) { index ->
                     SportsClubListCard(
@@ -222,12 +237,27 @@ fun SportsClubsListScreen(
                     )
                 }
             }
-
-
         }
-
-
-
+//
+//        Divider(
+//            color = Color.Gray, // Цвет разделителя
+//            thickness = 1.dp, // Толщина разделителя
+//            modifier = Modifier
+//                .fillMaxWidth() // Растягиваем по всей ширине
+//        )
+//
+//        Row(
+//            modifier = Modifier
+//                .padding(start = 20.dp),
+//            horizontalArrangement = Arrangement.Center,
+//            verticalAlignment = Alignment.CenterVertically,
+//        ) {
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//        }
 
     }
 }
@@ -254,7 +284,7 @@ fun SportsClubListCard(
                 contentDescription = "sportClubImage",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height((LocalConfiguration.current.screenHeightDp * 0.1).dp)
+                    .height((LocalConfiguration.current.screenHeightDp * 0.15).dp)
             )
 
 
@@ -294,6 +324,7 @@ fun SportsClubListCard(
                 Text(text = it,
                     style = TextStyle(
                         fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Green1))
             }
             Text(
@@ -318,6 +349,7 @@ fun SportsClubListCard(
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Color.White
                     )
                 )
@@ -327,6 +359,7 @@ fun SportsClubListCard(
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Green1
                     )
                 )
@@ -334,6 +367,7 @@ fun SportsClubListCard(
                     text = " (${sportClub.reviewsCount} отзывов)",
                     style = TextStyle(
                         fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Color.Gray
                     )
                 )
@@ -351,6 +385,7 @@ fun SportsClubListCard(
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Color.White
                     )
                 )
@@ -379,6 +414,23 @@ fun SportsClubsListScreenPreview(
             onApplySelectedFilters = {},
             onRefresh = {}
         )
+    }
+}
+
+@Composable
+fun IconWithText(icon: ImageVector, text: String) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Green1
+        )
+        Text(text = text,
+            color = Green1)
     }
 }
 

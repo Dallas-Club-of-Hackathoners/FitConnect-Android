@@ -26,20 +26,21 @@ class SportClubInfoViewModel @Inject constructor(
 
     private fun getSportClubInfo(id:Int) {
         mutableScreenState.update { it.copy(isLoading = true) }
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
                 val sportClubInfo = getSportClubInfoUseCase.getSportClubById(
                     mutableScreenState.value.id
                 )
-                mutableScreenState.update { it.copy( sportClub = sportClubInfo) }
-            }
+                mutableScreenState.update { it.copy(sportClub = sportClubInfo) }
 
-            // todo get sport club info
-        } catch (e: Exception) {
-            // todo handle exception
-            // add side effect?
-        } finally {
-            mutableScreenState.update { it.copy(isLoading = false) }
+
+                // todo get sport club info
+            } catch (e: Exception) {
+                // todo handle exception
+                // add side effect?
+            } finally {
+                mutableScreenState.update { it.copy(isLoading = false) }
+            }
         }
     }
 }
