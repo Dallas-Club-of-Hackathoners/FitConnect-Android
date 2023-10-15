@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 class UserSourceImpl @Inject constructor(
-    val usersApiService: UsersApiService
+    private val usersApiService: UsersApiService
 ): UsersSource {
     override suspend fun createUser(user: User) {
         try {

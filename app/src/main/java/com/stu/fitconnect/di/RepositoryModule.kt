@@ -1,7 +1,9 @@
-package com.example.smartmessenger.di
+package com.stu.fitconnect.di
 
 import com.stu.fitconnect.features.authentication.repositories.AuthenticationRepository
 import com.stu.fitconnect.features.authentication.repositories.AuthenticationRepositoryImpl
+import com.stu.fitconnect.features.sportclubs.repositories.SportClubRepository
+import com.stu.fitconnect.features.sportclubs.repositories.SportClubRepositoryImpl
 import com.stu.fitconnect.features.sportclubs.repositories.SportClubsRepository
 import com.stu.fitconnect.features.sportclubs.repositories.SportClubsRepositoryImpl
 import dagger.Binds
@@ -23,5 +25,8 @@ abstract class RepositoryModule {
         sportsClubsRepository: SportClubsRepositoryImpl
     ): SportClubsRepository
 
-
+    @Binds
+    abstract fun bindSportClubRepository(
+        sportClubRepository: SportClubRepositoryImpl
+    ): SportClubRepository
 }

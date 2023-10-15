@@ -11,11 +11,12 @@ data class SportClubResponse(
     @SerializedName("images_urls") val imagesRes: String,
     @SerializedName("location") val location: AppLocationResponse,
     @SerializedName("rating") val score: Double,
-    @SerializedName("contacts") val contacts: SportClubAdmin,
+    @SerializedName("admin") val contacts: SportClubAdminResponse,
     @SerializedName("description") val description: String,
-    @SerializedName("facilities") val facilities: List<String>,
+    @SerializedName("facilities") val facilities: String,
     @SerializedName("rating_count") val reviewsCount: Int,
     @SerializedName("cost") val cost: String,
+    @SerializedName("category") val category: String,
     @SerializedName("isFavorite") val isFavorite: Boolean
 
 ) {
@@ -26,12 +27,23 @@ data class SportClubResponse(
             listOf(imagesRes),
             location.toAppLocation(),
             score,
-            contacts,
+            contacts.toSportClubAdmin(),
             description,
-            facilities,
+            listOf( facilities),
             reviewsCount,
             cost,
+            category,
             isFavorite
         )
+    }
+}
+
+data class SportClubAdminResponse(
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("phone") val phone: String,
+) {
+    fun toSportClubAdmin(): SportClubAdmin{
+        return SportClubAdmin(id, name, phone)
     }
 }

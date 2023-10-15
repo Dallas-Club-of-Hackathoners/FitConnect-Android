@@ -5,7 +5,7 @@ import com.stu.fitconnect.features.authentication.repositories.AuthenticationRep
 class LogOutUseCase(
     private val authenticationRepository: AuthenticationRepository
 ) {
-    operator suspend fun invoke() {
+    suspend operator fun invoke() {
         return authenticationRepository.logOut()
     }
 }

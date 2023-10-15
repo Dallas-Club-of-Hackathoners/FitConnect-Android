@@ -3,7 +3,6 @@ package com.stu.fitconnect.features.sportclubs.repositories
 import com.stu.fitconnect.features.sportclubs.domain.SportClub
 import com.stu.fitconnect.network.authentication.AuthenticationSource
 import com.stu.fitconnect.network.sportclub.source.SportClubSource
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 

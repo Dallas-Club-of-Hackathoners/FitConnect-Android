@@ -37,7 +37,7 @@ class LoginViewModel @Inject constructor(
 
     private fun onLogin(navigateToMainScreen: () -> Unit) {
         mutableScreenState.update { it.copy(isLoading = true) }
-        viewModelScope.launch() {
+        viewModelScope.launch {
             try {
                 loginUseCase.invoke(
                     mutableScreenState.value.signInData.email,

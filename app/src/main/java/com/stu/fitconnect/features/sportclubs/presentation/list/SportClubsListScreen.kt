@@ -2,6 +2,8 @@ package com.stu.fitconnect.features.sportclubs.presentation.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,13 +16,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,6 +38,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -40,6 +51,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.Filter
@@ -98,97 +111,158 @@ fun SportsClubsListScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundColor) // BackgroundColor
-            .padding(16.dp)
     ) {
-        // Строка для ввода поиска
-        OutlinedTextField(
-            value = sportsClubsListState.searchText,
-            onValueChange = { newText ->
-                onSearch(newText)
-            },
-            label = {
-                Text(text = "Поиск спортзала")
-                TextStyle(color = Color.White)
-            },
-            textStyle = TextStyle(color = Color.White), // Задаем цвет текста
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(25.dp),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search, // Иконка поиска
-                    contentDescription = null, // Описание контента (можно оставить пустым)
-                    modifier = Modifier.padding(8.dp) // Отступ от текста
-                )
-            }
-        )
 
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
-            // Кнопка для сортировки
-            Button(
-                onClick = {
-                    // Открываем экран фильтров
-                    onNavigateToFiltersSportsClubsScreen()
-                },
-                modifier = Modifier
-                    .weight(1f) // Занимает доступное пространство равномерно с другой кнопкой
-                    .padding(4.dp),
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = BackgroundColor, // Здесь задайте цвет текста
-                    containerColor = Green1, // Здесь задайте цвет кнопки
-                )
-            ) {
-                Text("Фильтры")
+            Row( verticalAlignment = Alignment.CenterVertically) {
+                Spacer(modifier = Modifier.width(10.dp))
+                Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear", tint = Color.White)
+                Spacer(modifier = Modifier.width((LocalConfiguration.current.screenWidthDp * 0.50).dp))
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = BackgroundColor, // Здесь задайте цвет текста
+                        containerColor = Green1, // Здесь задайте цвет кнопки
+                    )                    ) {
+                    Text(text = "3000 баллов",
+                        style = TextStyle(
+                            color = BackgroundColor,
+                        )
+                        )
+                }
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
-
-            // Кнопка для сортировки
-            Button(
-                onClick = {
-                    // Открываем экран сортировки
-                    onNavigateToFiltersSportsClubsScreen()
+            // Строка для ввода поиска
+            OutlinedTextField(
+                value = sportsClubsListState.searchText,
+                onValueChange = { newText ->
+                    onSearch(newText)
                 },
-                modifier = Modifier
-                    .weight(1f) // Занимает доступное пространство равномерно с другой кнопкой
-                    .padding(4.dp),
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = BackgroundColor, // Здесь задайте цвет текста
-                    containerColor = Green1, // Здесь задайте цвет кнопки
-                )
-            ) {
-                Text("Сортировать")
-            }
-        }
-
-
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Список спортзалов
-        val sportsClubsPagingItems: LazyPagingItems<SportClubSummary> =
-            sportsClubsListState.pagingSportClubList.collectAsLazyPagingItems()
-
-
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            items(sportsClubsPagingItems.itemCount) { index ->
-                SportsClubListCard(
-                    sportClub = sportsClubsPagingItems[index]!!,
-                    onItemClick = { sportClubId ->
-                        // Передаем sportClubId при клике на элемент списка
-                        onNavigateToDetailSportsClubsScreen(sportClubId)
+                label = {
+                    Text(text = "Поиск спортзала")
+                },
+                textStyle = TextStyle(color = Color.White), // Задаем цвет текста
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(25.dp),
+                leadingIcon = {
+                    Box(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .size(24.dp), // Размер иконки
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search, // Иконка поиска
+                            contentDescription = null, // Описание контента (можно оставить пустым)
+                        )
                     }
-                )
+                }
+            )
+
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 5.dp)
+                ,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                OutlinedButton(
+                    onClick = { /* Ваша логика при нажатии */ },
+//                    shape = RoundedCornerShape(20.dp),
+                    modifier = Modifier
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder, // Пример иконки "Избранное"
+                        contentDescription = null,
+                        tint = Green1 // Задаем цвет иконки
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                OutlinedButton(
+                    onClick = { /* Ваша логика при нажатии */ },
+//                    shape = RoundedCornerShape(20.dp),
+                    modifier = Modifier
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Menu, // Пример иконки "Избранное"
+                        contentDescription = null,
+                        tint = Green1 // Задаем цвет иконки
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                OutlinedButton(onClick = { /*TODO*/ }) {
+                    Text(
+                        text = "Рекомендуем",
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_medium)),
+                            fontWeight = FontWeight(500),
+                            color = Color(0xFFFFFFFF),
+                        )
+                    )
+
+                }
+            }
+
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Список спортзалов
+            val sportsClubsPagingItems: LazyPagingItems<SportClubSummary> =
+                sportsClubsListState.pagingSportClubList.collectAsLazyPagingItems()
+
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                items(sportsClubsPagingItems.itemCount) { index ->
+                    SportsClubListCard(
+                        sportClub = sportsClubsPagingItems[index]!!,
+                        onItemClick = { sportClubId ->
+                            // Передаем sportClubId при клике на элемент списка
+                            onNavigateToDetailSportsClubsScreen(sportClubId)
+                        }
+                    )
+                }
             }
         }
+//
+//        Divider(
+//            color = Color.Gray, // Цвет разделителя
+//            thickness = 1.dp, // Толщина разделителя
+//            modifier = Modifier
+//                .fillMaxWidth() // Растягиваем по всей ширине
+//        )
+//
+//        Row(
+//            modifier = Modifier
+//                .padding(start = 20.dp),
+//            horizontalArrangement = Arrangement.Center,
+//            verticalAlignment = Alignment.CenterVertically,
+//        ) {
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//            IconWithText(icon = Icons.Default.Home, text = "Главная")
+//        }
+
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun SportsClubListCard(
     sportClub: SportClubSummary,
@@ -198,20 +272,21 @@ fun SportsClubListCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .background(BackgroundColor)
             .clickable { onItemClick(sportClub.id) },
     ) {
         Column(
             modifier = Modifier
                 .padding(16.dp)
         ) {
-//            ImagePager(
-//                images = sportClub.imagesRes,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(120.dp)
-//                    .clip(shape = RoundedCornerShape(8.dp))
-//            )
-            //todo fix
+
+            GlideImage(
+                model = sportClub.imagesRes[0], //sportClub.imagesRes[0],
+                contentDescription = "sportClubImage",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height((LocalConfiguration.current.screenHeightDp * 0.15).dp)
+            )
 
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -237,9 +312,9 @@ fun SportsClubListCard(
 
                 if (sportClub.isFavorite) {
                     Icon(
-                        imageVector = Icons.Default.Favorite,
+                        imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = null,
-                        tint = Color.Red,
+                        tint = Green1,
                         modifier = Modifier.size(16.dp)
                     )
                 }
@@ -250,6 +325,7 @@ fun SportsClubListCard(
                 Text(text = it,
                     style = TextStyle(
                         fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Green1))
             }
             Text(
@@ -274,15 +350,17 @@ fun SportsClubListCard(
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Color.White
                     )
                 )
 
                 Text(
-                    text = "${sportClub.score} ",
+                    text = "${String.format("%.1f", sportClub.score)} ",
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Green1
                     )
                 )
@@ -290,6 +368,7 @@ fun SportsClubListCard(
                     text = " (${sportClub.reviewsCount} отзывов)",
                     style = TextStyle(
                         fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Color.Gray
                     )
                 )
@@ -307,6 +386,7 @@ fun SportsClubListCard(
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
                         color = Color.White
                     )
                 )
@@ -335,6 +415,23 @@ fun SportsClubsListScreenPreview(
             onApplySelectedFilters = {},
             onRefresh = {}
         )
+    }
+}
+
+@Composable
+fun IconWithText(icon: ImageVector, text: String) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Green1
+        )
+        Text(text = text,
+            color = Green1)
     }
 }
 

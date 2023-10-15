@@ -6,7 +6,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.stu.fitconnect.features.authentication.presentation.login.LoginScreen
 import com.stu.fitconnect.features.authentication.presentation.login.LoginScreenRoute
 import com.stu.fitconnect.features.authentication.presentation.signup.SignUpScreenRoute
 import com.stu.fitconnect.features.sportclubs.presentation.list.SportsClubsListRoute

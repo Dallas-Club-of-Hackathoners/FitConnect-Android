@@ -4,7 +4,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportclubs.SportClubsPageLoader
-import com.stu.fitconnect.features.sportclubs.domain.SportClub
 import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
 import com.stu.fitconnect.network.authentication.AuthenticationSource

@@ -1,4 +1,4 @@
-package com.example.smartmessenger.di
+package com.stu.fitconnect.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

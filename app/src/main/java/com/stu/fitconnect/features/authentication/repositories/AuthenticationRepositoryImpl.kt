@@ -1,6 +1,5 @@
 package com.stu.fitconnect.features.authentication.repositories
 
-import com.stu.fitconnect.utils.AuthException
 import com.stu.fitconnect.features.authentication.domain.User
 import com.stu.fitconnect.network.authentication.AuthenticationSource
 import com.stu.fitconnect.network.usersource.source.UsersSource
@@ -17,7 +16,6 @@ class AuthenticationRepositoryImpl @Inject constructor(
         authenticationSource.signIn(email, password)
         val uId = authenticationSource.getCurrentUId()
             //val userData = usersSource.getUserData(uId ?: throw AuthException("Auth error. Cant get current User Id"))
-        //TODO добавить user в локальную бд
     }
 
     override suspend fun signUp(user: User, password: String, repeatPassword: String, rememberUser: Boolean) {

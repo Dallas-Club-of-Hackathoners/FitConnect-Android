@@ -1,19 +1,13 @@
 package com.stu.fitconnect.features.sportclubs.presentation.list
 
-import android.app.Application
-import android.content.Context
-import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.stu.fitconnect.App
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.ResourceManager
 import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
 import com.stu.fitconnect.features.sportclubs.domain.usecases.GetSportClubsListUseCase
-import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

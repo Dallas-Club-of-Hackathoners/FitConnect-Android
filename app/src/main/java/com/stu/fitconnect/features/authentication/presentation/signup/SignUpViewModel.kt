@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stu.fitconnect.features.authentication.domain.AuthField
 import com.stu.fitconnect.features.authentication.domain.User
-import com.stu.fitconnect.features.authentication.domain.usecases.SignInUseCase
 import com.stu.fitconnect.features.authentication.domain.usecases.SignUpUseCase
-import com.stu.fitconnect.features.authentication.presentation.login.LoginContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -39,7 +37,7 @@ class SignUpViewModel @Inject constructor(
 
     private fun onSignUp(navigateToMainScreen: () -> Unit) {
         mutableScreenState.update { it.copy(isLoading = true) }
-        viewModelScope.launch() {
+        viewModelScope.launch {
             try {
                 signUpUseCase.invoke(
                     User(email = mutableScreenState.value.signUpData.email),

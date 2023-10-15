@@ -27,9 +27,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.authentication.domain.AuthField
-import com.stu.fitconnect.features.authentication.domain.SignUpData
-import com.stu.fitconnect.features.authentication.presentation.login.LoginContract
-import com.stu.fitconnect.features.authentication.presentation.login.LoginViewModel
 import com.stu.fitconnect.ui.AuthTextField
 import com.stu.fitconnect.ui.theme.ButtonColor
 

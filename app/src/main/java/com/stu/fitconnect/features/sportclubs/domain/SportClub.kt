@@ -13,6 +13,7 @@ data class SportClub(
     val facilities: List<String>,
     val reviewsCount: Int,
     val cost: String,
+    val category: String,
     val isFavorite: Boolean
 )
 
