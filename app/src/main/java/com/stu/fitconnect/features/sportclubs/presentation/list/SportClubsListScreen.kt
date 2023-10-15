@@ -355,7 +355,7 @@ fun SportsClubListCard(
                 )
 
                 Text(
-                    text = "${sportClub.score} ",
+                    text = "${String.format("%.1f", sportClub.score)} ",
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,

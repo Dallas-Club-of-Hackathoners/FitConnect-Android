@@ -67,18 +67,13 @@ fun SportClubInfoRoute(
         event(SportClubInfoContract.Event.OnGetSportClub(sportClubId))
     }
 
-    state.sportClub?.let {
-        SportClubInfoScreen(
-            it
 
-    )
-    }
 }
 
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun SportClubInfoScreen(sportClub: SportClub) {
+fun SportClubInfoScreen(state: SportClubInfoContract.State) {
     val res = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/5a/2f/77/the-club.jpg?w=1200&h=1200&s=1"
 
     Column(
@@ -124,7 +119,7 @@ fun SportClubInfoScreen(sportClub: SportClub) {
 
             Spacer(modifier = Modifier.width(15.dp))
             Text(
-                text = sportClub.name,
+                text = state.sportClub?.name ?: "Название клуба",
                 style = TextStyle(
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
@@ -150,7 +145,7 @@ fun SportClubInfoScreen(sportClub: SportClub) {
                 .fillMaxWidth()
                 .padding(vertical = 8.dp, horizontal = 16.dp),
         ) {
-            Text(text = sportClub.description,
+            Text(text = state.sportClub?.description ?: "Описание клуба",
                 style = TextStyle(
                     color = Color.White, // Устанавливаем цвет текста
                     // Остальные параметры стиля
@@ -158,7 +153,7 @@ fun SportClubInfoScreen(sportClub: SportClub) {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            sportClub.location.metro?.let { Text(text = it,
+            state.sportClub?.location?.metro?.let { Text(text = it,
                 style = TextStyle(
                     color = Color.White, // Устанавливаем цвет текста
                     // Остальные параметры стиля
@@ -166,7 +161,7 @@ fun SportClubInfoScreen(sportClub: SportClub) {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Text(text = sportClub.location.address,
+            Text(text = state.sportClub?.location?.address ?: "Адрес клуба",
                 style = TextStyle(
                     color = Color.White, // Устанавливаем цвет текста
                     // Остальные параметры стиля
@@ -178,13 +173,13 @@ fun SportClubInfoScreen(sportClub: SportClub) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Рейтинг: ${sportClub.score}",
+                Text(text = "Рейтинг: ${state.sportClub?.score}",
                     style = TextStyle(
                         color = Color.White, // Устанавливаем цвет текста
                         // Остальные параметры стиля
                     ))
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "Отзывов: ${sportClub.reviewsCount}", color = Color.Gray)
+                Text(text = "Отзывов: ${state.sportClub?.reviewsCount}", color = Color.Gray)
                 Spacer(modifier = Modifier.width(25.dp))
                 OutlinedButton(
                     onClick = { /*TODO*/ },
@@ -341,19 +336,19 @@ fun SportClubInfoScreen(sportClub: SportClub) {
 }
 
 
-@OptIn(ExperimentalStdlibApi::class)
-@Preview
-@Composable
-fun SportClubInfoScreenPreview(
-    @PreviewParameter(SportClubPreviewProvider::class)
-    sportClubInfoState: SportClubInfoContract.State
-) {
-    Surface {
-        SportClubInfoScreen(
-            sportClub = sportClubInfoState.sportClub!!
-        )
-    }
-}
+//@OptIn(ExperimentalStdlibApi::class)
+//@Preview
+//@Composable
+//fun SportClubInfoScreenPreview(
+//    @PreviewParameter(SportClubPreviewProvider::class)
+//    sportClubInfoState: SportClubInfoContract.State
+//) {
+//    Surface {
+//        SportClubInfoScreen(
+//            sportClub = sportClubInfoState.sportClub!!
+//        )
+//    }
+//}
 
 @Composable
 fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
