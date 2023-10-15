@@ -272,6 +272,7 @@ fun SportsClubListCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .background(BackgroundColor)
             .clickable { onItemClick(sportClub.id) },
     ) {
         Column(

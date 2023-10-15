@@ -29,7 +29,7 @@ class SportClubInfoViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val sportClubInfo = getSportClubInfoUseCase.getSportClubById(
-                    mutableScreenState.value.id
+                    id
                 )
                 mutableScreenState.update { it.copy(sportClub = sportClubInfo) }
 

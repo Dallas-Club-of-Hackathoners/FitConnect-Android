@@ -67,7 +67,7 @@ fun SportClubInfoRoute(
         event(SportClubInfoContract.Event.OnGetSportClub(sportClubId))
     }
 
-
+    SportClubInfoScreen(state = state)
 }
 
 
@@ -88,7 +88,7 @@ fun SportClubInfoScreen(state: SportClubInfoContract.State) {
                 .height((LocalConfiguration.current.screenHeightDp * 0.20).dp) // 15% высоты экрана
         ) {
             GlideImage(
-                model = res, //sportClub.imagesRes[0],
+                model = state.sportClub?.imagesRes?.get(0),
                 contentDescription = "sportClubImage",
                 modifier = Modifier
                     .fillMaxSize()
@@ -173,7 +173,7 @@ fun SportClubInfoScreen(state: SportClubInfoContract.State) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Рейтинг: ${state.sportClub?.score}",
+                Text(text = "Рейтинг: ${String.format("%.1f",state.sportClub?.score)}",
                     style = TextStyle(
                         color = Color.White, // Устанавливаем цвет текста
                         // Остальные параметры стиля
@@ -226,21 +226,21 @@ fun SportClubInfoScreen(state: SportClubInfoContract.State) {
                 ) {
                     Spacer(modifier = Modifier.height(8.dp))
                     IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
+                    IconWithText(icon = Icons.Default.Info, text ="Душ" )
+                    IconWithText(icon = Icons.Default.Info, text ="Кафе" )
+                    IconWithText(icon = Icons.Default.Info, text ="Можно с 14 лет")
+                    IconWithText(icon = Icons.Default.Info, text ="Можно с 16 лет" )
 
                 }
                 Column(
                     modifier = Modifier.weight(1f)
                 ) {
                     Spacer(modifier = Modifier.height(8.dp))
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
+                    IconWithText(icon = Icons.Default.Info, text ="Полотенце" )
+                    IconWithText(icon = Icons.Default.Info, text ="Вода" )
+                    IconWithText(icon = Icons.Default.Info, text ="Не нужна обувь" )
+                    IconWithText(icon = Icons.Default.Info, text ="Dog friendly" )
+                    IconWithText(icon = Icons.Default.Info, text ="Только для женщин" )
                 }
             }
             Spacer(modifier = Modifier.height(10.dp))
