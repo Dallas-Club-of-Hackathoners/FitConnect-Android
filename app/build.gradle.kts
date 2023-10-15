@@ -66,6 +66,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation ("androidx.compose.material:material-icons-core:1.5.3")
+    implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
+
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 
