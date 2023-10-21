@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportclubs.domain
+package com.stu.fitconnect.features.sportclubs.domain.entity
 
 
 data class SportClubsFiltersData(
@@ -21,7 +21,7 @@ data class SportClubsFiltersData(
         return filtersData
     }
 
-    fun updateSortType(sortType: SortType) : SportClubsFiltersData  {
+    fun updateSortType(sortType: SortType) : SportClubsFiltersData {
 //        this.sortType = sortType
         return this
     }

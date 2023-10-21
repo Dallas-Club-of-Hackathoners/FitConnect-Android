@@ -1,4 +1,4 @@
-package com.stu.fitconnect.features.sportclubs.domain
+package com.stu.fitconnect.features.sportclubs.domain.entity
 
 import com.stu.fitconnect.features.authentication.domain.User
 
@@ -17,23 +17,6 @@ data class SportClub(
     val isFavorite: Boolean
 )
 
-data class SportClubAdmin(
-    val id: Int,
-    val name: String,
-    val phone: String,
-)
-
-data class Facility(
-    var id: String,
-    var name: String,
-    var iconRes: Int,
-)
-
-data class Trainer(
-    val id: Int,
-    val name: String,
-    val score: Double,
-)
 data class Review(
     val id: Int,
     val user: User,

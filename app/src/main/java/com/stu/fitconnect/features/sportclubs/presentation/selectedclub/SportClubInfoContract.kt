@@ -1,19 +1,17 @@
 package com.stu.fitconnect.features.sportclubs.presentation.selectedclub
 
 import com.stu.fitconnect.base.UnidirectionalViewModel
-import com.stu.fitconnect.features.sportclubs.domain.SportClub
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClub
 
 interface SportClubInfoContract:
     UnidirectionalViewModel<SportClubInfoContract.State, SportClubInfoContract.Event> {
 
     data class State(
         val isLoading: Boolean = false,
-        val id: Int = 0,
         val sportClub: SportClub? = null,
     )
 
     sealed class Event {
-//        object OnRefresh : Event()
         data class OnGetSportClub(val id: Int) : Event()
     }
 }

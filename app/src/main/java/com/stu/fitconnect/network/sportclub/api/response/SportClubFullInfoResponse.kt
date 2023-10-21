@@ -1,9 +1,9 @@
-package com.stu.fitconnect.network.sportclub.api
+package com.stu.fitconnect.network.sportclub.api.response
 
 import com.google.gson.annotations.SerializedName
-import com.stu.fitconnect.features.sportclubs.domain.SportClub
-import com.stu.fitconnect.features.sportclubs.domain.SportClubAdmin
-import com.stu.fitconnect.network.sportclubs.api.AppLocationResponse
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClub
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubAdmin
+
 
 data class SportClubResponse(
     @SerializedName("id") val id: Int,
@@ -20,7 +20,7 @@ data class SportClubResponse(
     @SerializedName("isFavorite") val isFavorite: Boolean
 
 ) {
-    fun toSportClub(): SportClub{
+    fun toSportClub(): SportClub {
         return SportClub(
             id,
             name,
@@ -43,7 +43,7 @@ data class SportClubAdminResponse(
     @SerializedName("name") val name: String,
     @SerializedName("phone") val phone: String,
 ) {
-    fun toSportClubAdmin(): SportClubAdmin{
+    fun toSportClubAdmin(): SportClubAdmin {
         return SportClubAdmin(id, name, phone)
     }
 }

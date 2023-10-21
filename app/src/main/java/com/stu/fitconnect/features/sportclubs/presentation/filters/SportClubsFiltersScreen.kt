@@ -7,12 +7,12 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun PreviewSportClubsFiltersScreen() {
     SportClubsFiltersScreen()
+
 }
 
 
 @Composable
 fun SportClubsFiltersScreen() {
-
 
 }
 

@@ -4,7 +4,7 @@ import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.stu.fitconnect.R
-import com.stu.fitconnect.features.sportclubs.domain.FilterCategory
+import com.stu.fitconnect.features.sportclubs.domain.entity.FilterCategory
 import dagger.hilt.android.scopes.ViewModelScoped
 
 @ViewModelScoped

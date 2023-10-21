@@ -1,8 +1,8 @@
-package com.stu.fitconnect.network.sportclubs.api
+package com.stu.fitconnect.network.sportclub.api.requests
 
 import com.google.gson.annotations.SerializedName
-import com.stu.fitconnect.features.sportclubs.domain.FilterType
-import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
+import com.stu.fitconnect.features.sportclubs.domain.entity.FilterType
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
 
 
 data class SportClubsSummaryRequest(
@@ -10,14 +10,6 @@ data class SportClubsSummaryRequest(
     @SerializedName("search_by") val searchBy: String,
     @SerializedName("page_index") val pageIndex: Int,
     @SerializedName("token") val token: String
-)
-
-data class SportClubsFilterRequest(
-    @SerializedName("favourites") var isFavourite: Boolean = false,
-    @SerializedName("facilities") val facilitiesIds: MutableList<Int> = mutableListOf(),
-    @SerializedName("cost") val costIds: MutableList<Int> = mutableListOf(),
-    @SerializedName("clubsCategory") val clubsCategoryIds: MutableList<Int> = mutableListOf(),
-    @SerializedName("sortsType") var sortTypesId: Int = 0
 )
 
 fun SportClubsFiltersData.toSportClubsFilterRequest() : SportClubsFilterRequest {

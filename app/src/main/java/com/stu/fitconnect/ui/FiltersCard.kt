@@ -14,8 +14,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 import com.stu.fitconnect.R
-import com.stu.fitconnect.features.sportclubs.domain.Filter
-import com.stu.fitconnect.features.sportclubs.domain.FilterCategory
+import com.stu.fitconnect.features.sportclubs.domain.entity.Filter
+import com.stu.fitconnect.features.sportclubs.domain.entity.FilterCategory
 import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.Gray
 

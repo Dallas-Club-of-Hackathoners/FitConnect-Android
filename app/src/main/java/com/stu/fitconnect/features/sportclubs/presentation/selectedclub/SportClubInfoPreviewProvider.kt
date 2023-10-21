@@ -1,11 +1,9 @@
 package com.stu.fitconnect.features.sportclubs.presentation.selectedclub
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.paging.PagingData
-import com.stu.fitconnect.features.sportclubs.domain.AppLocation
-import com.stu.fitconnect.features.sportclubs.domain.SportClub
-import com.stu.fitconnect.features.sportclubs.domain.SportClubAdmin
-import kotlinx.coroutines.flow.flowOf
+import com.stu.fitconnect.features.sportclubs.domain.entity.AppLocation
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClub
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubAdmin
 
 class SportClubPreviewProvider : PreviewParameterProvider<SportClubInfoContract.State> {
 

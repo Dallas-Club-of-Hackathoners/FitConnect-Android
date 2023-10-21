@@ -1,9 +1,9 @@
-package com.stu.fitconnect.network.sportclubs.source
+package com.stu.fitconnect.network.sportclub.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportclubs.SportClubsPageLoader
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubSummary
+import com.stu.fitconnect.features.sportclubs.repositories.SportClubsPageLoader
 
 class SportClubsPagingSource(
     private val loader: SportClubsPageLoader

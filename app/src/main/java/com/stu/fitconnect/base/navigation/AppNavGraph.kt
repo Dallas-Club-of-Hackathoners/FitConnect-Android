@@ -22,6 +22,7 @@ fun AppNavGraph(
     ) {
 
         composable(Screen.SignUp.route) {
+
             SignUpScreenRoute(
                 onNavigateToMainScreen = { /*TODO*/ },
                 onNavigateToSportClubsListScreen = {
@@ -46,7 +47,9 @@ fun AppNavGraph(
                 } ,
             )
         }
-        composable(Screen.SportClubSList.route) {
+        composable(Screen.SportClubSList.route) { entry ->
+//            val text = entry.savedStateHandle.get<String>("my_text")
+
             SportsClubsListRoute(
                 onNavigateToDetailSportsClubsScreen = { sportClubId ->
                     navHostController.navigate(

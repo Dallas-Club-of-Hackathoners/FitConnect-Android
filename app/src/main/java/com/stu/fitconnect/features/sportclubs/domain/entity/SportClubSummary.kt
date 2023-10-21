@@ -1,9 +1,9 @@
-package com.stu.fitconnect.features.sportclubs.domain
+package com.stu.fitconnect.features.sportclubs.domain.entity
 
 data class SportClubSummary(
     val id: Int,
     val name: String,
-    val imagesRes: List<String>,
+    val imagesUrls: List<String>,
     val location: AppLocation,
     val score: Double,
     val reviewsCount: Int,

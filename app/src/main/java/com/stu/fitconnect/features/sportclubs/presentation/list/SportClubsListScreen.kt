@@ -2,64 +2,40 @@ package com.stu.fitconnect.features.sportclubs.presentation.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.*
+import androidx.compose.ui.tooling.preview.*
+import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.fade
+import com.google.accompanist.placeholder.material.placeholder
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
-import com.stu.fitconnect.features.sportclubs.domain.Filter
-import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
+import com.stu.fitconnect.features.sportclubs.domain.entity.AppLocation
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubSummary
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
 import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.Green1
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -83,9 +59,6 @@ fun SportsClubsListRoute(
         onSearch = { searchBy ->
             event.invoke(SportClubListContract.Event.OnSearchSportClub(searchBy = searchBy))
         },
-        onApplySingleFilter = { filter ->
-            event.invoke(SportClubListContract.Event.OnApplySingleFilter(filter = filter))
-        },
         onApplySelectedFilters = { filters ->
             event.invoke(SportClubListContract.Event.OnApplySelectedFilters(sportsClubsFilters = filters))
         },
@@ -103,7 +76,6 @@ fun SportsClubsListScreen(
     onNavigateToDetailSportsClubsScreen: (sportClubId: Int) -> Unit,
     onNavigateToFiltersSportsClubsScreen: () -> Unit,
     onSearch: (searchBy: String) -> Unit,
-    onApplySingleFilter: (filter: Filter) -> Unit,
     onApplySelectedFilters: (filters: SportClubsFiltersData) -> Unit,
     onRefresh: () -> Unit,
 ) {
@@ -142,11 +114,13 @@ fun SportsClubsListScreen(
                 onValueChange = { newText ->
                     onSearch(newText)
                 },
+                modifier = Modifier
+                    .height(40.dp)
+                    .fillMaxWidth(),
                 label = {
                     Text(text = "Поиск спортзала")
                 },
                 textStyle = TextStyle(color = Color.White), // Задаем цвет текста
-                modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(25.dp),
                 leadingIcon = {
                     Box(
@@ -173,11 +147,15 @@ fun SportsClubsListScreen(
             ) {
 
                 OutlinedButton(
+                    contentPadding = PaddingValues(),
+                    modifier = Modifier
+                        .height(27.dp)
+                        .width(35.dp),
                     onClick = { /* Ваша логика при нажатии */ },
 //                    shape = RoundedCornerShape(20.dp),
-                    modifier = Modifier
                 ) {
                     Icon(
+                        modifier = Modifier.size(19.dp),
                         imageVector = Icons.Default.FavoriteBorder, // Пример иконки "Избранное"
                         contentDescription = null,
                         tint = Green1 // Задаем цвет иконки
@@ -189,9 +167,13 @@ fun SportsClubsListScreen(
                 OutlinedButton(
                     onClick = { /* Ваша логика при нажатии */ },
 //                    shape = RoundedCornerShape(20.dp),
+                    contentPadding = PaddingValues(),
                     modifier = Modifier
+                        .height(27.dp)
+                        .width(35.dp),
                 ) {
                     Icon(
+                        modifier = Modifier.size(19.dp),
                         imageVector = Icons.Default.Menu, // Пример иконки "Избранное"
                         contentDescription = null,
                         tint = Green1 // Задаем цвет иконки
@@ -238,27 +220,6 @@ fun SportsClubsListScreen(
                 }
             }
         }
-//
-//        Divider(
-//            color = Color.Gray, // Цвет разделителя
-//            thickness = 1.dp, // Толщина разделителя
-//            modifier = Modifier
-//                .fillMaxWidth() // Растягиваем по всей ширине
-//        )
-//
-//        Row(
-//            modifier = Modifier
-//                .padding(start = 20.dp),
-//            horizontalArrangement = Arrangement.Center,
-//            verticalAlignment = Alignment.CenterVertically,
-//        ) {
-//            IconWithText(icon = Icons.Default.Home, text = "Главная")
-//            IconWithText(icon = Icons.Default.Home, text = "Главная")
-//            IconWithText(icon = Icons.Default.Home, text = "Главная")
-//            IconWithText(icon = Icons.Default.Home, text = "Главная")
-//            IconWithText(icon = Icons.Default.Home, text = "Главная")
-//        }
-
     }
 }
 
@@ -268,71 +229,57 @@ fun SportsClubListCard(
     sportClub: SportClubSummary,
     onItemClick: (Int) -> Unit
 ) {
-    Card(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .background(BackgroundColor)
             .clickable { onItemClick(sportClub.id) },
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
+        Column( ) {
 
             GlideImage(
-                model = sportClub.imagesRes[0], //sportClub.imagesRes[0],
+                model = sportClub.imagesUrls[0], //sportClub.imagesRes[0],
                 contentDescription = "sportClubImage",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height((LocalConfiguration.current.screenHeightDp * 0.15).dp)
             )
 
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Название спортзала
-
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
-//                    .padding(top = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .fillMaxWidth()
+                    .padding(end = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = sportClub.name,
                     style = TextStyle(
-                        fontSize = 18.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat_bolditalic)),
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily(Font(R.font.montserrat_bold)),
                         color = Color.White
                     )
                 )
 
-                Spacer(modifier = Modifier.weight(1f))
-
-                if (sportClub.isFavorite) {
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = null,
-                        tint = Green1,
-                        modifier = Modifier.size(16.dp)
-                    )
-                }
+                Icon(
+                    imageVector = if (sportClub.isFavorite) Icons.Default.FavoriteBorder else Icons.Default.FavoriteBorder, // todo
+                    contentDescription = null,
+                    tint = Green1,
+                    modifier = Modifier.size(16.dp)
+                )
             }
 
             // Местоположение
-            sportClub.location.metro?.let {
-                Text(text = it,
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                        color = Green1))
-            }
+            Text(
+                text = sportClub.location.metro ?: "Станция метро",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                    color = Green1))
             Text(
                 text = sportClub.location.address,
                 style = TextStyle(
-                    fontSize = 14.sp,
-                    fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                    fontSize = 12.sp,
+                    fontFamily = FontFamily(Font(R.font.montserrat_regular)),
                     color = Color.White,
                 )
             )
@@ -342,55 +289,38 @@ fun SportsClubListCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
-                Text(
-                    text = "Оценка: ",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                        color = Color.White
+                Row {
+                    Text(
+                        text = "Оценка: ",
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            color = Color.White
+                        )
                     )
-                )
 
-                Text(
-                    text = "${String.format("%.1f", sportClub.score)} ",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                        color = Green1
+                    Text(
+                        text = "${String.format("%.1f", sportClub.score)}",
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
+                            color = Green1
+                        )
                     )
-                )
-                Text(
-                    text = " (${sportClub.reviewsCount} отзывов)",
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                        color = Color.Gray
+                    Text(
+                        text = " (${sportClub.reviewsCount} отзывов)",
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.montserrat_regular)),
+                            color = Color.Gray
+                        )
                     )
-                )
-            }
-
-            // Цена и иконка "Избранное"
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Цена: ${sportClub.cost} баллов",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                        color = Color.White
-                    )
-                )
-
+                }
+                //cost icon
             }
         }
     }
@@ -411,11 +341,33 @@ fun SportsClubsListScreenPreview(
             onNavigateToDetailSportsClubsScreen = {},
             onNavigateToFiltersSportsClubsScreen = {},
             onSearch = {},
-            onApplySingleFilter = {},
             onApplySelectedFilters = {},
             onRefresh = {}
         )
     }
+}
+
+@Preview
+@Composable
+fun SportsClubsItemListScreenPreview() {
+    val sportClub = SportClubSummary(
+        id = 1,
+        name = "Flex Balance",
+        imagesUrls = listOf(""),
+        location = AppLocation(
+            latitude = 52.520008,
+            longitude = 13.404954,
+            address = "набережная реки Смоленки, дом 9",
+            city = "Город 1",
+            metro = "Василеостровская"
+        ),
+        score = 4.565,
+        reviewsCount = 100,
+        cost = "2000",
+        category = "abc",
+        isFavorite = false
+    )
+    SportsClubListCard(sportClub = sportClub, onItemClick = {})
 }
 
 @Composable

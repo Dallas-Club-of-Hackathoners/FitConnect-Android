@@ -21,18 +21,15 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,15 +38,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.stu.fitconnect.base.use
-import com.stu.fitconnect.features.sportclubs.domain.SportClub
 import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.Green1
 
@@ -67,13 +61,17 @@ fun SportClubInfoRoute(
         event(SportClubInfoContract.Event.OnGetSportClub(sportClubId))
     }
 
-    SportClubInfoScreen(state = state)
+    SportClubInfoScreen(
+        state = state
+    )
 }
 
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun SportClubInfoScreen(state: SportClubInfoContract.State) {
+fun SportClubInfoScreen(
+    state: SportClubInfoContract.State
+) {
     val res = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/5a/2f/77/the-club.jpg?w=1200&h=1200&s=1"
 
     Column(
@@ -88,7 +86,7 @@ fun SportClubInfoScreen(state: SportClubInfoContract.State) {
                 .height((LocalConfiguration.current.screenHeightDp * 0.20).dp) // 15% высоты экрана
         ) {
             GlideImage(
-                model = state.sportClub?.imagesRes?.get(0),
+                model = res, //sportClub.imagesRes[0],
                 contentDescription = "sportClubImage",
                 modifier = Modifier
                     .fillMaxSize()

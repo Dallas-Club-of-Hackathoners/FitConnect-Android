@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.ResourceManager
-import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
 import com.stu.fitconnect.features.sportclubs.domain.usecases.GetSportClubsListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,7 +29,6 @@ class SportClubListViewModel @Inject constructor(
         SportClubListContract.Event.OnGetSportClubFilters -> getAllSportClubFiltersData()
         SportClubListContract.Event.OnGetSportClub -> getSportsClubsPagingList()
         is SportClubListContract.Event.OnSearchSportClub -> updateStateAndFetchData { it.copy(searchText = event.searchBy) }
-        is SportClubListContract.Event.OnApplySingleFilter -> updateStateAndFetchData { it.copy(selectedFilters = it.selectedFilters.getUpdatedFiltersList(event.filter)) }
         is SportClubListContract.Event.OnApplySelectedFilters -> updateStateAndFetchData { it.copy(selectedFilters = event.sportsClubsFilters) }
     }
 

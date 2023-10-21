@@ -71,7 +71,10 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    implementation("com.google.accompanist:accompanist-placeholder:0.33.2-alpha")
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.33.2-alpha")
 
 
     val hilt_version = "2.44"

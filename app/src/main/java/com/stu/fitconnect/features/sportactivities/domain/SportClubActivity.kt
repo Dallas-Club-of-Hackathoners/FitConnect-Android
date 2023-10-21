@@ -1,7 +1,7 @@
 package com.stu.fitconnect.features.sportactivities.domain
 
-import com.stu.fitconnect.features.sportclubs.domain.AppLocation
-import com.stu.fitconnect.features.sportclubs.domain.Trainer
+import com.stu.fitconnect.features.sportclubs.domain.entity.AppLocation
+import com.stu.fitconnect.features.sportclubs.domain.entity.Trainer
 
 data class SportClubActivity(
     val id: Int,
