@@ -6,7 +6,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.sp
 
-// Set of Material typography styles to start with
 val Typography = Typography(
     // заголовки типа Вход и тд
     headlineLarge = TextStyle(
@@ -39,6 +38,12 @@ val Typography = Typography(
         fontFamily = MontserratFamily,
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
+        color = White
+    ),
+    titleSmall = TextStyle(
+        fontFamily = MontserratFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
         color = White
     ),
     // для описания, текса типа "Парковка" и тд

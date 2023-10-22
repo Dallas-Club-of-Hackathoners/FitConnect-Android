@@ -65,7 +65,6 @@ fun SportsClubsListRoute(
     )
 }
 
-
 @ExperimentalMaterial3Api
 @Composable
 fun SportsClubsListScreen(
@@ -153,7 +152,6 @@ fun SportsClubsListScreen(
                     SportsClubListCard(
                         sportClub = sportsClubsPagingItems[index]!!,
                         onItemClick = { sportClubId ->
-                            // Передаем sportClubId при клике на элемент списка
                             onNavigateToDetailSportsClubsScreen(sportClubId)
                         }
                     )
@@ -194,7 +192,6 @@ fun SportsClubListCard(
                     text = sportClub.name,
                     style = MaterialTheme.typography.titleMedium
                 )
-
                 Icon(
                     imageVector = if (sportClub.isFavorite) Icons.Default.FavoriteBorder else Icons.Default.FavoriteBorder, // todo
                     contentDescription = null,
@@ -229,7 +226,7 @@ fun SportsClubListCard(
                     )
 
                     Text(
-                        text = "${String.format("%.1f", sportClub.score)}",
+                        text = String.format("%.1f", sportClub.score),
                         style = MaterialTheme.typography.headlineSmall.copy(color = Green)
                     )
                     Text(
