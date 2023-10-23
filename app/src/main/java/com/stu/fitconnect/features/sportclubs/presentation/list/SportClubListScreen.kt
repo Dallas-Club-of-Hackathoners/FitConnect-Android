@@ -286,20 +286,19 @@ fun SportsClubsItemListScreenPreview() {
 
 @Composable
 fun IconWithText(icon: ImageVector, text: String) {
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = Green1
-            )
-            Text(
-                text = text,
-                color = Green1
-            )
-        }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Green1
+        )
+        Text(
+            text = text,
+            color = Green1
+        )
+    }
 }

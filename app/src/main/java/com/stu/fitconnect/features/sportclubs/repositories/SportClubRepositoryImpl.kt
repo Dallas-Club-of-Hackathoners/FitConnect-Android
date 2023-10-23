@@ -9,6 +9,7 @@ import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersDat
 import com.stu.fitconnect.network.authentication.AuthenticationSource
 import com.stu.fitconnect.network.sportclub.source.SportClubSource
 import com.stu.fitconnect.network.sportclub.source.SportClubsPagingSource
+import com.stu.fitconnect.utils.ResourceJsonManager
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,13 +19,15 @@ typealias SportClubsPageLoader = suspend (pageIndex: Int) -> List<SportClubSumma
 @Singleton
 class SportClubRepositoryImpl @Inject constructor(
     private val sportClubSource: SportClubSource,
-    private val authenticationSource: AuthenticationSource
+    private val authenticationSource: AuthenticationSource,
+    private val resourceJsonManager: ResourceJsonManager
 ) : SportClubRepository {
 
     override suspend fun getSportClubById(id: Int): SportClub {
         val userId = authenticationSource.getCurrentUId()
-
-        return sportClubSource.getSportClubFullInfo(id, userId)
+        val sportClubsResponse = sportClubSource.getSportClubFullInfo(id, userId)
+        val amenities = resourceJsonManager.getAllAmenities()
+        return sportClubsResponse.toSportClub(amenities)
     }
 
     override fun getSportClubsPagingList(searchBy: String, sportClubsFilters: SportClubsFiltersData): Flow<PagingData<SportClubSummary>> {

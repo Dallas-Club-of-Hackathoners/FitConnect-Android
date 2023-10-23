@@ -11,12 +11,3 @@ class GetSportClubInfoUseCase @Inject constructor(
         return sportClubRepository.getSportClubById(id)
     }
 }
-public const val a = 20
-class Person() {
-    val brr = a
-}
-
-public class Student() {
-    public val per = Person()
-    public val b = per.brr
-}

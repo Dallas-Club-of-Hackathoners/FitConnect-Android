@@ -1,7 +1,12 @@
 package com.stu.fitconnect.features.sportclubs.presentation.selectedclub
 
+import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.stu.fitconnect.R
+import com.stu.fitconnect.features.sportclubs.domain.entity.AmenityWithAvailable
+import com.stu.fitconnect.features.sportclubs.domain.entity.FilterCategory
 import com.stu.fitconnect.features.sportclubs.domain.usecases.GetSportClubInfoUseCase
 import com.stu.fitconnect.features.sportclubs.presentation.list.SportClubListContract
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,5 +44,16 @@ class SportClubInfoViewModel @Inject constructor(
                 mutableScreenState.update { it.copy(isLoading = false) }
             }
         }
+    }
+
+    private fun getAllAmenities(availableAmenity: List<Int>) : List<AmenityWithAvailable> {
+        val inputStream = Resources.getSystem().openRawResource(R.raw.sport_clubs_filters_data)
+        val jsonString = inputStream.bufferedReader().use { it.readText() }
+        val allAmenity = Gson().fromJson(jsonString, Array<AmenityWithAvailable>::class.java).asList()
+        allAmenity.forEachIndexed { index, amenityWithAvailable ->
+            if(availableAmenity.contains(index))
+                amenityWithAvailable.available = true
+        }
+        return allAmenity
     }
 }

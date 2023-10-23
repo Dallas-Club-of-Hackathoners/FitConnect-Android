@@ -5,14 +5,14 @@ import com.stu.fitconnect.features.authentication.domain.User
 data class SportClub(
     val id: Int,
     val name: String,
-    val imagesRes: List<String>,
+    val imagesUrls: List<String>,
     val location: AppLocation,
     val score: Double,
     val contacts: SportClubAdmin, //ссылка на акк админа клуба ??
     val description: String,
-    val facilities: List<String>,
+    val amenities: List<AmenityWithAvailable>,
     val reviewsCount: Int,
-    val cost: String,
+    val cost: Int,
     val category: String,
     val isFavorite: Boolean
 )

@@ -1,5 +1,6 @@
 package com.stu.fitconnect.features.sportclubs.presentation.selectedclub
 
+import androidx.browser.customtabs.CustomTabsClient.getPackageName
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,15 +38,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.ui.theme.BackgroundColor
+import com.stu.fitconnect.ui.theme.FitConnectTheme
 import com.stu.fitconnect.ui.theme.Green1
 
 
@@ -216,32 +224,67 @@ fun SportClubInfoScreen(
                 style = TextStyle(
                     color = Color.White, // Устанавливаем цвет текста
                     // Остальные параметры стиля
-                ))
+                )
+            )
 
-            Row {
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    IconWithText(icon = Icons.Default.Info, text ="Парковка" )
-                    IconWithText(icon = Icons.Default.Info, text ="Душ" )
-                    IconWithText(icon = Icons.Default.Info, text ="Кафе" )
-                    IconWithText(icon = Icons.Default.Info, text ="Можно с 14 лет")
-                    IconWithText(icon = Icons.Default.Info, text ="Можно с 16 лет" )
+            state.sportClub?.amenities?.forEach {
 
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                val amenitiesSize = state.sportClub?.amenities?.size ?: 0
+                Column {
+                    repeat(amenitiesSize / 2 + 1) { column ->
+                        val amenity = state.sportClub?.amenities?.get(column + 1)
+                        IconWithText(
+                            iconRes = LocalContext.current.resources.getIdentifier(amenity?.iconRes, "drawable", LocalContext.current.packageName),
+                            text = "Парковка")
+                    }
                 }
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    IconWithText(icon = Icons.Default.Info, text ="Полотенце" )
-                    IconWithText(icon = Icons.Default.Info, text ="Вода" )
-                    IconWithText(icon = Icons.Default.Info, text ="Не нужна обувь" )
-                    IconWithText(icon = Icons.Default.Info, text ="Dog friendly" )
-                    IconWithText(icon = Icons.Default.Info, text ="Только для женщин" )
+                Column {
+                    repeat(amenitiesSize - amenitiesSize / 2 - 1) {column ->
+                        val amenity = state.sportClub?.amenities?.get(column + 1)
+                        IconWithText(iconRes = R.drawable.age14, text = "Парковка")
+                    }
                 }
             }
-            Spacer(modifier = Modifier.height(10.dp))
+
+//                IconWithText(iconRes = R.drawable.age14, text = "Парковка"), // todo
+//                IconWithText(iconRes = R.drawable.age14, text = "Душ"), // todo
+//                IconWithText(iconRes = R.drawable.cafe, text = "Кафе"),
+//                IconWithText(iconRes = R.drawable.age14, text = "Можно с 14 лет"),
+//                IconWithText(iconRes = R.drawable.age16, text = "Можно с 16 лет"),
+//                IconWithText(iconRes = R.drawable.towel, text = "Полотенце"),
+//                IconWithText(iconRes = R.drawable.bottle, text = "Вода"),
+//                IconWithText(iconRes = R.drawable.cross, text = "Не нужна обувь"),
+//                IconWithText(iconRes = R.drawable.pets, text = "Dog friendly"),
+//                IconWithText(iconRes = R.drawable.men_woman, text = "Только для женщин")
+//            )
+//            Row {
+//                Column(
+//                    modifier = Modifier.weight(1f)
+//                ) {
+//                    Spacer(modifier = Modifier.height(8.dp))
+//                    IconWithText(iconRes = R.drawable.age14, text ="Парковка" )
+//                    IconWithText(iconRes = R.drawable.age14, text ="Душ" )
+//                    IconWithText(iconRes = R.drawable.age14, text ="Кафе" )
+//                    IconWithText(iconRes = R.drawable.age14, text ="Можно с 14 лет")
+//                    IconWithText(iconRes = R.drawable.age14, text ="Можно с 16 лет")
+//                }
+//                Column(
+//                    modifier = Modifier.weight(1f)
+//                ) {
+//                    Spacer(modifier = Modifier.height(8.dp))
+//                    IconWithText(iconRes = R.drawable.age14, text ="Полотенце" )
+//                    IconWithText(iconRes = R.drawable.age14, text ="Вода" )
+//                    IconWithText(iconRes = R.drawable.age14, text ="Не нужна обувь" )
+//                    IconWithText(iconRes = R.drawable.age14, text ="Dog friendly" )
+//                    IconWithText(iconRes = R.drawable.age14, text ="Только для женщин" )
+//                }
+//            }
+//            Spacer(modifier = Modifier.height(10.dp))
         }
 
 
@@ -308,7 +351,7 @@ fun SportClubInfoScreen(
                         style = TextStyle(
                             color = Color.White, // Устанавливаем цвет текста
                         )
-                        )
+                    )
                 }
 
 
@@ -334,19 +377,18 @@ fun SportClubInfoScreen(
 }
 
 
-//@OptIn(ExperimentalStdlibApi::class)
-//@Preview
-//@Composable
-//fun SportClubInfoScreenPreview(
-//    @PreviewParameter(SportClubPreviewProvider::class)
-//    sportClubInfoState: SportClubInfoContract.State
-//) {
-//    Surface {
-//        SportClubInfoScreen(
-//            sportClub = sportClubInfoState.sportClub!!
-//        )
-//    }
-//}
+@Preview
+@Composable
+fun SportClubInfoScreenPreview(
+    @PreviewParameter(SportClubPreviewProvider::class)
+    sportClubInfoState: SportClubInfoContract.State
+) {
+    FitConnectTheme {
+        SportClubInfoScreen(
+            sportClubInfoState
+        )
+    }
+}
 
 @Composable
 fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
@@ -366,16 +408,20 @@ fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
     )
 }
 @Composable
-fun IconWithText(icon: ImageVector, text: String) {
+fun IconWithText(iconRes: Int, text: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp) // Расстояние между иконкой и текстом
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Icon(imageVector = icon, contentDescription = null, tint = Green1) // Отображаем иконку
-        Text(text = text,
-            style = TextStyle(
-                color = Color.White, // Устанавливаем цвет текста
-                // Остальные параметры стиля
-            )) // Отображаем текст
+        Icon(
+            painter = painterResource(id = iconRes),
+            contentDescription = null,
+            modifier = Modifier.size(16.dp),
+            tint = Green1
+        )
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }

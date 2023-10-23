@@ -7,6 +7,7 @@ import com.stu.fitconnect.network.sportclub.api.SportClubApiService
 import com.stu.fitconnect.network.sportclub.api.requests.SportClubSummaryRequest
 import com.stu.fitconnect.network.sportclub.api.requests.SportClubsSummaryRequest
 import com.stu.fitconnect.network.sportclub.api.requests.toSportClubsFilterRequest
+import com.stu.fitconnect.network.sportclub.api.response.SportClubResponse
 import com.stu.fitconnect.network.sportclub.api.response.toSportsClubSummaryList
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,14 +17,14 @@ class SportClubSourceImpl @Inject constructor(
     private val sportClubApiService: SportClubApiService
 ) : SportClubSource {
 
-    override suspend fun getSportClubFullInfo(id: Int, userId: String): SportClub {
+    override suspend fun getSportClubFullInfo(id: Int, userId: String): SportClubResponse {
         return try {
             sportClubApiService.getSportClubInfo(
                 SportClubSummaryRequest(
                     id = id,
                     userId = userId
                 )
-            ).toSportClub()
+            )/*.toSportClub()*/
         } catch (e: Exception) {
             throw e
         }
