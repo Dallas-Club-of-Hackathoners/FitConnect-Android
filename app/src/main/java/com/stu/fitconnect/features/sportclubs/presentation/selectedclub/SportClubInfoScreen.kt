@@ -220,73 +220,38 @@ fun SportClubInfoScreen(
                 .padding(horizontal = 16.dp),
         )  {
 
-            Text(text = "Удобства",
+            Text(
+                text = "Удобства",
                 style = TextStyle(
                     color = Color.White, // Устанавливаем цвет текста
                     // Остальные параметры стиля
                 )
             )
 
-            state.sportClub?.amenities?.forEach {
-
-            }
 
             Row(
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(35.dp)
             ) {
                 val amenitiesSize = state.sportClub?.amenities?.size ?: 0
                 Column {
                     repeat(amenitiesSize / 2 + 1) { column ->
-                        val amenity = state.sportClub?.amenities?.get(column + 1)
+                        val amenity = state.sportClub?.amenities?.get(column) ?: return@repeat
                         IconWithText(
-                            iconRes = LocalContext.current.resources.getIdentifier(amenity?.iconRes, "drawable", LocalContext.current.packageName),
-                            text = "Парковка")
+                            iconRes = LocalContext.current.resources.getIdentifier(amenity.iconRes, "drawable", LocalContext.current.packageName),
+                            text = amenity.name)
                     }
                 }
                 Column {
-                    repeat(amenitiesSize - amenitiesSize / 2 - 1) {column ->
-                        val amenity = state.sportClub?.amenities?.get(column + 1)
-                        IconWithText(iconRes = R.drawable.age14, text = "Парковка")
+                    repeat(amenitiesSize - amenitiesSize / 2 - 1) { column ->
+                        val amenity = state.sportClub?.amenities?.get((column + 1) * 2) ?: return@repeat
+                        IconWithText(
+                            iconRes = LocalContext.current.resources.getIdentifier(amenity.iconRes, "drawable", LocalContext.current.packageName),
+                            text = amenity.name)
                     }
                 }
             }
-
-//                IconWithText(iconRes = R.drawable.age14, text = "Парковка"), // todo
-//                IconWithText(iconRes = R.drawable.age14, text = "Душ"), // todo
-//                IconWithText(iconRes = R.drawable.cafe, text = "Кафе"),
-//                IconWithText(iconRes = R.drawable.age14, text = "Можно с 14 лет"),
-//                IconWithText(iconRes = R.drawable.age16, text = "Можно с 16 лет"),
-//                IconWithText(iconRes = R.drawable.towel, text = "Полотенце"),
-//                IconWithText(iconRes = R.drawable.bottle, text = "Вода"),
-//                IconWithText(iconRes = R.drawable.cross, text = "Не нужна обувь"),
-//                IconWithText(iconRes = R.drawable.pets, text = "Dog friendly"),
-//                IconWithText(iconRes = R.drawable.men_woman, text = "Только для женщин")
-//            )
-//            Row {
-//                Column(
-//                    modifier = Modifier.weight(1f)
-//                ) {
-//                    Spacer(modifier = Modifier.height(8.dp))
-//                    IconWithText(iconRes = R.drawable.age14, text ="Парковка" )
-//                    IconWithText(iconRes = R.drawable.age14, text ="Душ" )
-//                    IconWithText(iconRes = R.drawable.age14, text ="Кафе" )
-//                    IconWithText(iconRes = R.drawable.age14, text ="Можно с 14 лет")
-//                    IconWithText(iconRes = R.drawable.age14, text ="Можно с 16 лет")
-//                }
-//                Column(
-//                    modifier = Modifier.weight(1f)
-//                ) {
-//                    Spacer(modifier = Modifier.height(8.dp))
-//                    IconWithText(iconRes = R.drawable.age14, text ="Полотенце" )
-//                    IconWithText(iconRes = R.drawable.age14, text ="Вода" )
-//                    IconWithText(iconRes = R.drawable.age14, text ="Не нужна обувь" )
-//                    IconWithText(iconRes = R.drawable.age14, text ="Dog friendly" )
-//                    IconWithText(iconRes = R.drawable.age14, text ="Только для женщин" )
-//                }
-//            }
-//            Spacer(modifier = Modifier.height(10.dp))
         }
-
 
         Divider(
             color = Color.Gray, // Цвет разделителя
@@ -416,7 +381,7 @@ fun IconWithText(iconRes: Int, text: String) {
         Icon(
             painter = painterResource(id = iconRes),
             contentDescription = null,
-            modifier = Modifier.size(16.dp),
+            modifier = Modifier.size(18.dp),
             tint = Green1
         )
         Text(

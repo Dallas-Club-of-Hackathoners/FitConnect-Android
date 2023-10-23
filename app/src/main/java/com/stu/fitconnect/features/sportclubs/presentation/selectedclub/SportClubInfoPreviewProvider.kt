@@ -34,7 +34,7 @@ class SportClubPreviewProvider : PreviewParameterProvider<SportClubInfoContract.
                 description = "Описание спортзала 1",
                 amenities = listOf(
                     AmenityWithAvailable(id = 0, name = "Кафе", iconRes = "cafe", available = true),
-                    AmenityWithAvailable(id = 1, name = "Душ", iconRes = "shower", available = true),
+                    AmenityWithAvailable(id = 1, name = "Можно с 16 лет", iconRes = "age16", available = true),
                     AmenityWithAvailable(id = 2, name = "Вода", iconRes = "bottle", available = true),
                     AmenityWithAvailable(id = 3, name = "Можно с 14 лет", iconRes = "age14", available = true),
                     AmenityWithAvailable(id = 4, name = "Полотенце", iconRes = "towel", available = true)
