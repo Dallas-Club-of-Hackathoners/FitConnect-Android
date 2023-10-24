@@ -26,7 +26,7 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                             ),
                             score = 4.5,
                             reviewsCount = 100,
-                            cost = "2000",
+                            cost = 1,
                             category = "abc",
                             isFavorite = false
                         ),
@@ -43,7 +43,7 @@ class SportClubListStatePreviewProvider : PreviewParameterProvider<SportClubList
                             ),
                             score = 4.0,
                             reviewsCount = 75,
-                            cost = "1500",
+                            cost = 3,
                             category = "ccc",
                             isFavorite = true
                         )

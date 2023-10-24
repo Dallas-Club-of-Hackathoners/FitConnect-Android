@@ -1,52 +1,52 @@
 [
   {
     "id": 1,
-    "iconRes": "age14",
-    "text": "Парковка"
+    "iconRes": "parking",
+    "name": "Парковка"
   },
   {
     "id": 2,
-    "iconRes": "age14",
-    "text": "Душ"
+    "iconRes": "shower",
+    "name": "Душ"
   },
   {
     "id": 3,
     "iconRes": "cafe",
-    "text": "Кафе"
+    "name": "Кафе"
   },
   {
     "id": 4,
     "iconRes": "age14",
-    "text": "Можно с 14 лет"
+    "name": "Можно с 14 лет"
   },
   {
     "id": 5,
     "iconRes": "age16",
-    "text": "Можно с 16 лет"
+    "name": "Можно с 16 лет"
   },
   {
     "id": 6,
     "iconRes": "towel",
-    "text": "Полотенце"
+    "name": "Полотенце"
   },
   {
     "id": 7,
     "iconRes": "bottle",
-    "text": "Вода"
+    "name": "Вода"
   },
   {
     "id": 8,
     "iconRes": "cross",
-    "text": "Не нужна обувь"
+    "name": "Не нужна обувь"
   },
   {
     "id": 9,
     "iconRes": "pets",
-    "text": "Dog friendly"
+    "name": "Dog friendly"
   },
   {
     "id": 10,
     "iconRes": "men_woman",
-    "text": "Только для женщин"
+    "name": "Только для женщин"
   }
 ]

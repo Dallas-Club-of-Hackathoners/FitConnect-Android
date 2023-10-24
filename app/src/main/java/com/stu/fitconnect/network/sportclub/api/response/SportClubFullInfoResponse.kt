@@ -14,16 +14,17 @@ data class SportClubResponse(
     @SerializedName("rating") val score: Double,
     @SerializedName("admin") val contacts: SportClubAdminResponse,
     @SerializedName("description") val description: String,
-    @SerializedName("facilities") val amenitiesIds: List<Int>/*String*/,
     @SerializedName("rating_count") val reviewsCount: Int,
     @SerializedName("cost") val cost: String,
+    @SerializedName("facilities") val amenitiesIds: String/*List<Int>*/,
     @SerializedName("category") val category: String,
     @SerializedName("isFavorite") val isFavorite: Boolean
 ) {
     fun toSportClub(amenitiesList: List<Amenity>): SportClub {
-        val amenitiesWithAvailableList = amenitiesList.map { amenity ->
-            val available = amenity.id in amenitiesIds
-            AmenityWithAvailable(amenity.id, amenity.name, amenity.iconRes, available)
+        val amenitiesWithAvailableList = mutableListOf<AmenityWithAvailable>()
+        amenitiesList.forEach { amenity ->
+            val available = /*amenity.id in amenitiesIds.*/ true // todo
+            amenitiesWithAvailableList.add(AmenityWithAvailable(amenity.id, amenity.name, amenity.iconRes, available))
         }
         return SportClub(
             id = id,

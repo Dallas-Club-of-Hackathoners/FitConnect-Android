@@ -13,7 +13,7 @@ class SportClubPreviewProvider : PreviewParameterProvider<SportClubInfoContract.
         SportClubInfoContract.State(
             sportClub = SportClub(
                 id = 1,
-                name = "Спортзал 1",
+                name = "A fitness some huge name",
                 imagesUrls = listOf(
                     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/5a/2f/77/the-club.jpg?w=1200&h=1200&s=1",
                     "https://p2.zoon.ru/preview/qopEPmsUrWr_7X7bEtoxfg/640x427x85/1/0/9/original_5cb555f4142d8b39b65cc7bb_5df73f944b2c1.jpg"
@@ -21,9 +21,9 @@ class SportClubPreviewProvider : PreviewParameterProvider<SportClubInfoContract.
                 location = AppLocation(
                     latitude = 52.520008,
                     longitude = 13.404954,
-                    address = "Адрес 1",
+                    address = "Кондратьевский проспект, дом 40",
                     city = "Город 1",
-                    metro = "Метро 1"
+                    metro = "Площадь Ленина"
                 ),
                 score = 4.5,
                 contacts = SportClubAdmin(
@@ -31,9 +31,9 @@ class SportClubPreviewProvider : PreviewParameterProvider<SportClubInfoContract.
                     name = "Админ 1",
                     phone = "123-456-789"
                 ),
-                description = "Описание спортзала 1",
+                description = "A-Fitness — сеть премиальных фитнес-клубов, где созданы все условия для комфортных тренировок, отдыха, и поддержания своего тела и духа в отличной форме! Приходите к нам за осознанным спортом.",
                 amenities = listOf(
-                    AmenityWithAvailable(id = 0, name = "Кафе", iconRes = "cafe", available = true),
+                    AmenityWithAvailable(id = 0, name = "Кафе", iconRes = "cafe", available = false),
                     AmenityWithAvailable(id = 1, name = "Можно с 16 лет", iconRes = "age16", available = true),
                     AmenityWithAvailable(id = 2, name = "Вода", iconRes = "bottle", available = true),
                     AmenityWithAvailable(id = 3, name = "Можно с 14 лет", iconRes = "age14", available = true),

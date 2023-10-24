@@ -16,6 +16,6 @@ fun MainScreen() {
 
     AppNavGraph(
         navHostController = navigationState.navHostController,
-        isLogIn = false
+        isLogIn = true
     )
 }

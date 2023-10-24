@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.stu.fitconnect.ui.theme.FitConnectTheme
 import com.stu.fitconnect.ui.theme.Gray
@@ -19,19 +20,20 @@ import com.stu.fitconnect.ui.theme.Gray
 fun AppOutlineButton(
     onClick: () -> Unit,
     textValue: String,
-    textStile: TextStyle,
-    modifier: Modifier
+    textStyle: TextStyle,
+    modifier: Modifier,
+    shapeSize: Dp = 200.dp//max shape
 ) {
     OutlinedButton(
         onClick = onClick,
         border = BorderStroke(1.dp, Gray),
-        shape = RoundedCornerShape(18.dp),
+        shape = RoundedCornerShape(shapeSize),
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 12.dp)
     ) {
         Text(
             text = textValue,
-            style = textStile
+            style = textStyle
         )
 
     }
@@ -44,7 +46,7 @@ fun PreviewAppOutlineButton() {
         AppOutlineButton(
             onClick = {},
             textValue = "Рекомендуем",
-            textStile = MaterialTheme.typography.headlineSmall,
+            textStyle = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.height(27.dp))
     }
 }

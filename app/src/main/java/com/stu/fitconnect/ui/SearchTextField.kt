@@ -27,11 +27,11 @@ fun SearchTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = Modifier
-            .height(40.dp)
+            .height(50.dp)// todo было 40 по канону
             .fillMaxWidth()
             .border(
                 border = BorderStroke(width = 1.dp, Gray),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(25.dp)
             )
             .clip(shape = RoundedCornerShape(5.dp))
             .background(color = BackgroundColor),
