@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
@@ -109,7 +110,7 @@ fun SportClubInfoScreen(
                         .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp) // 15% высоты экрана
                 ) {
                     GlideImage(
-                        model = res, //sportClub.imagesRes[0],
+                        model = state.sportClub.imagesUrls[0],
                         contentDescription = "sportClubImage",
                         modifier = Modifier
                             .fillMaxSize(),
@@ -157,13 +158,13 @@ fun SportClubInfoScreen(
                                 style = MaterialTheme.typography.titleLarge
                             )
                             Text(
-                                text = "Фитнесс-клуб",
+                                text = "Фитнес-клуб",
                                 style = MaterialTheme.typography.headlineMedium
                             )
 
                         }
                     }
-                    RubleCostIcons(cost = state.sportClub?.cost ?: 1, iconSize = 30.dp)
+                    RubleCostIcons(cost = state.sportClub.cost, iconSize = 30.dp)
                 }
 
                 AppDivider()
@@ -296,7 +297,7 @@ fun SportClubInfoScreen(
                         style = MaterialTheme.typography.headlineMedium
                     )
                     Icon(
-                        imageVector = Icons.Default.KeyboardArrowRight,
+                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                         contentDescription = null,
                         tint = Green
                     )
@@ -385,7 +386,7 @@ fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
         contentDescription = null,
         tint = tint,
         modifier = Modifier
-            .padding(start = ((LocalConfiguration.current.screenWidthDp * 0.85).dp), top = 40.dp)
+            .padding(start = (( LocalConfiguration.current.screenWidthDp * 0.85).dp), top = 40.dp)
             .clickable {
                 isClicked = !isClicked
                 onClick()

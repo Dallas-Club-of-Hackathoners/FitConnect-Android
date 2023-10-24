@@ -15,16 +15,16 @@ fun List<SportClubSummaryResponse>.toSportsClubSummaryList() : List<SportClubSum
 data class SportClubSummaryResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
-    @SerializedName("images_urls") val imagesRes: String,
+    @SerializedName("image_urls") val imagesRes: String,
     @SerializedName("location") val location: AppLocationResponse,
     @SerializedName("rating") val score: Double,
     @SerializedName("rating_count") val reviewsCount: Int,
-    @SerializedName("cost") val cost: String,
+    @SerializedName("cost") val cost: Int,
     @SerializedName("category") val category: String,
     @SerializedName("isFavorite") val isFavorite: Boolean
 ) {
     fun toSportClubSummary() : SportClubSummary {
-        return SportClubSummary(id, name, listOf(imagesRes), location.toAppLocation(), score, reviewsCount,category, cost.toInt(), isFavorite)//todo
+        return SportClubSummary(id, name, listOf(imagesRes), location.toAppLocation(), score, reviewsCount,category, cost, isFavorite)//todo
     }
 }
 

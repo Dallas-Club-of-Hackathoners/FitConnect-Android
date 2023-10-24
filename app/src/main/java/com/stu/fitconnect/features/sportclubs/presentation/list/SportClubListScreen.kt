@@ -180,7 +180,7 @@ fun SportsClubListCard(
     ) {
         Column {
             GlideImage(
-                model = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&q=80&w=1975&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //sportClub.imagesRes[0],
+                model = sportClub.imagesUrls[0], //"https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&q=80&w=1975&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //sportClub.imagesRes[0],
                 contentDescription = "sportClubImage",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -245,7 +245,8 @@ fun SportsClubListCard(
                     modifier = Modifier.padding(horizontal = 6.dp)
                 ) {
                     Icon(
-                        imageVector = if (sportClub.isFavorite) Icons.Default.FavoriteBorder else Icons.Default.FavoriteBorder, // todo
+                        imageVector = if (sportClub.isFavorite) Icons.Default.FavoriteBorder
+                        else Icons.Default.FavoriteBorder, // todo
                         contentDescription = null,
                         tint = Green,
                         modifier = Modifier.size(24.dp)
