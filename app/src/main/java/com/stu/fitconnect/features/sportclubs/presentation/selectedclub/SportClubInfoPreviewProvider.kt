@@ -7,7 +7,7 @@ import com.stu.fitconnect.features.sportclubs.domain.entity.AppLocation
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClub
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubAdmin
 
-class SportClubPreviewProvider : PreviewParameterProvider<SportClubInfoContract.State> {
+class SportClubInfoPreviewProvider : PreviewParameterProvider<SportClubInfoContract.State> {
 
     override val values: Sequence<SportClubInfoContract.State> = sequenceOf(
         SportClubInfoContract.State(

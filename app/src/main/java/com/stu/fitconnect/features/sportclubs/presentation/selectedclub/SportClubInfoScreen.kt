@@ -365,7 +365,7 @@ fun AppDivider() {
 @Preview
 @Composable
 fun SportClubInfoScreenPreview(
-    @PreviewParameter(SportClubPreviewProvider::class)
+    @PreviewParameter(SportClubInfoPreviewProvider::class)
     sportClubInfoState: SportClubInfoContract.State
 ) {
     FitConnectTheme {
@@ -392,6 +392,7 @@ fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
             }
     )
 }
+@SuppressLint("DiscouragedApi")
 @Composable
 fun AmenityIconWithText(amenity: AmenityWithAvailable) {
     IconWithText(
