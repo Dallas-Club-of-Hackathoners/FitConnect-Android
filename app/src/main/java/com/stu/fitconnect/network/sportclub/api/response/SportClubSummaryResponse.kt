@@ -24,7 +24,7 @@ data class SportClubSummaryResponse(
     @SerializedName("isFavorite") val isFavorite: Boolean
 ) {
     fun toSportClubSummary() : SportClubSummary {
-        return SportClubSummary(id, name, listOf(imagesRes), location.toAppLocation(), score, reviewsCount,category, cost, isFavorite)//todo
+        return SportClubSummary(id, name, imagesRes.split("\n"), location.toAppLocation(), score, reviewsCount,category, cost, isFavorite)//todo
     }
 }
 

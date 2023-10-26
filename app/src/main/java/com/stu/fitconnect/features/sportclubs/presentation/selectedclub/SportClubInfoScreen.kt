@@ -14,15 +14,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -38,8 +36,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -49,10 +45,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.entity.AmenityWithAvailable
+import com.stu.fitconnect.features.sportclubs.presentation.list.ImagePager
 import com.stu.fitconnect.ui.AppOutlineButton
 import com.stu.fitconnect.ui.IconWithText
 import com.stu.fitconnect.ui.RubleCostIcons
@@ -83,13 +79,10 @@ fun SportClubInfoRoute(
 }
 
 @SuppressLint("DiscouragedApi")
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun SportClubInfoScreen(
     state: SportClubInfoContract.State
 ) {
-    val res =
-        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&q=80&w=1975&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
     Column(
         modifier = Modifier
@@ -107,26 +100,15 @@ fun SportClubInfoScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp) // 15% высоты экрана
+                        .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp), // 15% высоты экрана
                 ) {
-                    GlideImage(
-                        model = state.sportClub.imagesUrls[0],
-                        contentDescription = "sportClubImage",
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        contentScale = ContentScale.FillWidth
-                    )
+
+                    ImagePager(images = state.sportClub.imagesUrls, 250)
+
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        ClickableIcon(
-                            icon = Icons.Default.Favorite,
-                            onClick = { /*TODO*/ },
-                        )
-                        ClickableIcon(
-                                icon = Icons.Default.Close,
-                        onClick = { /*TODO*/ },
-                        )
+                        ClickableIcon{}
                     }
 
                 }
@@ -377,16 +359,16 @@ fun SportClubInfoScreenPreview(
 }
 
 @Composable
-fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
+fun ClickableIcon(onClick: () -> Unit) {
     var isClicked by remember { mutableStateOf(false) }
-    val tint = if (isClicked) Green else Color.Unspecified
+    val imageVector = if (isClicked) Icons.Default.Favorite else Icons.Default.FavoriteBorder
 
     Icon(
-        imageVector = icon,
+        imageVector = imageVector,
         contentDescription = null,
-        tint = tint,
+        tint = Green,
         modifier = Modifier
-            .padding(start = (( LocalConfiguration.current.screenWidthDp * 0.85).dp), top = 40.dp)
+            .padding(start = ((LocalConfiguration.current.screenWidthDp * 0.85).dp), top = 40.dp)
             .clickable {
                 isClicked = !isClicked
                 onClick()

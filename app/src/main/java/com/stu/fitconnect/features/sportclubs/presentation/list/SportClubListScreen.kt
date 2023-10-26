@@ -1,30 +1,50 @@
 package com.stu.fitconnect.features.sportclubs.presentation.list
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.*
-import androidx.compose.ui.tooling.preview.*
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.entity.AppLocation
@@ -167,7 +187,61 @@ fun SportsClubsListScreen(
     }
 }
 
-@OptIn(ExperimentalGlideComposeApi::class)
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun ImagePager(
+    images: List<String>,
+    tall: Int,
+) {
+    val imagePagerState = rememberPagerState {
+        images.size
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height((tall).dp)
+    ) {
+        HorizontalPager(state = imagePagerState) {
+
+
+            AsyncImage(
+                model = images[imagePagerState.currentPage],
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 8.dp)
+                    .clip(RoundedCornerShape(18.dp)),
+                contentScale = ContentScale.Crop
+            )
+
+
+        }
+
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            repeat(imagePagerState.pageCount) { iteration ->
+                val color = if (imagePagerState.currentPage == iteration) Green else Color.DarkGray
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 2.dp, vertical = 5.dp)
+                        .clip(CircleShape)
+                        .background(color)
+                        .size(10.dp)
+                )
+            }
+        }
+    }
+}
+
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SportsClubListCard(
     sportClub: SportClubSummary,
@@ -179,21 +253,16 @@ fun SportsClubListCard(
             .clickable { onItemClick(sportClub.id) },
     ) {
         Column {
-            GlideImage(
-                model = sportClub.imagesUrls[0], //"https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&q=80&w=1975&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //sportClub.imagesRes[0],
-                contentDescription = "sportClubImage",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height((/*LocalConfiguration.current.screenHeightDp * 0.15*/ 170).dp)
-                    .padding(bottom = 8.dp)
-                    .clip(RoundedCornerShape(18.dp)),
-                contentScale = ContentScale.Crop
-            )
+
+
+            ImagePager(images = sportClub.imagesUrls, 200)
 
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
+
+
                 Column {
                     Text(
                         text = sportClub.name,
@@ -287,7 +356,7 @@ fun SportsClubsItemListScreenPreview() {
         val sportClub = SportClubSummary(
             id = 1,
             name = "Flex Balance",
-            imagesUrls = listOf(""),
+            imagesUrls = listOf("", ""),
             location = AppLocation(
                 latitude = 52.520008,
                 longitude = 13.404954,

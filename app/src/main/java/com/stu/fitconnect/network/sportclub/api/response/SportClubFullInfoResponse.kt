@@ -29,7 +29,7 @@ data class SportClubResponse(
         return SportClub(
             id = id,
             name = name,
-            imagesUrls = listOf(imagesUrls),
+            imagesUrls = imagesUrls.split("\n"),
             location = location.toAppLocation(),
             score = score,
             contacts = contacts.toSportClubAdmin(),
