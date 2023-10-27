@@ -3,6 +3,7 @@ package com.stu.fitconnect.base.navigation
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
+import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
@@ -82,7 +83,7 @@ fun AppNavGraph(
             exitTransition = { // Анимация при выходе с экрана
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.End,
-                    animationSpec = tween(500, easing = EaseOut),
+                    animationSpec = tween(400, easing = EaseOut),
                     targetOffset = { -300 }
                 )
             }
@@ -107,14 +108,14 @@ fun AppNavGraph(
             arguments = listOf(navArgument(Screen.KEY_SPORT_CLUB) { type = NavType.IntType }),
             enterTransition = {
                 slideIntoContainer(
-                    animationSpec = tween(400),
+                    animationSpec = tween(500, ),
                     towards = AnimatedContentTransitionScope.SlideDirection.Start
                 )
             },
             popExitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.End,
-                    animationSpec = tween(400)
+                    animationSpec = tween(500, delayMillis = 16)
                 )
             }
         ) {

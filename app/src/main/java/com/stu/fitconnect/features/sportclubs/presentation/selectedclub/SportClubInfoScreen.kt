@@ -1,6 +1,9 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.stu.fitconnect.features.sportclubs.presentation.selectedclub
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,7 +18,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
@@ -23,6 +30,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -37,6 +45,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -48,12 +57,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.entity.AmenityWithAvailable
-import com.stu.fitconnect.features.sportclubs.presentation.list.ImagePager
 import com.stu.fitconnect.ui.AppOutlineButton
 import com.stu.fitconnect.ui.IconWithText
 import com.stu.fitconnect.ui.RubleCostIcons
@@ -75,7 +84,8 @@ fun SportClubInfoRoute(
     val (state, event) = use(viewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
-        event(SportClubInfoContract.Event.OnGetSportClub(sportClubId))
+        if(state.sportClub == null)
+            event(SportClubInfoContract.Event.OnGetSportClub(sportClubId))
     }
 
     SportClubInfoScreen(
@@ -84,7 +94,6 @@ fun SportClubInfoRoute(
 }
 
 @SuppressLint("DiscouragedApi")
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun SportClubInfoScreen(
     state: SportClubInfoContract.State
@@ -99,27 +108,26 @@ fun SportClubInfoScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
-//        if (state.sportClub != null) {
-            Column(
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
+        ) {
+            Box(
                 modifier = Modifier
-                    .weight(1f)
-                    .verticalScroll(rememberScrollState())
+                    .fillMaxWidth()
+                    .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp) // 15% высоты экрана
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp) // 15% высоты экрана
-                ) {
-                    ImagePager(images = state.sportClub.imagesUrls, 250)
+                ImagePager(images = state.sportClub?.imagesUrls ?: emptyList(), 250)
 
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        ClickableIcon(
-                            icon = Icons.Default.Favorite,
-                            onClick = { /*TODO*/ },
-                        )
-                    }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    ClickableIcon(
+                        icon = Icons.Default.Favorite,
+                        onClick = { /*TODO*/ },
+                    )
+                }
 //                    GlideImage(
 //                        model = res, //sportClub.imagesRes[0],
 //                        contentDescription = "sportClubImage",
@@ -140,43 +148,43 @@ fun SportClubInfoScreen(
 //                        )
 //                    }
 
-                }
+            }
 
-                // clubs name, category, logo and cost
+            // clubs name, category, logo and cost
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 20.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.spacedBy(15.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 10.dp)
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(15.dp),
+                    Image(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = "sportClubLogo",
                         modifier = Modifier
-                            .weight(1f)
-                            .padding(end = 10.dp)
-                    ) {
-                        Image(
-                            imageVector = Icons.Default.AccountCircle,
-                            contentDescription = "sportClubLogo",
-                            modifier = Modifier
-                                .size(60.dp)
+                            .size(60.dp)
+                    )
+                    Column {
+                        Text(
+                            text = state.sportClub?.name ?: "",
+                            style = MaterialTheme.typography.titleLarge
                         )
-                        Column {
-                            Text(
-                                text = state.sportClub.name,
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                            Text(
-                                text = "Фитнесс-клуб",
-                                style = MaterialTheme.typography.headlineMedium
-                            )
+                        Text(
+                            text = "Фитнесс-клуб",
+                            style = MaterialTheme.typography.headlineMedium
+                        )
 
-                        }
                     }
-                    RubleCostIcons(cost = state.sportClub?.cost ?: 1, iconSize = 30.dp)
                 }
+                RubleCostIcons(cost = state.sportClub?.cost ?: 1, iconSize = 30.dp)
+            }
 
             AppDivider()
 
@@ -272,28 +280,28 @@ fun SportClubInfoScreen(
                     style = MaterialTheme.typography.headlineMedium
                 )
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(35.dp)
-                    ) {
-                        if(state.sportClub != null)  { // todo
-                            val amenitiesSize = state.sportClub.amenities.size
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                repeat(amenitiesSize - amenitiesSize / 2) { column ->
-                                    AmenityIconWithText(state.sportClub.amenities[column])
-                                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(35.dp)
+                ) {
+                    if (state.sportClub != null) { // todo
+                        val amenitiesSize = state.sportClub.amenities.size
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            repeat(amenitiesSize - amenitiesSize / 2) { column ->
+                                AmenityIconWithText(state.sportClub.amenities[column])
                             }
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                repeat(amenitiesSize / 2) { column ->
-                                    AmenityIconWithText(state.sportClub.amenities[column + amenitiesSize / 2])
-                                }
+                        }
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            repeat(amenitiesSize / 2) { column ->
+                                AmenityIconWithText(state.sportClub.amenities[column + amenitiesSize / 2])
                             }
                         }
                     }
+                }
             }
 
             AppDivider()
@@ -360,7 +368,7 @@ fun SportClubInfoScreen(
                         .height(45.dp)// todo 33
                         .weight(1f)
                 )
-           // }
+            }
         }
     }
 }
@@ -385,13 +393,17 @@ fun ClickableIcon(icon: ImageVector, onClick: () -> Unit) {
         contentDescription = null,
         tint = tint,
         modifier = Modifier
-            .padding(start = ((LocalConfiguration.current.screenWidthDp * 0.85).dp), top = 40.dp)
+            .padding(
+                start = ((LocalConfiguration.current.screenWidthDp * 0.85).dp),
+                top = 40.dp
+            )
             .clickable {
                 isClicked = !isClicked
                 onClick()
             }
     )
 }
+
 @Composable
 fun AmenityIconWithText(amenity: AmenityWithAvailable) {
     IconWithText(
@@ -403,8 +415,9 @@ fun AmenityIconWithText(amenity: AmenityWithAvailable) {
         textValue = amenity.name,
         textStyle = MaterialTheme.typography.bodyMedium.copy(
             color =
-            if(amenity.available) White
-            else TextGray),
+            if (amenity.available) White
+            else TextGray
+        ),
         textDecoration =
         if (amenity.available) null
         else TextDecoration.LineThrough,
@@ -413,10 +426,63 @@ fun AmenityIconWithText(amenity: AmenityWithAvailable) {
         else DimGreen
     )
 }
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun ImagePager(
+    images: List<String>,
+    tall: Int,
+) {
+    val imagePagerState = rememberPagerState {
+        images.size
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height((tall).dp)
+    ) {
+        HorizontalPager(state = imagePagerState) {
+
+
+            AsyncImage(
+                model = images[imagePagerState.currentPage],
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 8.dp)
+                    .clip(RoundedCornerShape(18.dp)),
+                contentScale = ContentScale.Crop
+            )
+
+
+        }
+
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            repeat(imagePagerState.pageCount) { iteration ->
+                val color = if (imagePagerState.currentPage == iteration) Green else Color.DarkGray
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 2.dp, vertical = 5.dp)
+                        .clip(CircleShape)
+                        .background(color)
+                        .size(10.dp)
+                )
+            }
+        }
+    }
+}
+
+
 @Preview
 @Composable
 fun SportClubInfoScreenPreview(
-    @PreviewParameter(SportClubPreviewProvider::class)
+    @PreviewParameter(SportClubInfoPreviewProvider::class)
     sportClubInfoState: SportClubInfoContract.State
 ) {
     FitConnectTheme {

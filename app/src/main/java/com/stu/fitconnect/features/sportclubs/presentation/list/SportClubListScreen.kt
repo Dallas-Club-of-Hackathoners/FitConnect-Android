@@ -1,6 +1,5 @@
 @file:OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class,
     ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class,
-    ExperimentalGlideComposeApi::class
 )
 
 package com.stu.fitconnect.features.sportclubs.presentation.list
@@ -22,6 +21,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -32,6 +32,9 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -47,6 +50,7 @@ import androidx.compose.ui.text.font.*
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
@@ -56,6 +60,7 @@ import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.entity.AppLocation
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
+import com.stu.fitconnect.features.sportclubs.presentation.selectedclub.ImagePager
 import com.stu.fitconnect.ui.AppIconButton
 import com.stu.fitconnect.ui.AppOutlineButton
 import com.stu.fitconnect.ui.IconWithText
@@ -65,6 +70,7 @@ import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.FitConnectTheme
 import com.stu.fitconnect.ui.theme.Gray
 import com.stu.fitconnect.ui.theme.Green
+import kotlinx.coroutines.flow.emptyFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,8 +83,10 @@ fun SportsClubsListRoute(
     val (state, event) = use(viewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
-        event.invoke(SportClubListContract.Event.OnGetSportClub)
-        event.invoke(SportClubListContract.Event.OnGetSportClubFilters)
+        if(viewModel.state.value.pagingSportClubList == emptyFlow<PagingData<SportClubSummary>>()) {
+            event.invoke(SportClubListContract.Event.OnGetSportClub)
+            event.invoke(SportClubListContract.Event.OnGetSportClubFilters)
+        }
     }
 
     SportsClubsListScreen(
@@ -112,6 +120,8 @@ fun SportsClubsListScreen(
             .fillMaxSize()
             .background(BackgroundColor) // BackgroundColor
     ) {
+
+        val lazyColumnListState = rememberLazyListState()
 
         Column(
             modifier = Modifier
@@ -174,20 +184,45 @@ fun SportsClubsListScreen(
             val sportsClubsPagingItems: LazyPagingItems<SportClubSummary> =
                 sportsClubsListState.pagingSportClubList.collectAsLazyPagingItems()
 
+            val pullRefreshState = rememberPullRefreshState(
+                sportsClubsListState.refreshing,
+                onRefresh = onRefresh
+            )
 
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(35.dp)
+            Box(
+                Modifier.pullRefresh(pullRefreshState, enabled = !sportsClubsListState.refreshing)
             ) {
-                items(sportsClubsPagingItems.itemCount) { index ->
-                    SportsClubListCard(
-                        sportClub = sportsClubsPagingItems[index]!!,
-                        onItemClick = { sportClubId ->
-                            onNavigateToDetailSportsClubsScreen(sportClubId)
+
+                LazyColumn(
+                    state = lazyColumnListState,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(35.dp)
+                ) {
+                    items(
+                        sportsClubsPagingItems.itemCount,
+//                        key = {
+//                            sportsClubsPagingItems[it]?.id ?: null as Any
+//                        },
+                    ) { index ->
+                        sportsClubsPagingItems[index]?.let {
+                            SportsClubListCard(
+                                sportClub = it,
+                                onItemClick = { sportClubId ->
+                                    onNavigateToDetailSportsClubsScreen(sportClubId)
+                                }
+                            )
                         }
-                    )
+                    }
                 }
+
+
+                PullRefreshIndicator(
+                    refreshing = sportsClubsListState.refreshing,
+                    state = pullRefreshState,
+                    modifier = Modifier.align(Alignment.TopCenter),
+                    backgroundColor = Green,
+                )
             }
         }
     }
