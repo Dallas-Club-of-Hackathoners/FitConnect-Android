@@ -1,5 +1,6 @@
 package com.stu.fitconnect.features.sportclubs.domain.entity
 
+
 data class SportClubSummary(
     val id: Int,
     val name: String,

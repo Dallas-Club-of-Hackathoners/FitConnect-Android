@@ -1,26 +1,43 @@
+@file:OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalGlideComposeApi::class
+)
+
 package com.stu.fitconnect.features.sportclubs.presentation.list
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.DrawerValue
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material.rememberDrawerState
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -39,39 +56,43 @@ import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.FitConnectTheme
 import com.stu.fitconnect.ui.theme.Gray
 import com.stu.fitconnect.ui.theme.Green
+import kotlinx.coroutines.flow.emptyFlow
 
-@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SportsClubsListRoute(
     viewModel: SportClubListViewModel = hiltViewModel(),
     onNavigateToDetailSportsClubsScreen: (sportClubId: Int) -> Unit,
     onNavigateToFiltersSportsClubsScreen: () -> Unit,
 ) {
-
     val (state, event) = use(viewModel = viewModel)
-
     LaunchedEffect(key1 = Unit) {
-        event.invoke(SportClubListContract.Event.OnGetSportClub)
-        event.invoke(SportClubListContract.Event.OnGetSportClubFilters)
+        if(viewModel.state.value.pagingSportClubList == emptyFlow<PagingData<SportClubSummary>>()) {
+            event.invoke(SportClubListContract.Event.OnGetSportClub)
+            event.invoke(SportClubListContract.Event.OnGetSportClubFilters)
+        }
+    }
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Open))
+
+    Scaffold {
+        SportsClubsListScreen(
+            sportsClubsListState = state,
+            onNavigateToDetailSportsClubsScreen = onNavigateToDetailSportsClubsScreen,
+            onNavigateToFiltersSportsClubsScreen = onNavigateToFiltersSportsClubsScreen,
+            onSearch = { searchBy ->
+                event.invoke(SportClubListContract.Event.OnSearchSportClub(searchBy = searchBy))
+            },
+            onApplySelectedFilters = { filters ->
+                event.invoke(SportClubListContract.Event.OnApplySelectedFilters(sportsClubsFilters = filters))
+            },
+            onRefresh = {
+                event.invoke(SportClubListContract.Event.OnRefresh)
+            }
+        )
     }
 
-    SportsClubsListScreen(
-        sportsClubsListState = state,
-        onNavigateToDetailSportsClubsScreen = onNavigateToDetailSportsClubsScreen,
-        onNavigateToFiltersSportsClubsScreen = onNavigateToFiltersSportsClubsScreen,
-        onSearch = { searchBy ->
-            event.invoke(SportClubListContract.Event.OnSearchSportClub(searchBy = searchBy))
-        },
-        onApplySelectedFilters = { filters ->
-            event.invoke(SportClubListContract.Event.OnApplySelectedFilters(sportsClubsFilters = filters))
-        },
-        onRefresh = {
-            event.invoke(SportClubListContract.Event.OnRefresh)
-        }
-    )
 }
 
-@ExperimentalMaterial3Api
 @Composable
 fun SportsClubsListScreen(
     sportsClubsListState: SportClubListContract.State,
@@ -81,6 +102,12 @@ fun SportsClubsListScreen(
     onApplySelectedFilters: (filters: SportClubsFiltersData) -> Unit,
     onRefresh: () -> Unit,
 ) {
+
+    val stablePagingSportClubList = remember { sportsClubsListState.pagingSportClubList }
+    val stableSelectedFilters = remember { sportsClubsListState.selectedFilters }
+    val lazyColumnListState = rememberLazyListState()
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -109,7 +136,7 @@ fun SportsClubsListScreen(
 //                        style = TextStyle(
 //                            color = BackgroundColor,
 //                        )
-//                        )
+//                    )
 //                }
 //            }
 
@@ -148,26 +175,50 @@ fun SportsClubsListScreen(
             val sportsClubsPagingItems: LazyPagingItems<SportClubSummary> =
                 sportsClubsListState.pagingSportClubList.collectAsLazyPagingItems()
 
+            val pullRefreshState = rememberPullRefreshState(
+                sportsClubsListState.refreshing,
+                onRefresh = onRefresh
+            )
 
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(35.dp)
+            Box(
+                Modifier.pullRefresh(pullRefreshState, enabled = !sportsClubsListState.refreshing)
             ) {
-                items(sportsClubsPagingItems.itemCount) { index ->
-                    SportsClubListCard(
-                        sportClub = sportsClubsPagingItems[index]!!,
-                        onItemClick = { sportClubId ->
-                            onNavigateToDetailSportsClubsScreen(sportClubId)
+
+                LazyColumn(
+                    state = lazyColumnListState,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(35.dp)
+                ) {
+                    items(
+                        sportsClubsPagingItems.itemCount,
+//                        key = {
+//                            sportsClubsPagingItems[it]?.id ?: null as Any
+//                        },
+                    ) { index ->
+                        sportsClubsPagingItems[index]?.let {
+                            SportsClubListCard(
+                                sportClub = it,
+                                onItemClick = { sportClubId ->
+                                    onNavigateToDetailSportsClubsScreen(sportClubId)
+                                }
+                            )
                         }
-                    )
+                    }
                 }
+
+
+                PullRefreshIndicator(
+                    refreshing = sportsClubsListState.refreshing,
+                    state = pullRefreshState,
+                    modifier = Modifier.align(Alignment.TopCenter),
+                    backgroundColor = Green,
+                )
             }
         }
     }
 }
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun SportsClubListCard(
     sportClub: SportClubSummary,

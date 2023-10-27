@@ -29,9 +29,9 @@ import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.authentication.domain.AuthField
 import com.stu.fitconnect.ui.AuthTextField
+import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.ButtonColor
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreenRoute(
     viewModel: LoginViewModel = hiltViewModel(),
@@ -64,7 +64,6 @@ fun LoginScreenRoute(
 }
 
 
-@ExperimentalMaterial3Api
 @Composable
 fun LoginScreen(
     loginState: LoginContract.State,
@@ -80,7 +79,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1D1D1D))
+            .background(BackgroundColor)
             .padding(horizontal = 17.dp), // BackgroundColor
 
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -129,7 +128,8 @@ fun LoginScreen(
             Text(
                 text = "Войти",
                 color = Color.White,
-                fontFamily = FontFamily(Font(R.font.montserrat_medium)))
+                fontFamily = FontFamily(Font(R.font.montserrat_medium))
+            )
         }
 
         Spacer(modifier = Modifier.height(15.dp))
@@ -145,66 +145,21 @@ fun LoginScreen(
             Text(
                 text = "Нет аккаунта? Зарегистрироваться",
                 color = Color.White,
-                fontFamily = FontFamily(Font(R.font.montserrat_medium)))
+                fontFamily = FontFamily(Font(R.font.montserrat_medium))
+            )
         }
-//    {
-//            Row(
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.SpaceBetween
-//            ) {
-//                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
-//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
-//                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
-//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
-//                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null) // Иконка перед текстом
-//                Spacer(modifier = Modifier.width(22.dp)) // Расстояние между иконкой и текстом
-//                Text(
-//                    text = "Сonnect",
-//                    fontFamily = FontFamily(Font(R.font.montserrat_italic)),
-//                    )
-//                Spacer(modifier = Modifier.width(22.dp)) // Расстояние между иконкой и текстом
-//                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
-//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между иконкой и текстом
-//                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
-//                Spacer(modifier = Modifier.width(1.dp)) // Расстояние между текстом и второй иконкой
-//                Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null) // Иконка после текста
-//            }
-//
-//        }
-//
-//    }
-//    SnackbarHost(
-//        hostState = snackbarHostState,
-//        modifier = Modifier
-//            .navigationBarsPadding()
-//            .statusBarsPadding()
-//    )
-
     }
 }
-//@Composable
-//fun NextScreenButton(onClick: () -> Unit) {
-//    Button(
-//        onClick = onClick,
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(16.dp)
-//    ) {
-//        Text(text = "Далее")
-//    }
+//
+//fun isValidEmail(email: String): Boolean {
+//
+//    return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+//}
+//
+//fun isValidPassword(password: String): Boolean {
+//    return password.isNotEmpty() // Добавьте здесь свою логику проверки пароля
 //}
 
-
-fun isValidEmail(email: String): Boolean {
-
-    return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-}
-
-fun isValidPassword(password: String): Boolean {
-    return password.isNotEmpty() // Добавьте здесь свою логику проверки пароля
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun LoginScreenPreview() {

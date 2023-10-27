@@ -11,7 +11,7 @@ class ResourceManager @Inject constructor(
 ) {
 
     fun getRawJsonAsString(resourceId: Int): String {
-        val inputStream = context.resources.openRawResource(R.raw.sport_clubs_filters_data)
+        val inputStream = context.resources.openRawResource(resourceId)
         return inputStream.bufferedReader().use { it.readText() }
     }
 }
