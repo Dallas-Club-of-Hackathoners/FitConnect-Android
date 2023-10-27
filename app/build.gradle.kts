@@ -78,6 +78,12 @@ dependencies {
     implementation("androidx.compose.material:material:1.5.4")
     implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
 
+    val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
+    implementation(composeBom)
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -90,7 +96,11 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0") // todo delete
+    implementation("io.coil-kt:coil:2.4.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+//    implementation ("com.google.accompanist:accompanist-pager:1.0.0") // todo delete?
+//    implementation ("com.google.accompanist:accompanist-pager-indicators:1.0.0") // todo delete?
 
     implementation("com.google.accompanist:accompanist-placeholder:0.33.2-alpha")
     implementation("com.google.accompanist:accompanist-placeholder-material:0.33.2-alpha")

@@ -9,34 +9,34 @@ import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubAdmin
 data class SportClubResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
-    @SerializedName("images_urls") val imagesUrls: String,
+    @SerializedName("image_urls") val imagesUrls: String,
     @SerializedName("location") val location: AppLocationResponse,
     @SerializedName("rating") val score: Double,
     @SerializedName("admin") val contacts: SportClubAdminResponse,
     @SerializedName("description") val description: String,
     @SerializedName("rating_count") val reviewsCount: Int,
-    @SerializedName("cost") val cost: String,
-    @SerializedName("facilities") val amenitiesIds: String/*List<Int>*/,
+    @SerializedName("cost") val cost: Int,
+    @SerializedName("facilities") val amenitiesIds: String /*List<Int>*/,
     @SerializedName("category") val category: String,
     @SerializedName("isFavorite") val isFavorite: Boolean
 ) {
     fun toSportClub(amenitiesList: List<Amenity>): SportClub {
         val amenitiesWithAvailableList = mutableListOf<AmenityWithAvailable>()
         amenitiesList.forEach { amenity ->
-            val available = /*amenity.id in amenitiesIds.*/ true // todo
+            val available = /*amenity.id in amenitiesIds.// todo*/ true
             amenitiesWithAvailableList.add(AmenityWithAvailable(amenity.id, amenity.name, amenity.iconRes, available))
         }
         return SportClub(
             id = id,
             name = name,
-            imagesUrls = listOf(imagesUrls),
+            imagesUrls = imagesUrls.split("\n"),
             location = location.toAppLocation(),
             score = score,
             contacts = contacts.toSportClubAdmin(),
             description = description,
             amenities = amenitiesWithAvailableList,
             reviewsCount =reviewsCount,
-            cost = /*cost todo*/ 1,
+            cost = /*cost todo*/ cost,
             category = category,
             isFavorite = isFavorite
         )

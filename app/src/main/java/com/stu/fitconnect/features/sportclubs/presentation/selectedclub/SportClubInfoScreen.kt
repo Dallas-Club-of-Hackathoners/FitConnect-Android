@@ -14,13 +14,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -51,6 +53,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.entity.AmenityWithAvailable
+import com.stu.fitconnect.features.sportclubs.presentation.list.ImagePager
 import com.stu.fitconnect.ui.AppOutlineButton
 import com.stu.fitconnect.ui.IconWithText
 import com.stu.fitconnect.ui.RubleCostIcons
@@ -96,73 +99,84 @@ fun SportClubInfoScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Box(
+//        if (state.sportClub != null) {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp) // 15% высоты экрана
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
             ) {
-                GlideImage(
-                    model = res, //sportClub.imagesRes[0],
-                    contentDescription = "sportClubImage",
+                Box(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    contentScale = ContentScale.FillWidth,
-                )
+                        .fillMaxWidth()
+                        .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp) // 15% высоты экрана
+                ) {
+                    ImagePager(images = state.sportClub.imagesUrls, 250)
+
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        ClickableIcon(
+                            icon = Icons.Default.Favorite,
+                            onClick = { /*TODO*/ },
+                        )
+                    }
+//                    GlideImage(
+//                        model = res, //sportClub.imagesRes[0],
+//                        contentDescription = "sportClubImage",
+//                        modifier = Modifier
+//                            .fillMaxSize(),
+//                        contentScale = ContentScale.FillWidth
+//                    )
+//                    Row(
+//                        horizontalArrangement = Arrangement.SpaceBetween
+//                    ) {
+//                        ClickableIcon(
+//                            icon = Icons.Default.Favorite,
+//                            onClick = { /*TODO*/ },
+//                        )
+//                        ClickableIcon(
+//                                icon = Icons.Default.Close,
+//                        onClick = { /*TODO*/ },
+//                        )
+//                    }
+
+                }
+
+                // clubs name, category, logo and cost
                 Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ClickableIcon(
-                        icon = Icons.Default.Favorite,
-                        onClick = { /*TODO*/ },
-                    )
-                    ClickableIcon(
-                        icon = Icons.Default.Close,
-                        onClick = { /*TODO*/ },
-                    )
-                }
-
-            }
-
-            // clubs name, category, logo and cost
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(15.dp),
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(end = 10.dp)
-                ) {
-                    Image(
-                        imageVector = Icons.Default.AccountCircle,
-                        contentDescription = "sportClubLogo",
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(15.dp),
                         modifier = Modifier
-                            .size(60.dp)
-                    )
-                    Column {
-                        Text(
-                            text = state.sportClub?.name ?: "",
-                            style = MaterialTheme.typography.titleLarge
+                            .weight(1f)
+                            .padding(end = 10.dp)
+                    ) {
+                        Image(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "sportClubLogo",
+                            modifier = Modifier
+                                .size(60.dp)
                         )
-                        Text(
-                            text = "Фитнесс-клуб",
-                            style = MaterialTheme.typography.headlineMedium
-                        )
+                        Column {
+                            Text(
+                                text = state.sportClub.name,
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Text(
+                                text = "Фитнесс-клуб",
+                                style = MaterialTheme.typography.headlineMedium
+                            )
 
+                        }
                     }
+                    RubleCostIcons(cost = state.sportClub?.cost ?: 1, iconSize = 30.dp)
                 }
-                RubleCostIcons(cost = state.sportClub?.cost ?: 1, iconSize = 30.dp)
-            }
 
             AppDivider()
 
@@ -346,7 +360,7 @@ fun SportClubInfoScreen(
                         .height(45.dp)// todo 33
                         .weight(1f)
                 )
-            }
+           // }
         }
     }
 }
