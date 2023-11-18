@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,10 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.stu.fitconnect.R
-import com.stu.fitconnect.animation.EnterAnimation
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.authentication.domain.AuthField
-import com.stu.fitconnect.ui.AuthTextField
+import com.stu.fitconnect.composables.AuthTextField
 import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.ButtonColor
 

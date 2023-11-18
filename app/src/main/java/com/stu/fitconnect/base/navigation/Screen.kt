@@ -6,7 +6,8 @@ sealed class Screen(
 
     object SignIn : Screen(ROUTE_SIGN_IN)
     object SignUp : Screen(ROUTE_SIGN_UP)
-    object SportClubSList : Screen(ROUTE_SPORT_CLUBS_LIST)
+    object SportClubList : Screen(ROUTE_SPORT_CLUBS_LIST)
+    object SportClubFilters : Screen(ROUTE_SPORT_CLUBS_FILTERS)
     data class SelectedSportClub(val sportClubId: Int) : Screen(ROUTE_SELECTED_SPORT_CLUB) {
         fun getRouteWithArgs(): String {
             return "$ROUTE_SELECTED_SPORT_CLUB_FOR_ARG/$sportClubId"
@@ -22,6 +23,7 @@ sealed class Screen(
         const val ROUTE_SIGN_UP = "sign_up"
         const val ROUTE_HOME = "home"
         const val ROUTE_SPORT_CLUBS_LIST = "clubs_list"
+        const val ROUTE_SPORT_CLUBS_FILTERS = "clubs_filters"
         const val ROUTE_SELECTED_SPORT_CLUB_FOR_ARG = "selected_club"
         const val ROUTE_SELECTED_SPORT_CLUB = "$ROUTE_SELECTED_SPORT_CLUB_FOR_ARG/{$KEY_SPORT_CLUB}"
     }

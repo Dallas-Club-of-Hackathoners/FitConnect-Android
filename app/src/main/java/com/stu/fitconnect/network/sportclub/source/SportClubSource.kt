@@ -9,6 +9,6 @@ interface SportClubSource {
 
     suspend fun getSportClubFullInfo(id: Int, userId: String): SportClubResponse
 
-    suspend fun getSummarySportClubsPagingList(filters: SportClubsFiltersData, searchBy: String, pageIndex: Int, userId: String): List<SportClubSummary>
+    suspend fun getSummarySportClubsPagingList(filters: SportClubsFiltersData?, searchBy: String, pageIndex: Int, userId: String): List<SportClubSummary>
 
 }

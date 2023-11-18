@@ -1,6 +1,7 @@
-package com.stu.fitconnect.ui
+package com.stu.fitconnect.composables
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
@@ -22,7 +23,6 @@ import com.stu.fitconnect.ui.theme.Gray
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FiltersCard(
-    filtersList: List<Filter>,
     filterCategory: FilterCategory,
     onFilterSelected: (Filter) -> Unit
 ) {
@@ -41,7 +41,7 @@ fun FiltersCard(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
 
         ) {
-            for(filter in filtersList) {
+            for(filter in filterCategory.filtersList) {
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
@@ -52,6 +52,7 @@ fun FiltersCard(
                         )
                         .clip(CircleShape)
                         .height(28.dp)
+                        .clickable { onFilterSelected(filter) }
                 ) {
                     Text(
                         text = filter.name,
@@ -96,7 +97,7 @@ fun FilterItem(filter: Filter) {
 @Preview
 @Composable
 fun PreviewFiltersCard() {
-    val filters = listOf(
+    val filters = mutableListOf(
         Filter(1, 1, "Душ", isSelect = true),
         Filter(2, 1, "хз еще", isSelect = false),
         Filter(3, 2, "длинное назание", isSelect = true),
@@ -109,11 +110,11 @@ fun PreviewFiltersCard() {
         Filter(6, 3, "хз что", isSelect = true),
         Filter(6, 3, "хз что", isSelect = true),
     )
-    val category = FilterCategory(1, "Вид занятия")
+    val category = FilterCategory(1, "Вид занятия", filters)
     Box(
         modifier = Modifier.fillMaxSize().background(color = BackgroundColor)
     ){
-        FiltersCard(filtersList =  filters, filterCategory = category, onFilterSelected = {})
+        FiltersCard(filterCategory = category, onFilterSelected = {})
 
     }
 }

@@ -6,7 +6,7 @@ import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersDat
 
 
 data class SportClubsSummaryRequest(
-    @SerializedName("clubs_filters") val clubsFilters: SportClubsFilterRequest,
+    @SerializedName("clubs_filters") val clubsFilters: SportClubsFilterRequest?,
     @SerializedName("search_by") val searchBy: String,
     @SerializedName("page_index") val pageIndex: Int,
     @SerializedName("token") val token: String

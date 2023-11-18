@@ -1,5 +1,7 @@
 package com.stu.fitconnect.features.sportclubs.domain.entity
 
+import androidx.compose.runtime.Stable
+
 data class Amenity(
     var id: Int,
     var name: String,

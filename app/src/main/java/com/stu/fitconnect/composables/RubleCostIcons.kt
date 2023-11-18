@@ -1,4 +1,4 @@
-package com.stu.fitconnect.ui
+package com.stu.fitconnect.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

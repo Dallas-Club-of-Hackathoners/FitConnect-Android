@@ -1,4 +1,4 @@
-package com.stu.fitconnect.ui
+package com.stu.fitconnect.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,7 +21,7 @@ fun AppOutlineButton(
     onClick: () -> Unit,
     textValue: String,
     textStyle: TextStyle,
-    modifier: Modifier,
+    modifier: Modifier = Modifier.height(27.dp),
     shapeSize: Dp = 200.dp//max shape
 ) {
     OutlinedButton(
@@ -35,7 +35,6 @@ fun AppOutlineButton(
             text = textValue,
             style = textStyle
         )
-
     }
 }
 
@@ -46,7 +45,7 @@ fun PreviewAppOutlineButton() {
         AppOutlineButton(
             onClick = {},
             textValue = "Рекомендуем",
-            textStyle = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.height(27.dp))
+            textStyle = MaterialTheme.typography.headlineSmall
+        )
     }
 }

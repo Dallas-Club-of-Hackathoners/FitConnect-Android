@@ -1,4 +1,4 @@
-package com.stu.fitconnect.ui
+package com.stu.fitconnect.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -67,6 +67,7 @@ fun AuthTextField(
             autoCorrect = false),
         decorationBox = { innerTextField ->
             if(value.isEmpty())
+                innerTextField()
                 Text(
                     text = label,
                     color = Gray,
@@ -74,7 +75,6 @@ fun AuthTextField(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
-            innerTextField()
         }
     )
 }

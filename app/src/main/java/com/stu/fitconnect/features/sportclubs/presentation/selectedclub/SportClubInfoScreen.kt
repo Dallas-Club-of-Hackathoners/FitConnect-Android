@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -25,17 +24,16 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -55,17 +53,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.entity.AmenityWithAvailable
-import com.stu.fitconnect.ui.AppOutlineButton
-import com.stu.fitconnect.ui.IconWithText
-import com.stu.fitconnect.ui.RubleCostIcons
+import com.stu.fitconnect.composables.AppOutlineButton
+import com.stu.fitconnect.composables.IconWithText
+import com.stu.fitconnect.composables.RubleCostIcons
 import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.Black
 import com.stu.fitconnect.ui.theme.DimGreen
@@ -74,7 +71,10 @@ import com.stu.fitconnect.ui.theme.Gray
 import com.stu.fitconnect.ui.theme.Green
 import com.stu.fitconnect.ui.theme.TextGray
 import com.stu.fitconnect.ui.theme.White
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SportClubInfoRoute(
     sportClubId: Int,
@@ -88,9 +88,11 @@ fun SportClubInfoRoute(
             event(SportClubInfoContract.Event.OnGetSportClub(sportClubId))
     }
 
-    SportClubInfoScreen(
-        state = state
-    )
+    Surface {
+        SportClubInfoScreen(
+            state = state
+        )
+    }
 }
 
 @SuppressLint("DiscouragedApi")
@@ -98,8 +100,6 @@ fun SportClubInfoRoute(
 fun SportClubInfoScreen(
     state: SportClubInfoContract.State
 ) {
-    val res =
-        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&q=80&w=1975&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
     Column(
         modifier = Modifier
@@ -118,7 +118,7 @@ fun SportClubInfoScreen(
                     .fillMaxWidth()
                     .height((/*LocalConfiguration.current.screenHeightDp * 0.20*/250).dp) // 15% высоты экрана
             ) {
-                ImagePager(images = state.sportClub?.imagesUrls ?: emptyList(), 250)
+                ImagePager(images = state.sportClub?.imagesUrls?.toImmutableList() ?: emptyList<String>().toImmutableList(), 250.dp)
 
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -415,60 +415,53 @@ fun AmenityIconWithText(amenity: AmenityWithAvailable) {
         textValue = amenity.name,
         textStyle = MaterialTheme.typography.bodyMedium.copy(
             color =
-            if (amenity.available) White
-            else TextGray
+                if (amenity.available) White
+                else TextGray
         ),
         textDecoration =
-        if (amenity.available) null
-        else TextDecoration.LineThrough,
+            if (amenity.available) null
+            else TextDecoration.LineThrough,
         iconColor =
-        if (amenity.available) Green
-        else DimGreen
+            if (amenity.available) Green
+            else DimGreen
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ImagePager(
-    images: List<String>,
-    tall: Int,
+    images: ImmutableList<String>,
+    imageHeight: Dp,
 ) {
-    val imagePagerState = rememberPagerState {
-        images.size
-    }
+    val imagePagerState = rememberPagerState { images.size }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height((tall).dp)
+            .height(imageHeight)
     ) {
-        HorizontalPager(state = imagePagerState) {
-
-
-            AsyncImage(
-                model = images[imagePagerState.currentPage],
-                contentDescription = "",
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 8.dp)
-                    .clip(RoundedCornerShape(18.dp)),
-                contentScale = ContentScale.Crop
-            )
-
-
+        HorizontalPager(state = imagePagerState) { page ->
+                AsyncImage(
+                    model = images[page],
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(18.dp)),
+                    contentScale = ContentScale.Crop,
+                )
         }
 
         Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .padding(bottom = 8.dp),
+                .padding(bottom = 10.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             repeat(imagePagerState.pageCount) { iteration ->
                 val color = if (imagePagerState.currentPage == iteration) Green else Color.DarkGray
                 Box(
                     modifier = Modifier
-                        .padding(horizontal = 2.dp, vertical = 5.dp)
+                        .padding(horizontal = 2.dp)
                         .clip(CircleShape)
                         .background(color)
                         .size(10.dp)
