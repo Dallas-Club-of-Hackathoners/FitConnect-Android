@@ -88,7 +88,6 @@ fun AppNavGraph(
                     towards = AnimatedContentTransitionScope.SlideDirection.End,
                     initialOffset = { -200 }
                 )
-
             },
             exitTransition = { // Анимация при выходе с экрана
                 slideOutOfContainer(
