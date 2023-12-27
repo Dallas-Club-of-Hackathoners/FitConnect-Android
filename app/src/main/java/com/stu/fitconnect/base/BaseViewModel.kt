@@ -26,6 +26,8 @@ open class BaseViewModel(
     override fun baseEvent(event: BaseContract.BaseEvent) = when (event) {
         BaseContract.BaseEvent.OnBackPressed -> onBackPressed()
         BaseContract.BaseEvent.OnRetryPressed -> onRetryPressed()
+        BaseContract.BaseEvent.OnBackPressed -> TODO()
+        BaseContract.BaseEvent.OnRetryPressed -> TODO()
     }
 
     private fun onBackPressed() {

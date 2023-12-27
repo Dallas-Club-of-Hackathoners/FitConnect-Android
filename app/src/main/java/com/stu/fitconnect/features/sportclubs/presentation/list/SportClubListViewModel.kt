@@ -1,22 +1,14 @@
 package com.stu.fitconnect.features.sportclubs.presentation.list
 
-import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.usecases.GetSportClubsListUseCase
 import com.stu.fitconnect.utils.ResourceJsonManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,6 +29,7 @@ class SportClubListViewModel @Inject constructor(
             SportClubListContract.Event.OnGetSportClub -> getSportsClubsPagingList()
             is SportClubListContract.Event.OnSearchSportClub -> updateStateAndFetchData { it.copy(searchText = event.searchBy) }
             is SportClubListContract.Event.OnApplySelectedFilters -> updateStateAndFetchData { it.copy(selectedFilters = event.sportsClubsFilters) }
+            else -> {}
         }
     }
 

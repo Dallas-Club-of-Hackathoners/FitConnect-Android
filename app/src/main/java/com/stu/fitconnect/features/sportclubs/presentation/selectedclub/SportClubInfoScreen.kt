@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -25,11 +24,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -58,8 +54,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.sportclubs.domain.entity.AmenityWithAvailable
@@ -98,8 +92,6 @@ fun SportClubInfoRoute(
 fun SportClubInfoScreen(
     state: SportClubInfoContract.State
 ) {
-    val res =
-        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&q=80&w=1975&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
     Column(
         modifier = Modifier
@@ -430,7 +422,7 @@ fun AmenityIconWithText(amenity: AmenityWithAvailable) {
 @Composable
 fun ImagePager(
     images: List<String>,
-    tall: Int,
+    height: Int,
 ) {
     val imagePagerState = rememberPagerState {
         images.size
@@ -439,7 +431,7 @@ fun ImagePager(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height((tall).dp)
+            .height((height).dp)
     ) {
         HorizontalPager(state = imagePagerState) {
 

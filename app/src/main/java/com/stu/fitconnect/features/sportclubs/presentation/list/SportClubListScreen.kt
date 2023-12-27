@@ -105,6 +105,7 @@ fun SportsClubsListRoute(
     )
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @ExperimentalMaterial3Api
 @Composable
 fun SportsClubsListScreen(
@@ -169,7 +170,7 @@ fun SportsClubsListScreen(
                 )
 
                 AppIconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { /*TODO*/  },
                     icon = Icons.Default.Menu
                 )
 

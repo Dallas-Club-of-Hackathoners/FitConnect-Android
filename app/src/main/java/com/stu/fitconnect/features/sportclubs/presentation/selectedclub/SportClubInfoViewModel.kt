@@ -31,6 +31,7 @@ class SportClubInfoViewModel @Inject constructor(
     override fun event(event: SportClubInfoContract.Event) {
         when(event) {
             is SportClubInfoContract.Event.OnGetSportClub -> getSportClubInfo(event.id)
+            else -> {}
         }
     }
 
