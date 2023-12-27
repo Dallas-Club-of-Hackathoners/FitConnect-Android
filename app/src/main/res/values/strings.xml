@@ -2,7 +2,6 @@
     <string name="app_name">Fit Connect</string>
 
 
-
     <string name="connection_error">Can\'t connect to the server</string>
     <string name="auth_error">Auth error</string>
     <string name="backend_error">Ops, error on server! Please try again later.</string>
@@ -16,5 +15,9 @@
     <string name="auth_weak_password_error">Password is weak. Change it</string>
     <string name="account_already_exists_error">Account with this email already exist</string>
 
+
+    <string name="grade_with_colon">Оценка:</string>
+    <string name="reviews_count">(%1$d отзывов):</string>
+    <string name="find_sport_club_label">Поиск спортзала</string>
 
 </resources>

@@ -2,36 +2,47 @@ package com.stu.fitconnect.features.sportclubs.domain.entity
 
 
 data class SportClubsFiltersData(
-    var filtersCategoryList: List<FilterCategory> = emptyList(),
+    var filtersCategoryList: List<FilterCategory>,
 //    val filtersList:
 //    var sortType: SortType = SortType()
 ) {
 
     fun getUpdatedFiltersList(filter: Filter) : SportClubsFiltersData {
-        val filtersData = this
-        filtersData.filtersCategoryList.forEach { filterCategory ->
-            if (filterCategory.id == filter.id) {
-                filterCategory.filtersList.forEach { filterItem ->
+
+        val updatedFiltersCategoryList = filtersCategoryList.map { filterCategory ->
+            if (filterCategory.id == filter.categoryId) {
+                val updatedFiltersList = filterCategory.filtersList.map { filterItem ->
                     if (filterItem.id == filter.id) {
-                        filterItem.isSelect = !filterItem.isSelect
+                        filterItem.copy(isSelect = !filterItem.isSelect)
+                    } else {
+                        filterItem
                     }
                 }
+                filterCategory.copy(filtersList = updatedFiltersList)
+            } else {
+                filterCategory
             }
         }
-        return filtersData
+        return SportClubsFiltersData(updatedFiltersCategoryList)
     }
 
     fun updateSortType(sortType: SortType) : SportClubsFiltersData {
 //        this.sortType = sortType
         return this
     }
+
+//    fun getFiltersWithSelectFilter(filter: Filter): SportClubsFiltersData {
+//        val filterData = this.copy(filtersCategoryList = this.filtersCategoryList.find { it.id == filter.categoryId }?.filtersList?.find { it.id == filter.id })
+//        return this.copy()
+//
+//    }
 }
 
 
 data class FilterCategory(
     val id: Int,
     val name: String,
-    val filtersList: MutableList<Filter> = mutableListOf()
+    val filtersList: List<Filter>
 )
 
 data class Filter(
@@ -40,12 +51,13 @@ data class Filter(
     val name: String,
     val imageRes: Int? = null,
     val count: Int? = null,
-    var isSelect: Boolean = false
+    val isSelect: Boolean = false
 )
 
 data class SortType(
-    var id: Int = 0,
-    var name: String = "",
+    val id: Int,
+    val name: String,
+    val isSelect: Boolean,
 )
 
 enum class FilterType {
@@ -104,28 +116,65 @@ enum class FilterType {
 //}
 //
 //
-//interface Filter
-//
-//data class IsFavouriteFilter(
-//    var isFavourite: Boolean = false
-//): Filter
-//
-//data class Facility(
-//    var id: String,
-//    var name: String,
-//    var iconRes: Int,
-//)
-//
-//data class Cost(
-//    var id: String,
-//    var count: Int,
-//): Filter
-//
-//data class ClubsCategory(
-//    var id: String,
-//    var name: String,
-//): Filter
-//
+
+data class FiltersData(
+    private val isFavouriteFilter: IsFavouriteFilter,
+    private val facilities: Map<Int, AmenityFilter>,
+    private val costs: Map<Int, CostFilter>,
+    private val clubsCategories: Map<Int, ClubsCategoryFilter>,
+    private var sortTypes: Map<Int, SortType>
+) {
+    fun getFiltersWithSelectClubsCategory(clubsCategoryId: Int) : FiltersData? {
+        val category = this.clubsCategories[clubsCategoryId]
+        return if(category != null)
+            copy(clubsCategories = clubsCategories.toMutableMap().apply {
+                this[clubsCategoryId] = category.copy(isSelect = category.isSelect)
+            })
+        else null
+    }
+}
+
+interface FilterT
+
+data class IsFavouriteFilter(
+    val isSelect: Boolean
+): FilterT {
+    fun getSelectIsFavourite(): IsFavouriteFilter {
+        return copy(isSelect = !isSelect)
+    }
+}
+
+data class AmenityFilter(
+    val id: String,
+    val name: String,
+    val iconRes: Int,
+    val isSelect: Boolean
+): FilterT {
+    fun getSelectFacility(): AmenityFilter {
+        return copy(isSelect = !isSelect)
+    }
+}
+
+data class CostFilter(
+    val id: String,
+    val count: Int,
+    val isSelect: Boolean
+): FilterT {
+    fun getSelectCost(): CostFilter {
+        return copy(isSelect = !isSelect)
+    }
+}
+
+data class ClubsCategoryFilter(
+    val id: String,
+    val name: String,
+    val isSelect: Boolean
+): FilterT {
+    fun getSelectClubsCategory(): ClubsCategoryFilter {
+        return copy(isSelect = !isSelect)
+    }
+}
+
 //// список фильтров
 //
 //data class ShortClubFilters(

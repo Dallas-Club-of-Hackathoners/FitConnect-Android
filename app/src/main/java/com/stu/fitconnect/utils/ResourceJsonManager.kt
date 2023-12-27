@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.stu.fitconnect.R
 import com.stu.fitconnect.features.sportclubs.domain.entity.Amenity
+import com.stu.fitconnect.features.sportclubs.domain.entity.FilterCategory
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,7 +23,9 @@ class ResourceJsonManager @Inject constructor(
     fun getFilters(): SportClubsFiltersData {
         val inputStream = context.resources.openRawResource(R.raw.sport_clubs_filters_data)
         val jsonString = inputStream.bufferedReader().use { it.readText() }
-        return Gson().fromJson(jsonString, SportClubsFiltersData::class.java)
+        return SportClubsFiltersData(
+            Gson().fromJson(jsonString, Array<FilterCategory>::class.java).asList()
+        )
     }
 
 }

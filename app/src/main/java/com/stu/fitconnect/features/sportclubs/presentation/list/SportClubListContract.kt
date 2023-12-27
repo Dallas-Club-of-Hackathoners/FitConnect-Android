@@ -4,6 +4,7 @@ import androidx.compose.runtime.Stable
 import androidx.paging.PagingData
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubSummary
 import com.stu.fitconnect.base.UnidirectionalViewModel
+import com.stu.fitconnect.features.sportclubs.domain.entity.Filter
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -15,7 +16,8 @@ interface SportClubListContract: UnidirectionalViewModel<SportClubListContract.S
     data class State(
         val pagingSportClubList : Flow<PagingData<SportClubSummary>> = emptyFlow(),
         val searchText: String = "",
-        val selectedFilters: SportClubsFiltersData = SportClubsFiltersData(),
+        val selectedFilters: SportClubsFiltersData? = null,
+        val errorMessages: List<String> = emptyList(),
         val refreshing: Boolean = false,
         val isLoading: Boolean = true,
     )
@@ -25,6 +27,6 @@ interface SportClubListContract: UnidirectionalViewModel<SportClubListContract.S
         object OnGetSportClubFilters : Event()
         object OnGetSportClub : Event()
         data class OnSearchSportClub(val searchBy: String) : Event()
-        data class OnApplySelectedFilters(val sportsClubsFilters: SportClubsFiltersData) : Event()
+        data class OnSelectFilter(val filter: Filter) : Event()
     }
 }

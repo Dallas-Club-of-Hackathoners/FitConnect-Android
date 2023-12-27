@@ -1,6 +1,5 @@
 package com.stu.fitconnect.network.sportclub.source
 
-import com.stu.fitconnect.features.sportclubs.domain.entity.SportClub
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubSummary
 import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
 import com.stu.fitconnect.network.sportclub.api.SportClubApiService
@@ -30,11 +29,11 @@ class SportClubSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSummarySportClubsPagingList(filters: SportClubsFiltersData, searchBy: String, pageIndex: Int, userId: String): List<SportClubSummary> {
+    override suspend fun getSummarySportClubsPagingList(filters: SportClubsFiltersData?, searchBy: String, pageIndex: Int, userId: String): List<SportClubSummary> {
         return try {
             sportClubApiService.getSummarySportClubList(
                 SportClubsSummaryRequest(
-                    clubsFilters = filters.toSportClubsFilterRequest(),
+                    clubsFilters = filters?.toSportClubsFilterRequest(),
                     searchBy = searchBy,
                     pageIndex = pageIndex,
                     token = userId

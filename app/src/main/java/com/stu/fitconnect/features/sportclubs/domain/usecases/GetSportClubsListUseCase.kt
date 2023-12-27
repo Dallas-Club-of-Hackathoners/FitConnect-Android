@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetSportClubsListUseCase @Inject constructor(
     private val sportClubRepository: SportClubRepository
 ) {
-    suspend fun getSportsClubsPagingList(searchBy: String, sportClubsFilters: SportClubsFiltersData): Flow<PagingData<SportClubSummary>> {
+    suspend fun getSportsClubsPagingList(searchBy: String, sportClubsFilters: SportClubsFiltersData?): Flow<PagingData<SportClubSummary>> {
         return sportClubRepository.getSportClubsPagingList(searchBy, sportClubsFilters)
     }
 }

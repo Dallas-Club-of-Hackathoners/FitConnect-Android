@@ -1,6 +1,8 @@
 package com.stu.fitconnect.features.sportclubs.domain.entity
 
+import androidx.compose.runtime.Stable
 
+@Stable
 data class SportClubSummary(
     val id: Int,
     val name: String,

@@ -1,10 +1,17 @@
 package com.stu.fitconnect.base.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.runtime.Composable
@@ -16,6 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.stu.fitconnect.features.authentication.presentation.login.LoginScreenRoute
 import com.stu.fitconnect.features.authentication.presentation.signup.SignUpScreenRoute
+import com.stu.fitconnect.features.sportclubs.presentation.filters.SportClubsFiltersRoute
 import com.stu.fitconnect.features.sportclubs.presentation.list.SportsClubsListRoute
 import com.stu.fitconnect.features.sportclubs.presentation.selectedclub.SportClubInfoRoute
 import com.stu.fitconnect.test.TestScreen
@@ -27,12 +35,12 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = /*"test"*/ if(isLogIn) Screen.SportClubSList.route else Screen.SignIn.route
+        startDestination = /*"test"*/ if(isLogIn) Screen.SportClubList.route else Screen.SignIn.route
     ) {
         composable(route = "test") {
 
             //val viewModel: TestViewModel = hiltViewModel(it)
-            TestScreen(onNavigate = {navHostController.navigate(Screen.SportClubSList.route)})
+            TestScreen(onNavigate = {navHostController.navigate(Screen.SportClubList.route)})
         }
         composable(
             route = Screen.SignUp.route,
@@ -53,7 +61,7 @@ fun AppNavGraph(
             SignUpScreenRoute(
                 onNavigateToMainScreen = { /*TODO*/ },
                 onNavigateToSportClubsListScreen = {
-                    navHostController.navigate(Screen.SportClubSList.route)
+                    navHostController.navigate(Screen.SportClubList.route)
                 }
             )
         }
@@ -62,7 +70,7 @@ fun AppNavGraph(
                 onNavigateToMainScreen = { /*TODO*/ },
                 onNavigateToSportClubsListScreen = {
                     navHostController.navigate(
-                        route = Screen.SportClubSList.route
+                        route = Screen.SportClubList.route
                     )
                 },
                 onNavigateToSignUpScreen = {
@@ -72,7 +80,8 @@ fun AppNavGraph(
                 } ,
             )
         }
-        composable(Screen.SportClubSList.route,
+
+        composable(Screen.SportClubList.route,
             popEnterTransition = {
                 slideIntoContainer(
                     animationSpec = tween(300),
@@ -98,7 +107,9 @@ fun AppNavGraph(
                     )
                 },
                 onNavigateToFiltersSportsClubsScreen = {
-
+                    navHostController.navigate(
+                        route = Screen.SportClubFilters.route
+                    )
                 }
 
             )
@@ -108,14 +119,14 @@ fun AppNavGraph(
             arguments = listOf(navArgument(Screen.KEY_SPORT_CLUB) { type = NavType.IntType }),
             enterTransition = {
                 slideIntoContainer(
-                    animationSpec = tween(500, ),
+                    animationSpec = tween(400),
                     towards = AnimatedContentTransitionScope.SlideDirection.Start
                 )
             },
             popExitTransition = {
                 slideOutOfContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.End,
-                    animationSpec = tween(500, delayMillis = 16)
+                    animationSpec = tween(400, )
                 )
             }
         ) {
@@ -123,6 +134,34 @@ fun AppNavGraph(
                 sportClubId = it.arguments?.getInt(Screen.KEY_SPORT_CLUB) ?: throw (Exception()),//todo
                 onNavigateToActivitiesTableScreen = {
                     //todo
+                }
+            )
+        }
+
+        composable(
+            route = Screen.SportClubFilters.route,
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Up,
+                    animationSpec = tween(300, easing = FastOutSlowInEasing),
+                    initialOffset = { it }
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Down,
+                    animationSpec = tween(400, easing = LinearEasing),
+                    targetOffset = { it }
+                ) + fadeOut(
+                    animationSpec = tween(200, easing = FastOutLinearInEasing),
+                    targetAlpha = 0f
+                )
+            }
+        ) {
+
+            SportClubsFiltersRoute(
+                onNavigateBack = {
+                    navHostController.popBackStack()
                 }
             )
         }

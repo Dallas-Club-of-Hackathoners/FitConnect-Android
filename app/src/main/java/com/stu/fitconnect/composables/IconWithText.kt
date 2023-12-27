@@ -1,11 +1,11 @@
-package com.stu.fitconnect.ui
+package com.stu.fitconnect.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,12 +36,13 @@ fun IconWithText(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(2.dp)
+        horizontalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Image(
             painter = painterResource(id = iconRes),
             contentDescription = null,
-            modifier = Modifier.size(20.dp)
+            modifier = Modifier
+                .size(20.dp)
                 .scale(scaleX = 1.2f, scaleY = 1.2f),
             colorFilter = ColorFilter.tint(iconColor),
             contentScale = ContentScale.Crop
@@ -49,7 +50,8 @@ fun IconWithText(
         Text(
             text = textValue,
             style = textStyle,
-            textDecoration = textDecoration
+            textDecoration = textDecoration,
+            maxLines = 1
         )
     }
 }

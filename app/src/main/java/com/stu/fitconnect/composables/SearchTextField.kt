@@ -1,4 +1,4 @@
-package com.stu.fitconnect.ui
+package com.stu.fitconnect.composables
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -27,7 +27,7 @@ fun SearchTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = Modifier
-            .height(50.dp)// todo было 40 по канону
+            .height(48.dp)// todo было 40 по канону
             .fillMaxWidth()
             .border(
                 border = BorderStroke(width = 1.dp, Gray),
@@ -49,13 +49,15 @@ fun SearchTextField(
                     contentDescription = null,
                     tint = Gray
                 )
-                if (value.isEmpty()) {
-                    Text(
-                        text = label,
-                        style = MaterialTheme.typography.headlineSmall
-                    )
+                Box {
+                    if (value.isEmpty()) {
+                        Text(
+                            text = label,
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                    }
+                    innerTextField()
                 }
-                innerTextField()
             }
         }
     )
