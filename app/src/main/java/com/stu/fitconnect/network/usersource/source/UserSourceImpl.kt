@@ -1,8 +1,8 @@
 package com.stu.fitconnect.network.usersource.source
 
 import com.stu.fitconnect.features.authentication.domain.User
-import com.stu.fitconnect.network.usersource.api.UsersAddRequest
 import com.stu.fitconnect.network.usersource.api.UsersApiService
+import com.stu.fitconnect.network.usersource.api.request.UsersAddRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 

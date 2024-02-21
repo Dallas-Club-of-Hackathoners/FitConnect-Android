@@ -1,29 +1,25 @@
 package com.stu.fitconnect.features.sportclubs.presentation.filters
 
-import androidx.paging.PagingData
+import androidx.compose.runtime.Stable
 import com.stu.fitconnect.base.UnidirectionalViewModel
-import com.stu.fitconnect.features.sportclubs.domain.Filter
-import com.stu.fitconnect.features.sportclubs.domain.SportClubSummary
-import com.stu.fitconnect.features.sportclubs.domain.SportClubsFiltersData
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
+import com.stu.fitconnect.features.sportclubs.domain.entity.Filter
+import com.stu.fitconnect.features.sportclubs.domain.entity.FilterCategory
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClubsFiltersData
+import kotlinx.collections.immutable.ImmutableList
 
+@Stable
 interface SportClubsFilterContract : UnidirectionalViewModel<SportClubsFilterContract.State, SportClubsFilterContract.Event> {
 
+    @Stable
     data class State(
-        val pagingSportClubList : Flow<PagingData<SportClubSummary>> = emptyFlow(),
-        val searchText: String = "",
-        val selectedFilters: SportClubsFiltersData = SportClubsFiltersData(),
-        val refreshing: Boolean = false,
-        val isLoading: Boolean = false,
+        val filtersData: SportClubsFiltersData = SportClubsFiltersData(emptyList())
     )
 
+    @Stable
     sealed class Event {
-        object OnRefresh : Event()
-        object OnGetSportClubFilters : Event()
-        object OnGetSportClub : Event()
-        data class OnFilterSelected(val searchBy: String) : Event()
-        data class OnApplySingleFilter(val filter: Filter) : Event()
-        data class OnApplySelectedFilters(val sportsClubsFilters: SportClubsFiltersData) : Event()
+        object OnGetAllFilters : Event()
+        object OnClearAllFilters : Event()
+        data class OnApplyFilters(val onNavigateBack: () -> Unit) : Event()
+        data class OnSelectFilter(val filter: Filter) : Event()
     }
 }

@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "iconRes": "parking",
+    "name": "Парковка"
+  },
+  {
+    "id": 2,
+    "iconRes": "shower",
+    "name": "Душ"
+  },
+  {
+    "id": 3,
+    "iconRes": "cafe",
+    "name": "Кафе"
+  },
+  {
+    "id": 4,
+    "iconRes": "age14",
+    "name": "Можно с 14 лет"
+  },
+  {
+    "id": 5,
+    "iconRes": "age16",
+    "name": "Можно с 16 лет"
+  },
+  {
+    "id": 6,
+    "iconRes": "towel",
+    "name": "Полотенце"
+  },
+  {
+    "id": 7,
+    "iconRes": "bottle",
+    "name": "Вода"
+  },
+  {
+    "id": 8,
+    "iconRes": "cross",
+    "name": "Не нужна обувь"
+  },
+  {
+    "id": 9,
+    "iconRes": "pets",
+    "name": "Dog friendly"
+  },
+  {
+    "id": 10,
+    "iconRes": "men_woman",
+    "name": "Только для женщин"
+  }
+]

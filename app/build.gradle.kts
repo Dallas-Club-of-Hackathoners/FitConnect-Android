@@ -25,11 +25,16 @@ android {
 
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("debug")
+            isDebuggable = false
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isDebuggable = true
         }
     }
     compileOptions {
@@ -43,7 +48,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -53,6 +58,9 @@ android {
 }
 
 dependencies {
+
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.2")
@@ -65,24 +73,46 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation ("androidx.compose.material:material-icons-core:1.5.3")
+    implementation("androidx.compose.material:material-icons-core:1.5.4")
+    implementation("androidx.compose.material:material:1.5.4")
     implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
+
+    val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
+    implementation(composeBom)
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
+
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+//    debugImplementation("androidx.compose.ui:ui-tooling:1.5.2")
+//    implementation("androidx.compose.ui:ui-tooling-preview:1.5.2")
+
+    // Needed to get a view model reference in Jetpack Compose
+    //implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
 
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 
+    implementation("com.github.bumptech.glide:glide:4.16.0") // todo delete
+    implementation("io.coil-kt:coil:2.4.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+//    implementation ("com.google.accompanist:accompanist-pager:1.0.0") // todo delete?
+//    implementation ("com.google.accompanist:accompanist-pager-indicators:1.0.0") // todo delete?
 
+    implementation("com.google.accompanist:accompanist-placeholder:0.33.2-alpha")
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.33.2-alpha")
 
-
-    val hilt_version = "2.44"
+    val hilt_version = "2.48.1"
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
-    //kapt("androidx.hilt:hilt-compiler:1.0.0")
+//    kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    val nav_version = "2.5.3"
+    val nav_version = "2.7.4"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     val paging_version = "3.2.1"
@@ -99,10 +129,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
 
-//    val room_version = "2.5.2"
-//    implementation("androidx.room:room-runtime:$room_version")
-//    implementation("androidx.room:room-ktx:$room_version")
-//    implementation("androidx.room:room-paging:$room_version")
+    val room_version = "2.5.2"
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-paging:$room_version")
 
     implementation("com.google.code.gson:gson:2.10.1")
 
@@ -111,6 +141,6 @@ dependencies {
 //    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 //    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
 //    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-//    debugImplementation("androidx.compose.ui:ui-tooling")
-//    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

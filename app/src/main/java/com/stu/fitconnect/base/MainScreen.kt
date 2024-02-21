@@ -1,21 +1,20 @@
 package com.stu.fitconnect.base
 
 import androidx.compose.runtime.Composable
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.navigation.compose.rememberNavController
 import com.stu.fitconnect.base.navigation.AppNavGraph
 import com.stu.fitconnect.base.navigation.rememberNavigationState
-import com.stu.fitconnect.ui.theme.BackgroundColor
 
 @Composable
 fun MainScreen() {
-    val navigationState = rememberNavigationState()
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setStatusBarColor(
-        color = BackgroundColor
-    )
-
+//    val navigationState = rememberNavigationState()
+//    val systemUiController = rememberSystemUiController()
+//    systemUiController.setStatusBarColor(
+//        color = BackgroundColor
+//    )
+    val nc = rememberNavController()
     AppNavGraph(
-        navHostController = navigationState.navHostController,
-        isLogIn = false
+        navHostController = nc,
+        isLogIn = true
     )
 }

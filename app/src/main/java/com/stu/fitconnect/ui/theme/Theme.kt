@@ -6,7 +6,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
@@ -36,13 +39,10 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun FitConnectTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> DarkColorScheme
-    }
+    val colorScheme = DarkColorScheme
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
@@ -54,7 +54,31 @@ fun FitConnectTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+        typography = Typography
+    ) {
+        CompositionLocalProvider(
+            LocalPaddings provides Paddings,
+            LocalSpacers provides Spacers
+        ) {
+            content()
+        }
+    }
 }
+
+private val LocalPaddings = staticCompositionLocalOf<Paddings> {
+    error("CompositionLocal LocalDimensions not present")
+}
+
+private val LocalSpacers = staticCompositionLocalOf<Spacers> {
+    error("CompositionLocal LocalSpacers not present")
+}
+
+//val MaterialTheme.paddings: Paddings
+//    @Composable
+//    @ReadOnlyComposable
+//    get() = LocalPaddings.current
+
+//val MaterialTheme.spacers: Spacers
+//    @Composable
+//    @ReadOnlyComposable
+//    get() = LocalSpacers.current

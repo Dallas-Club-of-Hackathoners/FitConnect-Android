@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,10 +26,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.stu.fitconnect.R
 import com.stu.fitconnect.base.use
 import com.stu.fitconnect.features.authentication.domain.AuthField
-import com.stu.fitconnect.ui.AuthTextField
+import com.stu.fitconnect.composables.AuthTextField
+import com.stu.fitconnect.ui.theme.BackgroundColor
 import com.stu.fitconnect.ui.theme.ButtonColor
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreenRoute(
     viewModel: SignUpViewModel = hiltViewModel(),
@@ -42,7 +41,6 @@ fun SignUpScreenRoute(
 //    LaunchedEffect(key1 = Unit) {
 //        event.invoke(LoginContract.Event.OnLogin) // входим если есть в бд
 //    }
-
     SignUpScreen(
         signUpState = state,
         onNavigateToSportClubsListScreen = onNavigateToSportClubsListScreen,
@@ -58,6 +56,7 @@ fun SignUpScreenRoute(
             }))
         }
     )
+
 }
 
 
@@ -72,9 +71,8 @@ fun SignUpScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1D1D1D))
-            .padding(horizontal = 17.dp), // BackgroundColor
-
+            .background(BackgroundColor)
+            .padding(horizontal = 17.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

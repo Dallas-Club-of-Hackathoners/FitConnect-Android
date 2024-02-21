@@ -1,6 +1,6 @@
 package com.stu.fitconnect.features.sportclubs.domain.usecases
 
-import com.stu.fitconnect.features.sportclubs.domain.SportClub
+import com.stu.fitconnect.features.sportclubs.domain.entity.SportClub
 import com.stu.fitconnect.features.sportclubs.repositories.SportClubRepository
 import javax.inject.Inject
 

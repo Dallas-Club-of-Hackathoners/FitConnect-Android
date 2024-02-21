@@ -1,301 +1,339 @@
-{
-  "filtersList": [
-    {
-      "id": "0",
-      "name": "Избранные",
-      "filtersList": [
-        {
-          "id": "0",
-          "name": "Избранное",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        }
-      ]
-    },
-    {
-      "id": "1",
-      "name": "Удобства",
-      "filtersList": [
-        {
-          "id": "0",
-          "name": "Парковка",
-          "imageRes": 123,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "1",
-          "name": "Душ",
-          "imageRes": 456,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "2",
-          "name": "Питьевая вода",
-          "imageRes": 789,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "3",
-          "name": "Можно с животными",
-          "imageRes": 1011,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "4",
-          "name": "18+",
-          "imageRes": 1213,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "5",
-          "name": "16+",
-          "imageRes": 1415,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "6",
-          "name": "14+",
-          "imageRes": 1617,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "7",
-          "name": "Фитнес-бар",
-          "imageRes": 1819,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "8",
-          "name": "Сауна",
-          "imageRes": 2021,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "9",
-          "name": "Круглосуточно",
-          "imageRes": 2223,
-          "count": null,
-          "isSelect": false
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Стоимость",
-      "filtersList": [
-        {
-          "id": "0",
-          "name": "Одна цена",
-          "imageRes": null,
-          "count": 1,
-          "isSelect": false
-        },
-        {
-          "id": "1",
-          "name": "Две цены",
-          "imageRes": null,
-          "count": 2,
-          "isSelect": false
-        },
-        {
-          "id": "2",
-          "name": "Три цены",
-          "imageRes": null,
-          "count": 3,
-          "isSelect": false
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "name": "Категории клубов",
-      "filtersList": [
-        {
-          "id": "0",
-          "name": "Бег",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "1",
-          "name": "Водные виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "2",
-          "name": "Единоборства",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "3",
-          "name": "Фитнес",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "4",
-          "name": "Зимние виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "5",
-          "name": "Экстремальные виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "6",
-          "name": "Отдых и туризм",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "7",
-          "name": "Летние виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "8",
-          "name": "Воздушные виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "9",
-          "name": "Силовые виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "10",
-          "name": "Стрелковые виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "11",
-          "name": "Акробатика",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "12",
-          "name": "Эквитация (конный спорт)",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "13",
-          "name": "Лыжи",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "14",
-          "name": "Горные виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "15",
-          "name": "Командные виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "16",
-          "name": "Индивидуальные виды",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "17",
-          "name": "Спортивные танцы",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "18",
-          "name": "Спортивные игры",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        },
-        {
-          "id": "19",
-          "name": "Марафоны и дистанции",
-          "imageRes": null,
-          "count": null,
-          "isSelect": false
-        }
-      ]
-    },
-    {
-      "id": "4",
-      "name": "Сортировки",
-      "filtersList": [
-        {
-          "id": 0,
-          "name": "A-Z"
-        },
-        {
-          "id": 1,
-          "name": "Z-A"
-        },
-        {
-          "id": 2,
-          "name": "Новые"
-        },
-        {
-          "id": 3,
-          "name": "Старые"
-        },
-        {
-          "id": 4,
-          "name": "Рейтинг"
-        },
-        {
-          "id": 5,
-          "name": "Цена по возрастанию"
-        },
-        {
-          "id": 6,
-          "name": "Цена по убыванию"
-        }
-      ]
-    }
-
-  ]
-}
+[
+  {
+    "id": "0",
+    "name": "Избранные",
+    "filtersList": [
+      {
+        "id": "0",
+        "name": "Избранное",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "0"
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "name": "Удобства",
+    "filtersList": [
+      {
+        "id": "0",
+        "name": "Парковка",
+        "imageRes": 123,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "1",
+        "name": "Душ",
+        "imageRes": 456,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "2",
+        "name": "Питьевая вода",
+        "imageRes": 789,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "3",
+        "name": "Можно с животными",
+        "imageRes": 1011,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "4",
+        "name": "18+",
+        "imageRes": 1213,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "5",
+        "name": "16+",
+        "imageRes": 1415,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "6",
+        "name": "14+",
+        "imageRes": 1617,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "7",
+        "name": "Фитнес-бар",
+        "imageRes": 1819,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "8",
+        "name": "Сауна",
+        "imageRes": 2021,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      },
+      {
+        "id": "9",
+        "name": "Круглосуточно",
+        "imageRes": 2223,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "1"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Стоимость",
+    "filtersList": [
+      {
+        "id": "0",
+        "name": "Одна цена",
+        "imageRes": null,
+        "count": 1,
+        "isSelect": false,
+        "categoryId": "2"
+      },
+      {
+        "id": "1",
+        "name": "Две цены",
+        "imageRes": null,
+        "count": 2,
+        "isSelect": false,
+        "categoryId": "2"
+      },
+      {
+        "id": "2",
+        "name": "Три цены",
+        "imageRes": null,
+        "count": 3,
+        "isSelect": false,
+        "categoryId": "2"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Категории клубов",
+    "filtersList": [
+      {
+        "id": "0",
+        "name": "Бег",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "1",
+        "name": "Водные виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "2",
+        "name": "Единоборства",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "3",
+        "name": "Фитнес",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "4",
+        "name": "Зимние виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "5",
+        "name": "Экстремальные виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "6",
+        "name": "Отдых и туризм",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "7",
+        "name": "Летние виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "8",
+        "name": "Воздушные виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "9",
+        "name": "Силовые виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "10",
+        "name": "Стрелковые виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "11",
+        "name": "Акробатика",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "12",
+        "name": "Эквитация (конный спорт)",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "13",
+        "name": "Лыжи",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "14",
+        "name": "Горные виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "15",
+        "name": "Командные виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "16",
+        "name": "Индивидуальные виды",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "17",
+        "name": "Спортивные танцы",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "18",
+        "name": "Спортивные игры",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      },
+      {
+        "id": "19",
+        "name": "Марафоны и дистанции",
+        "imageRes": null,
+        "count": null,
+        "isSelect": false,
+        "categoryId": "3"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Сортировки",
+    "filtersList": [
+      {
+        "id": 0,
+        "name": "A-Z",
+        "categoryId": "4"
+      },
+      {
+        "id": 1,
+        "name": "Z-A",
+        "categoryId": "4"
+      },
+      {
+        "id": 2,
+        "name": "Новые",
+        "categoryId": "4"
+      },
+      {
+        "id": 3,
+        "name": "Старые",
+        "categoryId": "4"
+      },
+      {
+        "id": 4,
+        "name": "Рейтинг",
+        "categoryId": "4"
+      },
+      {
+        "id": 5,
+        "name": "Цена по возрастанию",
+        "categoryId": "4"
+      },
+      {
+        "id": 6,
+        "name": "Цена по убыванию",
+        "categoryId": "4"
+      }
+    ]
+  }
+]

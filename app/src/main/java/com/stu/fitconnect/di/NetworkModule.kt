@@ -2,7 +2,6 @@ package com.stu.fitconnect.di
 
 import com.stu.fitconnect.network.ApiConstants
 import com.stu.fitconnect.network.sportclub.api.SportClubApiService
-import com.stu.fitconnect.network.sportclubs.api.SportClubsApiService
 import com.stu.fitconnect.network.usersource.api.UsersApiService
 import dagger.Module
 import dagger.Provides
@@ -23,12 +22,6 @@ class NetworkModule {
             .baseUrl(ApiConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideSportClubsApiService(retrofit: Retrofit): SportClubsApiService {
-        return retrofit.create(SportClubsApiService::class.java)
     }
 
 
